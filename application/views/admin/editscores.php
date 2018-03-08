@@ -23,7 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Events</h2>
+                                    <h2 class="title">Scores</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -32,10 +32,10 @@
                             <div class="row breadcrumb-div">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-            							<li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>events">Events</li></a>
-                                        <li class="active">Add Events</li>
-            						</ul>
+            							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
+                                        <li><a href="<?php echo base_url();?>scores">Scores</li></a>
+                                        <li class="active">Edit Scores</li>
+            						            </ul>
                                 </div>
                             </div>
                             <!-- /.row -->
@@ -47,51 +47,53 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Input Your Event</small></h5>
+                                                    <h5>Edit Your Scores</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
+                                              <?php foreach($scores as $result){?>
+                                                <form method="POST" action="<?php echo base_url()?>updateScores/<?php echo $result->score_id;?>" class="form-horizontal" enctype="multipart/form-data">
+                                                  
+                                                  <div class="form-group">
+                                                		<label for="text1" class="col-sm-2 control-label">Score1</label>
+                                                		<div class="col-sm-10">
+                                                			<input type="number" name="score" class="form-control" id="score1" placeholder="Score 1" value="<?php echo $result->score?>" required="ON" maxlength="2">
+                                                		</div>
+                                                  </div>
+                                                  
+                                                  <div class="form-group">
+                                                		<label for="text1" class="col-sm-2 control-label">Score2</label>
+                                                		<div class="col-sm-10">
+                                                			<input type="number" name="score2" class="form-control" id="score2" placeholder="Score 2" value="<?php echo $result->score2?>" required="ON" maxlength="2">
+                                                		</div>
+                                                  </div>
+                                                  
+                                                  <div class="form-group">
+                                                    <label for="text1" class="col-sm-2 control-label">User</label>
+                                                		<div class="col-sm-10">
+                                                      <select name="users" class="form-control" required="ON">
+                                                        <option value="<?php echo $result->id?>" ><?php echo $result->name;?></option>
+                                                        <?php 
+                                                          foreach($users as $data){
+                                                          
+                                                          ?>
+                                                          
+                                                          <option value="<?php echo $data->id;?>"><?php echo $data->name;?></option>
+                                                          
+                                                          <?php
+                                                            }
+                                                          ?>
+                                                      </select>
+                                                    </div>
+                                                  </div>
 
-                                                <form method="POST" action="<?php echo base_url()?>insertEvents" class="form-horizontal" enctype="multipart/form-data">
-                                                	<div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Title</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input type title" required="ON">
-                                                		</div>
-                                                	</div>
-        
-                                                    <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Picture</label>
-                                                		<div class="col-sm-10">
-                                                        <input id="picture" type="file" class="validate" name="picture" >
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="text1" class="col-sm-2 control-label">Description</label>
-                                                		<div class="col-sm-10">
-                                                            <textarea class="form-control note-codable" name="description"  placeholder="Desc.." style="height: 300px;" required="ON"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                		<label for="date" class="col-sm-2 control-label">Date</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="date" name="date"  class="form-control" id="date" required="ON">
-                                                		</div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                		<label for="time" class="col-sm-2 control-label">Time</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="time" name="time" class="form-control" id="time" required="ON">
-                                                		</div>
-                                                    </div>
-                                                    
                                                 	<div class="form-group">
                                                 		<div class="col-sm-offset-2 col-sm-10">
                                                 			<button type="submit" class="btn btn-primary">Submit</button>
                                                 		</div>
                                                 	</div>
                                                 </form>  
+                                            <?php } ?>
                                             </div>
                                         </div>
                                     </div>  

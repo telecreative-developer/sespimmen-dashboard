@@ -46,39 +46,32 @@
                         <section class="section">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat bg-primary" href="#">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <a class="dashboard-stat" style="background:#27ae60;" href="#">
+                                            <?php $query = $this->db->query("SELECT * FROM events"); ?>
+                                            <span class="number" style="color:#fff;"><?php echo $query->num_rows();?></span>
+                                            <span class="name" style="color:#fff;">Events</span>
+                                            <span class="bg-icon"><i class="fa fa-calendar-check-o"></i></span>
+                                        </a>
+                                        <!-- /.dashboard-stat -->
+                                    </div>
+                                    
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <a class="dashboard-stat" style="background:#27ae60;" href="#">
                                             <?php $query = $this->db->query("SELECT * FROM posts"); ?>
-                                            <span class="number"><?php echo $query->num_rows();?></span>
-                                            <span class="name">Articles</span>
+                                            <span class="number" style="color:#fff;"><?php echo $query->num_rows();?></span>
+                                            <span class="name" style="color:#fff;">Articles</span>
                                             <span class="bg-icon"><i class="fa fa-newspaper-o"></i></span>
                                         </a>
                                         <!-- /.dashboard-stat -->
                                     </div>
                                     
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat bg-primary" href="#">
-                                            <span class="number counter">1,411</span>
-                                            <span class="name">Comments</span>
-                                            <span class="bg-icon"><i class="fa fa-comments"></i></span>
-                                        </a>
-                                        <!-- /.dashboard-stat -->
-                                    </div>
-                                    
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat bg-primary" href="#">
-                                            <span class="number counter">1,411</span>
-                                            <span class="name">Comments</span>
-                                            <span class="bg-icon"><i class="fa fa-comments"></i></span>
-                                        </a>
-                                        <!-- /.dashboard-stat -->
-                                    </div>
-                                    
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat bg-primary" href="#">
-                                            <span class="number counter">1,411</span>
-                                            <span class="name">Comments</span>
-                                            <span class="bg-icon"><i class="fa fa-comments"></i></span>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <a class="dashboard-stat" style="background:#27ae60;" href="#">
+                                            <?php $query = $this->db->query("SELECT * FROM users"); ?>
+                                            <span class="number" style="color:#fff;"><?php echo $query->num_rows();?></span>
+                                            <span class="name" style="color:#fff;">User</span>
+                                            <span class="bg-icon"><i class="fa fa-user"></i></span>
                                         </a>
                                         <!-- /.dashboard-stat -->
                                     </div>
@@ -89,6 +82,60 @@
                             <!-- /.container-fluid -->
                         </section>
                         <!-- /.section -->
+
+
+                        <section class="section pt-n">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel border-primary no-border border-3-top">
+                                            <div class="panel-heading">
+                                                <div class="panel-title">
+                                                    <h5>Total Nilai Terbesar <small> Peringkat 10 Sespim Terbaik </small></h5>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body p-20">
+                                                <div class="tab-content bg-white p-15">
+                                                    <div class="row">
+                                                    <?php 
+                                                        foreach($users as $result){
+                                                    ?>
+                                                        <div class="col-lg-2">
+                                                            <div class="outline-product" style="background: url('<?php echo $result->avatar_url;?>')center no-repeat; background-size:cover; width:150px; border-radius:150%; height:150px; margin-top:20px;">          
+                                                            </div>
+                                                        </div>   
+                                                        <div class="col-lg-4">
+                                                            <div style="background:#f8f8f8; padding:20px; margin-top:40px;">
+                                                                <p style="overflow-wrap: break-word;">
+                                                                    <small>
+                                                                        <b><?php echo $result->first_name;?> <?php echo $result->last_name;?></b> 
+                                                                        <br> <a href="<?php echo base_url();?>pagesprofile/<?php echo $result->id;?>" style="color:blue;"><?php echo $result->email;?></a>
+                                                                        <br>Total Nilai : 
+                                                                        <?php if ($result->total <= 60 ){?>
+                                                                            <span class="color-danger"><?php echo substr($result->total,0,2);?></span>    
+                                                                        <?php 
+                                                                        }else{
+                                                                        ?><?php echo substr($result->total,0,2);?>        
+                                                                        <?php 
+                                                                        }?>
+                                                                    </small>
+                                                                </p>
+                                                            </div>
+                                                        </div>     
+                                                        <?php } ?>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.container-fluid -->
+                        </section>
+                        <!-- /.section -->
+
                         
                     </div>
                     <!-- /.main-page -->

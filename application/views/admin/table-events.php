@@ -65,9 +65,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
+                                                            <th width="5%">Thumbnail</th>
                                                             <th>Title</th>
                                                             <th>Description</th>
-                                                            <th>Time</th>
+                                                            <th>Date / Time</th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
@@ -79,9 +80,10 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
+                                                            <td><img src="<?php echo $result->thumbnail_url;?>" width="100%"/></td>
                                                             <td><?php echo $result->title;?></td>
                                                             <td><?php echo $result->description;?></td>
-                                                            <td><?php echo $result->time;?></td>
+                                                            <td><?php echo $result->date;?></td>
                                                             <td>
                                                                 <a href="<?php echo base_url();?>editevents/<?php echo $result->event_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
                                                                 <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteEvents/<?php echo $result->event_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>

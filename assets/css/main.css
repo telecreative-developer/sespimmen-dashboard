@@ -1398,6 +1398,10 @@ code:not(.language-html) {
   background-color: #292929;
   border-color: #292929;
   color: #fff !important;
+} 
+
+.bg-red{
+  background:#e84b3b;
 }
 
 .bg-black h1, .bg-black h2, .bg-black h3, .bg-black h4, .bg-black h5, .bg-black h6 {
@@ -5188,10 +5192,6 @@ code:not(.language-html) {
   display: block;
   padding: 8px;
   font-size: 90%;
-}
-
-.dashboard-stat-2:hover {
-  background: #292929 !important;
 }
 
 @media (max-width: 768px) {

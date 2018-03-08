@@ -16,6 +16,8 @@
 </li>
 <li><a href="<?php echo base_url()?>events"><i class="fa fa-calendar-check-o"></i> <span>Events</span></a></li>
 <li><a href="<?php echo base_url()?>articles"><i class="fa fa-newspaper-o"></i> <span>Articles</span></a></li>
+<li><a href="<?php echo base_url()?>categories"><i class="fa fa-newspaper-o"></i> <span>Categories</span></a></li>
+<li><a href="<?php echo base_url()?>posts"><i class="fa fa-newspaper-o"></i> <span>Posts</span></a></li>
 
 <li class="nav-header">
   <span class="">Users</span>

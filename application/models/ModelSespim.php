@@ -16,12 +16,49 @@ Class ModelSespim extends CI_Model{
 		$db = $this->db->get("");
 		return $db;
   }
+
+  public function loadQueryRelationArticles(){    
+    $this->db->select('*');
+		$this->db->from('article_categories');
+		$this->db->select('article_categories.title as category');
+		$this->db->join('articles', 'articles.article_category_id = article_categories.article_category_id');
+		$db = $this->db->get();
+		return $db;
+  }
+
+  public function loadQueryRelationWhere($id){
+    $this->db->select('*');
+    $this->db->from('users');
+    $this->db->select('((scores.score + scores.score2) / 2) as total');
+    $this->db->join('scores', 'scores.id = users.id');
+    $this->db->where('users.id',$id);
+		$db = $this->db->get("");
+		return $db;
+  }
+
+  public function loadQueryLimit(){
+    $this->db->select('*');
+    $this->db->from('users');
+    $this->db->select('((scores.score + scores.score2) / 2) as total');
+    $this->db->join('scores', 'scores.id = users.id');
+    $this->db->order_by('total','desc');
+    $this->db->limit('10');
+		$db = $this->db->get("");
+		return $db;
+  }
+
   public function loadQuery($orderid,$table){
     $this->db->order_by($orderid, 'desc');
 		$db = $this->db->get($table);
 		return $db;
   }
 
+  public function LoadUsersNotById($id_user){
+    $this->db->where('id !=',$id_user);
+    $db =$this->db->get('users');
+		return $db;
+  }
+  
   public function insertQuery($table,$data){
 		$this->db->insert($table,$data);
   }
@@ -29,6 +66,29 @@ Class ModelSespim extends CI_Model{
   public function loadQueryById($where,$id,$table){
 		$this->db->where($where,$id);
     $db =$this->db->get($table);
+    return $db;
+  }
+
+  public function loadQueryByIdRelation($id){
+    $this->db->select('*');
+    $this->db->from('article_categories');
+    $this->db->select('article_categories.title as category');
+    $this->db->join('articles','article_categories.article_category_id = articles.article_category_id');
+    $this->db->where('articles.article_id',$id);
+    $db =$this->db->get('');
+    return $db;
+  }
+
+  public function loadQueryUserById($where,$id,$table){
+    $this->db->join('users', 'users.id = scores.id');
+		$this->db->where($where,$id);
+    $db =$this->db->get($table);
+    return $db;
+  }
+
+  public function loadQueryNotById($id){
+		$this->db->where("article_category_id !='$id'");
+    $db =$this->db->get('article_categories');
     return $db;
   }
 
@@ -44,12 +104,12 @@ Class ModelSespim extends CI_Model{
 
   public function deleteImage($id){
     error_reporting(0);
-    $this->db->where('post_id',$id);
-    $query = $this->db->get('posts');
+    $this->db->where('article_id',$id);
+    $query = $this->db->get('articles');
     $row = $query->row();
-    $x = $row->loc_thumbnail;
+    $x = $row->thumbnail_loc;
     
-    //$this->db->delete('posts',array('post_id' => $id));
+    //$this->db->delete('articles',array('article_id' => $id));
     $path ='/opt/lampp/htdocs/sespim/assets/images/articles/'.$x;
     if($this->db->affected_rows() >= 1){
       if(unlink($path)){
@@ -64,12 +124,12 @@ Class ModelSespim extends CI_Model{
 
   public function deleteFile($id){
     error_reporting(0);
-    $this->db->where('post_id',$id);
-    $query = $this->db->get('posts');
+    $this->db->where('article_id',$id);
+    $query = $this->db->get('articles');
     $row = $query->row();
     $y = $row->loc_file;
     
-    //$this->db->delete('posts',array('post_id' => $id));
+    //$this->db->delete('articles',array('article_id' => $id));
     $path ='/opt/lampp/htdocs/sespim/assets/images/articles/'.$y;
     if($this->db->affected_rows() >= 1){
       if(unlink($path)){

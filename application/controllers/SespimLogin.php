@@ -20,7 +20,7 @@ class SespimLogin extends CI_Controller {
 		$cek_login    = $this->ModelLogin->CheckLogin($data);
 		  if ($cek_login->num_rows() > 0) {
 			  foreach ($cek_login->result() as $sess) {
-				  $sess_data['id_admin'] 		= $sess->id_admin;
+				  $sess_data['admin_id'] 		= $sess->admin_id;
 				  $sess_data['username'] 	= $sess->username;
 				  $x = $this->session->set_userdata($sess_data);
 			  }

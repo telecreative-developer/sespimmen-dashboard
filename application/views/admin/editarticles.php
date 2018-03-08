@@ -53,40 +53,56 @@
                                             </div>
                                             <div class="panel-body">
                                             <?php foreach($articles as $result){?>
-                                                <form method="POST" action="<?php echo base_url()?>updateArticles/<?php echo $result->post_id;?>" class="form-horizontal" enctype="multipart/form-data">
-                                                  <div class="form-group">
-                                                    <label for="text1" class="col-sm-2 control-label">Title</label>
-                                                    <div class="col-sm-10">
-                                                      <input type="text" name="title" class="form-control" id="title" value="<?php echo $result->title;?>" placeholder="Input type text">
+                                                <form method="POST" action="<?php echo base_url()?>updateArticles/<?php echo $result->article_id;?>" class="form-horizontal" enctype="multipart/form-data">
+                                                    <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">Title</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" name="title" class="form-control" id="title" value="<?php echo $result->title;?>" placeholder="Input type text">
+                                                        </div>
                                                     </div>
-                                                  </div>
 
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Picture</label>
-                                                		<div class="col-sm-10">
-                                                      <input id="picture" type="file" class="validate" name="picture">
+                                                    <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">Picture</label>
+                                                        <div class="col-sm-10">
+                                                            <input id="picture" type="file" class="validate" name="picture">
+                                                        </div>
                                                     </div>
-                                                  </div>
                                                   
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">File</label>
-                                                		<div class="col-sm-10">
-                                                      <input id="file" type="file" class="validate" name="file">
+                                                    <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">File</label>
+                                                        <div class="col-sm-10">
+                                                            <input id="file" type="file" class="validate" name="file">
+                                                        </div>
                                                     </div>
-                                                	</div>
-                                                    
-                                                  <div class="form-group">
-                                                      <label for="text1" class="col-sm-2 control-label">Description</label>
-                                                      <div class="col-sm-10">
-                                                          <textarea class="form-control note-codable" name="description" placeholder="Desc.." style="height: 300px;"><?php echo $result->description;?></textarea>
-                                                      </div>
-                                                  </div>
 
-                                                  <div class="form-group">
-                                                    <div class="col-sm-offset-2 col-sm-10">
-                                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <div class="form-group">
+                                                        <label for="time" class="col-sm-2 control-label">Category</label>
+                                                        <div class="col-sm-10">
+                                                            <select name="id_category" class="form-control" required="ON">
+                                                                <option value=""><?php echo $result->category;?></option>
+                                                                <?php 
+                                                                foreach($categories as $category){
+                                                                ?>
+                                                                    <option value="<?php echo $category->article_category_id;?>"><?php echo $category->title;?></option>
+                                                                <?php   
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                  </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">Description</label>
+                                                        <div class="col-sm-10">
+                                                            <textarea class="form-control note-codable" name="description" placeholder="Desc.." style="height: 300px;"><?php echo $result->description;?></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-2 col-sm-10">
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                                        </div>
+                                                    </div>
 
                                                 </form>  
                                               <?php } ?>

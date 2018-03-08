@@ -81,24 +81,24 @@
                                                             <td><?php echo $no;?></td>
                                                             <td>
                                                               <?php 
-                                                                if($result->avatar == ""){
+                                                                if($result->avatar_url == ""){
                                                                   if($result->gender == '1'){
-                                                                  ?><img src="http://www.tlcteignmouth.co.uk/wp-content/uploads/2015/06/default-avatar_man.png" width="100%"/>
+                                                                  ?><img src="http://www.tlcteignmouth.co.uk/wp-content/uploads/2015/06/default-avatar_url_man.png" width="100%"/>
                                                                   <?php 
                                                                     }else{
-                                                                      ?><img src="http://usvirtualcareers.com/wp-content/uploads/2016/06/default-avatar_women.png" width="100%"/>
+                                                                      ?><img src="http://usvirtualcareers.com/wp-content/uploads/2016/06/default-avatar_url_women.png" width="100%"/>
                                                                   <?php  
                                                                   }
 
                                                                 }else{
                                                                 
-                                                                ?> <img src="<?php echo $result->avatar;?>" width="100%"/>
+                                                                ?> <img src="<?php echo $result->avatar_url;?>" width="100%"/>
                                                                 
                                                               <?php
                                                                 }
                                                               ?>
                                                             </td>
-                                                            <td><?php echo $result->name;?></td>
+                                                            <td><?php echo $result->first_name;?> <?php echo $result->last_name?></td>
                                                             <td>
                                                               <a href="pagesprofile/<?php echo $result->id?>" span style="color:blue;"> <?php echo $result->email;?></a>
                                                             </td>

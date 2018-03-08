@@ -64,7 +64,7 @@ $route['editevents/:any']    = 'Sespim/editEvents';
 $route['updateEvents/:any']  = 'Sespim/updateEvents';
 $route['deleteEvents/:any']  = 'Sespim/deleteEvents';
 
-// Route Events
+// Route Articles
 $route['articles']           = 'Sespim/articles';
 $route['addarticles']        = 'Sespim/addarticles';
 $route['insertarticles']     = 'Sespim/insertarticles';
@@ -72,10 +72,25 @@ $route['editarticles/:any']  = 'Sespim/editarticles';
 $route['updateArticles/:any']  = 'Sespim/updatearticles';
 $route['deleteArticles/:any']  = 'Sespim/deleteArticles';
 
-// Route Users
-$route['users']             = 'Sespim/users';
-$route['pagesprofile/:any']      = 'Sespim/pagesprofile';
+// Route Categories
+$route['categories']           = 'Sespim/categories';
 
+// Route posts
+$route['posts']                = 'Sespim/posts';
+$route['deletePosts/:any']     = 'Sespim/deletePosts';
+
+// Route Users
+$route['users']                = 'Sespim/users';
+$route['pagesprofile/:any']    = 'Sespim/pagesprofile';
+$route['addusers']             = 'Sespim/addusers';
+
+// Route Scores
+$route['scores']             = 'Sespim/scores';
+$route['addscores']          = 'Sespim/addscores';
+$route['insertscores']       = 'Sespim/insertscores';
+$route['editscores/:any']    = 'Sespim/editScores';
+$route['updateScores/:any']  = 'Sespim/updateScores';
+$route['deleteScores/:any']  = 'Sespim/deleteScores';
 
 $route['logout'] = 'Sespim/logout';
 $route['404_override'] = '';
