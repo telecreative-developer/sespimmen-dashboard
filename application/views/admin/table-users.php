@@ -28,8 +28,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Tables - DataTables</h2>
-                                    <p class="sub-title">One stop solution for perfect admin dashboard!</p>
+                                    <h2 class="title">Tabel Users</h2>
                                 </div>
                                 
                             </div>
@@ -64,10 +63,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
+                                                            <th width="10%">Nomor Serdik</th>
                                                             <th width="10%">Picture</th>
                                                             <th>Name</th>
                                                             <th>Username / Email</th>
-                                                            <th width="5%">Score</th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
@@ -79,30 +78,10 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td>
-                                                              <?php 
-                                                                if($result->avatar_url == ""){
-                                                                  if($result->gender == '1'){
-                                                                  ?><img src="http://www.tlcteignmouth.co.uk/wp-content/uploads/2015/06/default-avatar_url_man.png" width="100%"/>
-                                                                  <?php 
-                                                                    }else{
-                                                                      ?><img src="http://usvirtualcareers.com/wp-content/uploads/2016/06/default-avatar_url_women.png" width="100%"/>
-                                                                  <?php  
-                                                                  }
-
-                                                                }else{
-                                                                
-                                                                ?> <img src="<?php echo $result->avatar_url;?>" width="100%"/>
-                                                                
-                                                              <?php
-                                                                }
-                                                              ?>
-                                                            </td>
-                                                            <td><?php echo $result->first_name;?> <?php echo $result->last_name?></td>
-                                                            <td>
-                                                              <a href="pagesprofile/<?php echo $result->id?>" span style="color:blue;"> <?php echo $result->email;?></a>
-                                                            </td>
-                                                            <td><?php echo substr($result->total,0,2);?></td>
+                                                            <td><?php echo $result->no_serdik;?></td>
+                                                            <td><img src="<?php echo $result->avatar_url?>" width="100%"/></td>
+                                                            <td><a href="pagesprofile/<?php echo $result->no_serdik?>" span style="color:blue;"><?php echo $result->first_name;?> <?php echo $result->last_name?></a></td>
+                                                            <td><?php echo $result->email;?></td>
                                                             <td>
                                                                 <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteUsers/<?php echo $result->id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
                                                             </td>

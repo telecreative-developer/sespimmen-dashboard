@@ -64,20 +64,25 @@ $route['editevents/:any']    = 'Sespim/editEvents';
 $route['updateEvents/:any']  = 'Sespim/updateEvents';
 $route['deleteEvents/:any']  = 'Sespim/deleteEvents';
 
-// Route Articles
-$route['articles']           = 'Sespim/articles';
-$route['addarticles']        = 'Sespim/addarticles';
-$route['insertarticles']     = 'Sespim/insertarticles';
-$route['editarticles/:any']  = 'Sespim/editarticles';
-$route['updateArticles/:any']  = 'Sespim/updatearticles';
-$route['deleteArticles/:any']  = 'Sespim/deleteArticles';
-
-// Route Categories
-$route['categories']           = 'Sespim/categories';
+// Route Documents
+$route['documents']              = 'Sespim/documents';
+$route['add_documents']          = 'Sespim/add_documents';
+$route['insert_documents']       = 'Sespim/insert_documents';
+$route['edit_documents/:any']    = 'Sespim/edit_documents';
+$route['update_documents/:any']  = 'Sespim/update_documents';
+$route['delete_documents/:any']  = 'Sespim/delete_documents';
 
 // Route posts
 $route['posts']                = 'Sespim/posts';
 $route['deletePosts/:any']     = 'Sespim/deletePosts';
+
+// Route Interviewees
+$route['interviewees']                = 'Sespim/interviewees';
+$route['addinterviewees']             = 'Sespim/addinterviewees';
+$route['insertInterviewees']          = 'Sespim/insertInterviewees';
+$route['editinterviewees/:any']       = 'Sespim/editinterviewees';
+$route['updateInterviewees/:any']     = 'Sespim/updateinterviewees';
+$route['deleteInterviewees/:any']     = 'Sespim/deleteInterviewees';
 
 // Route Users
 $route['users']                = 'Sespim/users';
@@ -91,6 +96,15 @@ $route['insertscores']       = 'Sespim/insertscores';
 $route['editscores/:any']    = 'Sespim/editScores';
 $route['updateScores/:any']  = 'Sespim/updateScores';
 $route['deleteScores/:any']  = 'Sespim/deleteScores';
+
+// Route All Random
+$route['teams']              = 'Sespim/teams';
+$route['topics']             = 'Sespim/topics';
+$route['insertTopics']       = 'Sespim/insertTopics';
+$route['deleteTopics/:any']  = 'Sespim/deleteTopics';
+$route['insertTeams']        = 'Sespim/insertTeams';
+$route['deleteTeams/:any']   = 'Sespim/deleteTeams';
+
 
 $route['logout'] = 'Sespim/logout';
 $route['404_override'] = '';

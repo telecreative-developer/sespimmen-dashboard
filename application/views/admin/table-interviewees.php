@@ -28,7 +28,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Tabel Events</h2>
+                                    <h2 class="title">Tabel Narasumber</h2>
                                 </div>
                                 
                             </div>
@@ -36,9 +36,9 @@
                             <div class="row breadcrumb-div">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-            							<li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-            							<li class="active">Events</li>
-            						</ul>
+                                      <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
+                                      <li class="active">Interviewees</li>
+                                    </ul>
                                 </div>
                             </div>
                             <!-- /.row -->
@@ -54,8 +54,8 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Events </h5>
-                                                    <a href="<?php echo base_url()?>addevents"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Event <i class="fa fa-plus"></i></button></a>
+                                                    <h5>Interviewees</h5>
+                                                    <a href="<?php echo base_url()?>addinterviewees"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Interviewees <i class="fa fa-plus"></i></button></a>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">
@@ -64,12 +64,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th width="5%">Thumbnail</th>
-                                                            <th>Title</th>
-                                                            <th>Description</th>
-                                                            <th>Place</th>
-                                                            <th>Date</th>
-                                                            <th>Time</th>
+                                                            <th>Name</th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
@@ -77,19 +72,14 @@
                                                     <tbody>
                                                         <?php
                                                             $no = 1; 
-                                                            foreach ($events as $result) {
+                                                            foreach ($interviewees as $result) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><img src="<?php echo $result->thumbnail_url;?>" width="100%"/></td>
-                                                            <td><?php echo $result->title;?></td>
-                                                            <td><?php echo $result->description;?></td>
-                                                            <td><?php echo $result->place;?></td>
-                                                            <td><?php echo $result->date;?></td>
-                                                            <td><?php echo $result->time_start;?> - <?php echo $result->time_end?></td>
+                                                            <td><?php echo $result->full_name;?></td>
                                                             <td>
-                                                                <a href="<?php echo base_url();?>editevents/<?php echo $result->event_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
-                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteEvents/<?php echo $result->event_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
+                                                                <a href="<?php echo base_url();?>editinterviewees/<?php echo $result->interviewee_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
+                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteInterviewees/<?php echo $result->interviewee_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
                                                             </td>
                                                         </tr>
                                                         <?php 

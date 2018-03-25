@@ -67,12 +67,21 @@
                                                         </div>
                                                     </div>
 
+
+                                                    <div class="form-group">
+                                                		<label for="text1" class="col-sm-2 control-label">Place</label>
+                                                		<div class="col-sm-10">
+                                                			<input type="text" name="place" class="form-control" id="title" placeholder="Place" required="ON">
+                                                		</div>
+                                                	</div>
+
                                                     <div class="form-group">
                                                         <label for="text1" class="col-sm-2 control-label">Description</label>
                                                 		<div class="col-sm-10">
                                                             <textarea class="form-control note-codable" name="description"  placeholder="Desc.." style="height: 300px;" required="ON"></textarea>
                                                         </div>
                                                     </div>
+
                                                     <div class="form-group">
                                                 		<label for="date" class="col-sm-2 control-label">Date</label>
                                                 		<div class="col-sm-10">
@@ -80,9 +89,14 @@
                                                 		</div>
                                                     </div>
                                                     <div class="form-group">
-                                                		<label for="time" class="col-sm-2 control-label">Time</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="time" name="time" class="form-control" id="time" required="ON">
+                                                		<label for="time" class="col-sm-2 control-label">Time Start</label>
+                                                		<div class="col-sm-4">
+                                                			<input type="time" name="time_start" class="form-control" id="time" required="ON">
+                                                		</div>
+
+                                                        <label for="time" class="col-sm-2 control-label">Time End</label>
+                                                		<div class="col-sm-4">
+                                                			<input type="time" name="time_end" class="form-control" id="time" required="ON">
                                                 		</div>
                                                     </div>
                                                     

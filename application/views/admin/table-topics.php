@@ -16,8 +16,6 @@
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">
-
-                    
                     <div class="left-sidebar fixed-sidebar bg-primary box-shadow tour-three">
                         <div class="sidebar-content">
                             <?php include "partial/navigation.php" ?>
@@ -28,8 +26,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Tables - DataTables</h2>
-                                    <p class="sub-title">One stop solution for perfect admin dashboard!</p>
+                                    <h2 class="title">Tabel Topic</h2>
                                 </div>
                                 
                             </div>
@@ -38,7 +35,7 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
                                       <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                      <li class="active">Articles</li>
+                                      <li class="active">Topic</li>
                                     </ul>
                                 </div>
                             </div>
@@ -55,8 +52,23 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Articles </h5>
-                                                    <a href="<?php echo base_url()?>addarticles"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Articles <i class="fa fa-plus"></i></button></a>
+                                                    <h5>Topic</h5>
+                                                    <?php 
+                                                    $query = $this->db->query("SELECT * FROM topics");
+                                                    $buttonDisable = $query->num_rows();
+                                                
+                                                        if($buttonDisable == 0){
+                                                        ?>
+                                                            <a href="<?php echo base_url()?>insertTopics"><button type="button" class="btn btn-primary btn-xs btn-labeled">Random Topic <i class="fa fa-plus"></i></button></a>
+                                                            <button type="button" class="btn btn-default btn-xs btn-labeled" disabled>Hapus Topic <i class="fa fa-minus"></i></button>
+                                                        <?php
+                                                        }else{
+                                                            echo "<button type='button' class='btn btn-default btn-xs btn-labeled' disabled>Random Topic <i class='fa fa-plus'></i></button>";
+                                                        ?>
+                                                            <a href="<?php echo base_url()?>deleteTopics/all" onclick="javascript:return confirm('Are you sure want to delete ?')" ><button type="button" class="btn btn-danger btn-xs btn-labeled">Hapus Topic <i class="fa fa-minus"></i></button></a>
+                                                        <?php
+                                                        }
+                                                    ?>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">
@@ -65,31 +77,22 @@
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th width="5%">Thumbnail</th>
-                                                            <th>Title</th>
-                                                            <th>Description</th>
-                                                            <th>Category</th>
-                                                            <th width="20%">file</th>
-                                                            <th width="3%">Action</th>
+                                                            <th>No Serdik</th>
+                                                            <th>Nama</th>
+                                                            <th>Topic</th>
                                                         </tr>
                                                     </thead>
                                                     
                                                     <tbody>
                                                         <?php
                                                             $no = 1; 
-                                                            foreach ($articles as $result) {
+                                                            foreach ($topics as $result) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><img src="<?php echo $result->thumbnail_url;?>" width="100%"/></td>
-                                                            <td><?php echo $result->title;?></td>
-                                                            <td><?php echo $result->description;?></td>
-                                                            <td><?php echo $result->category;?></td>
-                                                            <td><a href="<?php echo $result->file_url;?>"><i class="fa fa-file-pdf-o"></i> <?php echo $result->file_loc;?></a> </td>
-                                                            <td>
-                                                                <a href="<?php echo base_url();?>editarticles/<?php echo $result->article_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
-                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteArticles/<?php echo $result->article_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
-                                                            </td>
+                                                            <td><?php echo $result->no_serdik;?></td>
+                                                            <td><?php echo $result->first_name;?> <?php echo $result->last_name;?></td>
+                                                            <td>Topic <?php echo $result->topic;?></td>
                                                         </tr>
                                                         <?php 
                                                             $no++;

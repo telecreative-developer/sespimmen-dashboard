@@ -7,21 +7,37 @@ Class ModelSespim extends CI_Model{
     $query =$this->db->get_where('admin',$data);
     return $query;	
   }
- 
-  public function loadQueryRelation(){
+  
+  public function loadQueryTheBestValue(){
     $this->db->select('*');
     $this->db->from('users');
-    $this->db->select('((scores.score + scores.score2) / 2) as total');
     $this->db->join('scores', 'scores.id = users.id');
-		$db = $this->db->get("");
+    $db = $this->db->get();
 		return $db;
   }
 
-  public function loadQueryRelationArticles(){    
+  public function loadQueryRelation(){
     $this->db->select('*');
-		$this->db->from('article_categories');
-		$this->db->select('article_categories.title as category');
-		$this->db->join('articles', 'articles.article_category_id = article_categories.article_category_id');
+    $this->db->from('scores');
+    $this->db->join('users', 'scores.id = users.id');
+    $this->db->join('interviewees', 'interviewees.interviewee_id = scores.interviewee_nr1_id');
+    $this->db->order_by('scores.id','desc');
+    $db = $this->db->get();
+		return $db;
+  }
+  
+  public function loadQueryRelationTeams(){    
+    $this->db->select('*');
+		$this->db->from('teams');
+		$this->db->join('users', 'users.id = teams.id');
+		$db = $this->db->get();
+		return $db;
+  }
+
+  public function loadQueryRelationTopics(){    
+    $this->db->select('*');
+		$this->db->from('topics');
+		$this->db->join('users', 'users.id = topics.id');
 		$db = $this->db->get();
 		return $db;
   }
@@ -29,9 +45,9 @@ Class ModelSespim extends CI_Model{
   public function loadQueryRelationWhere($id){
     $this->db->select('*');
     $this->db->from('users');
-    $this->db->select('((scores.score + scores.score2) / 2) as total');
     $this->db->join('scores', 'scores.id = users.id');
-    $this->db->where('users.id',$id);
+    $this->db->join('interviewees', 'interviewees.interviewee_id = scores.interviewee_nr1_id');
+    $this->db->where('users.no_serdik',$id);
 		$db = $this->db->get("");
 		return $db;
   }
@@ -62,20 +78,13 @@ Class ModelSespim extends CI_Model{
   public function insertQuery($table,$data){
 		$this->db->insert($table,$data);
   }
-
+  public function insertQueryForeach($table,$data){
+    $this->db->insert($table,$data);
+  }
+  
   public function loadQueryById($where,$id,$table){
 		$this->db->where($where,$id);
     $db =$this->db->get($table);
-    return $db;
-  }
-
-  public function loadQueryByIdRelation($id){
-    $this->db->select('*');
-    $this->db->from('article_categories');
-    $this->db->select('article_categories.title as category');
-    $this->db->join('articles','article_categories.article_category_id = articles.article_category_id');
-    $this->db->where('articles.article_id',$id);
-    $db =$this->db->get('');
     return $db;
   }
 
@@ -83,12 +92,6 @@ Class ModelSespim extends CI_Model{
     $this->db->join('users', 'users.id = scores.id');
 		$this->db->where($where,$id);
     $db =$this->db->get($table);
-    return $db;
-  }
-
-  public function loadQueryNotById($id){
-		$this->db->where("article_category_id !='$id'");
-    $db =$this->db->get('article_categories');
     return $db;
   }
 
@@ -102,44 +105,8 @@ Class ModelSespim extends CI_Model{
     $this->db->delete($table);
   }
 
-  public function deleteImage($id){
-    error_reporting(0);
-    $this->db->where('article_id',$id);
-    $query = $this->db->get('articles');
-    $row = $query->row();
-    $x = $row->thumbnail_loc;
-    
-    //$this->db->delete('articles',array('article_id' => $id));
-    $path ='/opt/lampp/htdocs/sespim/assets/images/articles/'.$x;
-    if($this->db->affected_rows() >= 1){
-      if(unlink($path)){
-        return TRUE;
-        } else {
-            return FALSE;
-        }
-    }else{
-
-    }
+  public function deleteQueryAll($table){
+    $this->db->query("DELETE FROM $table");
   }
-
-  public function deleteFile($id){
-    error_reporting(0);
-    $this->db->where('article_id',$id);
-    $query = $this->db->get('articles');
-    $row = $query->row();
-    $y = $row->loc_file;
-    
-    //$this->db->delete('articles',array('article_id' => $id));
-    $path ='/opt/lampp/htdocs/sespim/assets/images/articles/'.$y;
-    if($this->db->affected_rows() >= 1){
-      if(unlink($path)){
-        return TRUE;
-        } else {
-            return FALSE;
-        }
-    }else{
-
-    }
-  }
-
+  
 }

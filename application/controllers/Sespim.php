@@ -15,9 +15,8 @@ class Sespim extends CI_Controller {
 
 	public function dashboard()
 	{
-    $id = 'id';
-    $data['users']  = $this->ModelSespim->loadQueryLimit($id,'users')->result();
-		$this->load->view('admin/dashboard',$data);
+    $data['users']  = $this->ModelSespim->loadQueryTheBestValue()->result();
+    $this->load->view('admin/dashboard',$data);
   }
 
   public function events()
@@ -35,17 +34,19 @@ class Sespim extends CI_Controller {
   public function insertEvents(){
     $imageUrl = base_url();
     $admin_id = $this->session->userdata('admin_id');
-    $title         = $this->input->post('title');
+    $title    = $this->input->post('title');
+    $place    = $this->input->post('place');
     
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/events/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
 
     $description   = $this->input->post('description');
     $date          = $this->input->post('date');
-    $time          = $this->input->post('time');
+    $time_start    = $this->input->post('time_start');
+    $time_end      = $this->input->post('time_end');
 
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
@@ -53,9 +54,12 @@ class Sespim extends CI_Controller {
     $data = array(
       'title'  			    => $title,
       'thumbnail_url'	  => $imageUrl."assets/images/events/".$fileName,
-      'thumbnail_loc'	 => $fileName,
+      'thumbnail_loc'	  => $fileName,
       'description'  		=> $description,
-      'date'		        => $date." ".$time,
+      'place'		        => $place,
+      'date'		        => $date,
+      'time_start'		  => $time_start,
+      'time_end'   		  => $time_end,
       'admin_id'		    => $admin_id,
       'createdAt'		    => $datenow." ".$timenow,
       'updatedAt'		    => $datenow." ".$timenow
@@ -84,9 +88,11 @@ class Sespim extends CI_Controller {
   
     $id = $this->uri->segment(2);
     $title         = $this->input->post('title');
+    $place         = $this->input->post('place');
     $description   = $this->input->post('description');
     $date          = $this->input->post('date');
-    $time          = $this->input->post('time');
+    $time_start    = $this->input->post('time_start');
+    $time_end      = $this->input->post('time_end');
 
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
@@ -99,7 +105,10 @@ class Sespim extends CI_Controller {
       $data = array(
         'title'          => $title,
         'description'    => $description,
-        'date'		       => $date." ".$time,
+        'place'		       => $place,
+        'date'		       => $date,
+        'time_start'		  => $time_start,
+        'time_end'   		  => $time_end,
         'admin_id'       => $admin_id,
         'updatedAt'		   => $datenow." ".$timenow
       );
@@ -111,9 +120,12 @@ class Sespim extends CI_Controller {
       $data = array(
         'title'          => $title,
         'description'    => $description,
-        'date'		       => $date." ".$time,
+        'place'		       => $place,
+        'date'		       => $date,
+        'time_start'		 => $time_start,
+        'time_end'   		 => $time_end,
         'admin_id'       => $admin_id,
-        'thumbnail_url'		     => $imageUrl."assets/images/events/".$fileName,
+        'thumbnail_url'	 => $imageUrl."assets/images/events/".$fileName,
         'thumbnail_loc'	 => $fileName,
         'updatedAt'		   => $datenow." ".$timenow
       );
@@ -141,189 +153,109 @@ class Sespim extends CI_Controller {
      </script>");
   }
 
-  public function articles()
+  public function documents()
 	{
-    $orderid = 'article_id';
-    $data['articles']  = $this->ModelSespim->loadQueryRelationArticles()->result();
-		$this->load->view('admin/table-articles',$data);
+    $id = 'document_id';
+    $data['documents']  = $this->ModelSespim->loadQuery($id,'documents')->result();
+		$this->load->view('admin/table-documents',$data);
   }
 
-  public function addarticles()
+  public function add_documents()
 	{
-    $orderid = 'article_category_id';
-    $data['categories']  = $this->ModelSespim->loadQuery($orderid,'article_categories')->result();
-		$this->load->view('admin/addarticles',$data);
+		$this->load->view('admin/add_documents');
   }
 
-  public function insertarticles(){
-
+  public function insert_documents(){
     $imageUrl = base_url();
-    
-    $title              = $this->input->post('title');
-    $description        = $this->input->post('description');
-    $id_category        = $this->input->post('id_category');
-
-		$tempFile 		= $_FILES['picture']['tmp_name'];
-		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/articles/'; 
+    $title         = $this->input->post('title');
+    $tipe          = $this->input->post('tipe');
+    $tempFile 		= $_FILES['file']['tmp_name'];
+		$fileName 		= time().$_FILES['file']['name'];	  
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
-
-    $tempFilePDF 		= $_FILES['file']['tmp_name'];
-		$fileNamePDF    = time().$_FILES['file']['name'];	  
-    $targetPathPDF	= '/opt/lampp/htdocs/sespim/assets/images/articles/'; 
-		$targetFilePDF 	= $targetPathPDF . $fileNamePDF;
-    move_uploaded_file($tempFilePDF, $targetFilePDF);
-
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
-
-
+    
     $data = array(
-      'title'               => $title,
-      'thumbnail_url'	      => $imageUrl."assets/images/articles/".$fileName,
-      'thumbnail_loc'	      => $fileName,
-      'description'		      => $description,
-      'article_category_id' => $id_category,
-      'file_url'		        => $imageUrl."assets/images/articles/".$fileNamePDF,
-      'file_loc'		        => $fileNamePDF,
-      'updatedAt'		        => $datenow." ".$timenow
+      'document_title'  => $title,
+      'document_url'	  => $imageUrl."assets/images/documents/".$fileName,
+      'document_loc'	  => $fileName,
+      'document_type'	  => $tipe,
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
     );
 
-    $this->ModelSespim->insertQuery('articles',$data); 
-    echo ("<script LANGUAGE='JavaScript'>
-    window.alert('Success Data');
-    window.location.href='articles'; 
-    </script>");
-  }
-
-  public function editarticles()
-	{
-    $id = $this->uri->segment(2);
-    $query = $this->db->query("SELECT * FROM articles WHERE article_id = '$id'");
-    $row = $query->row();
-
-    $id_category =  $row->article_category_id;
-    $data['articles'] = $this->ModelSespim->loadQueryByIdRelation($id,'articles')->result();
-    $data['categories'] = $this->ModelSespim->loadQueryNotById($id_category)->result();
-	  $this->load->view('admin/editarticles',$data);
-  }
-
-  public function updatearticles() {
-    $datenow = date("Y-m-d");
-    $timenow = date("H:i:s");
-
-    $imageUrl = base_url();
-    $id = $this->uri->segment(2);
-    $title              = $this->input->post('title');
-    $description        = $this->input->post('description');    
-    $id_category        = $this->input->post('id_category');
-
-    $tempFile 		= $_FILES['picture']['tmp_name'];
-		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/articles/'; 
-		$targetFile 	= $targetPath . $fileName;
-    move_uploaded_file($tempFile, $targetFile);
-
-    $tempFilePDF 		= $_FILES['file']['tmp_name'];
-		$fileNamePDF    = time().$_FILES['file']['name'];	  
-    $targetPathPDF	= '/opt/lampp/htdocs/sespim/assets/images/articles/'; 
-		$targetFilePDF 	= $targetPathPDF . $fileNamePDF;
-    move_uploaded_file($tempFilePDF, $targetFilePDF);
-
-    $thumbnail = substr($fileName,10);
-    
-    $pic = substr($fileName,10);
-    $file = substr($fileNamePDF,10);
-    
-    if($pic == "" AND $file == ""){
-      $data = array(
-        'title'               => $title,
-        'description'		      => $description,
-        'article_category_id' => $id_category,
-        'updatedAt'		        => $datenow." ".$timenow
-      );
-      
-      $where = array(
-        'article_id' => $id
-      );
-      $this->ModelSespim->updateQuery($where,$data,'articles');
-    }else if($pic == ""){
-      $data = array(
-        'title'          => $title,
-        'description'		 => $description,
-        'article_category_id' => $id_category,
-        'file_url'		       => $imageUrl."assets/images/articles/".$fileNamePDF,
-        'file_loc'		   => $fileNamePDF,
-        'updatedAt'		   => $datenow." ".$timenow
-      );
-      
-      $where = array(
-        'article_id' => $id
-      );
-      $this->ModelSespim->deleteFile($id);
-      $this->ModelSespim->updateQuery($where,$data,'articles');
-    }else if($file == ""){
-      $data = array(
-        'title'          => $title,
-        'description'		 => $description,
-        'article_category_id' => $id_category,
-        'thumbnail_url'		     => $imageUrl."assets/images/articles/".$fileName,
-        'thumbnail_loc'		 => $fileName,
-        'updatedAt'		   => $datenow." ".$timenow
-      );
-      
-      $where = array(
-        'article_id' => $id
-      );
-
-      $this->ModelSespim->deleteImage($id);
-      $this->ModelSespim->updateQuery($where,$data,'articles');
-    }else{
-      $data = array(
-        'title'     => $title,
-        'thumbnail_url'		     => $imageUrl."assets/images/articles/".$fileName,
-        'thumbnail_loc'		 => $fileName,
-        'description'		 => $description,
-        'article_category_id' => $id_category,
-        'file_url'		       => $imageUrl."assets/images/articles/".$fileNamePDF,
-        'file_loc'		   => $fileNamePDF,
-        'updatedAt'		   => $datenow." ".$timenow
-      );
-      
-      $where = array(
-        'article_id' => $id
-      );
-      $this->ModelSespim->deleteFile($id);
-      $this->ModelSespim->deleteImage($id);
-      $this->ModelSespim->updateQuery($where,$data,'articles');
-    }
-  
-		 echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Update Data');
-     window.location.href='../articles';
+     $this->ModelSespim->insertQuery('documents',$data); 
+     echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Success Data');
+     window.location.href='documents';
      </script>");
   }
 
-
-  public function deleteArticles() {
+  public function edit_documents()
+	{
     $id = $this->uri->segment(2);
-    $idwhere = 'article_id';
-    $this->ModelSespim->deleteImage($id);
-    $this->ModelSespim->deleteFile($id);
-    $this->ModelSespim->deleteQuery($idwhere,$id,'articles');
-    echo ("<script LANGUAGE='JavaScript'>
-    window.alert('Delete Data');
-    window.location.href='../articles';
+    $where = 'document_id';
+    $data['documents'] = $this->ModelSespim->loadQueryById($where,$id,'documents')->result();
+		$this->load->view('admin/edit_documents',$data);
+  }
+
+  public function update_documents() {
+    $imageUrl = base_url();
+    $id = $this->uri->segment(2);
+    $title         = $this->input->post('title');
+    $tipe          = $this->input->post('tipe');
+    $tempFile 		= $_FILES['file']['tmp_name'];
+		$fileName 		= time().$_FILES['file']['name'];	  
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
+		$targetFile 	= $targetPath . $fileName;
+    move_uploaded_file($tempFile, $targetFile);
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+
+    $file = substr($fileName,10);
+    if($file== ""){
+      $data = array(
+        'document_title'  => $title,
+        'document_type'	  => $tipe,
+        'updatedAt'		    => $datenow." ".$timenow
+      );
+      $where = array(
+        'document_id' => $id
+      );
+      $this->ModelSespim->updateQuery($where,$data,'documents');
+    }else{
+      $data = array(
+        'document_title'  => $title,
+        'document_url'	  => $imageUrl."assets/images/documents/".$fileName,
+        'document_loc'	  => $fileName,
+        'document_type'	  => $tipe,
+        'updatedAt'		    => $datenow." ".$timenow
+      );
+      $where = array(
+        'document_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFile($id);
+      $this->ModelSespim->updateQuery($where,$data,'documents');
+    }
+		echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Update Data');
+    window.location.href='../documents';
     </script>");
   }
 
-  public function categories()
-	{
-    $orderid = 'article_category_id';
-    $data['categories']  = $this->ModelSespim->loadQuery($orderid,'article_categories')->result();
-		$this->load->view('admin/table-categories',$data);
+  public function delete_documents() {
+    $id = $this->uri->segment(2);
+    $idwhere = 'document_id';
+    $this->ModelDeleteImage->deleteFile($id);
+    $this->ModelSespim->deleteQuery($idwhere,$id,'documents');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../documents';
+     </script>");
   }
+  
 
   public function posts()
 	{
@@ -339,6 +271,69 @@ class Sespim extends CI_Controller {
     echo ("<script LANGUAGE='JavaScript'>
      window.alert('Delete Data');
      window.location.href='../posts';
+     </script>");
+  }
+
+  public function interviewees()
+	{
+    $id = 'interviewee_id';
+    $data['interviewees']  = $this->ModelSespim->loadQuery($id,'interviewees')->result();
+		$this->load->view('admin/table-interviewees',$data);
+  }
+
+  public function addinterviewees()
+	{
+		$this->load->view('admin/addinterviewees');
+  }
+
+  public function insertInterviewees(){
+    $full_name         = $this->input->post('full_name');
+
+    $data = array(
+      'full_name'     			    => $full_name,
+    );
+
+     $this->ModelSespim->insertQuery('interviewees',$data); 
+     echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Success Data');
+     window.location.href='interviewees';
+     </script>");
+  }
+
+  public function editinterviewees()
+	{
+    $id = $this->uri->segment(2);
+    $where = 'interviewee_id';
+    $data['interviewees'] = $this->ModelSespim->loadQueryById($where,$id,'interviewees')->result();
+		$this->load->view('admin/editinterviewees',$data);
+  }
+
+  public function updateinterviewees() {
+    $id = $this->uri->segment(2);
+    $full_name         = $this->input->post('full_name');
+    
+		$data = array(
+      'full_name'     => $full_name,
+		);
+		
+		$where = array(
+			'interviewee_id' => $id
+    );
+    
+    $this->ModelSespim->updateQuery($where,$data,'interviewees');
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../interviewees';
+     </script>");
+  }
+  
+  public function deleteInterviewees() {
+    $id = $this->uri->segment(2);
+    $idwhere = 'interviewee_id';
+    $this->ModelSespim->deleteQuery($idwhere,$id,'interviewees');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../interviewees';
      </script>");
   }
 
@@ -364,34 +359,88 @@ class Sespim extends CI_Controller {
 
   public function scores()
 	{
-    $orderid = 'score_id';
-    $data['scores']  = $this->ModelSespim->loadQueryRelation($orderid,'scores')->result();
+    $data['scores']  = $this->ModelSespim->loadQueryRelation()->result();
 		$this->load->view('admin/table-scores',$data);
   }
 
   public function addscores()
 	{
     $id = 'id';
-    $data['users']  = $this->ModelSespim->loadQueryLimit($id,'users')->result();
+    $data['users']  = $this->ModelSespim->loadQuery($id,'users')->result();
+    $orderid = 'interviewee_id';
+    $data['interviewees']  = $this->ModelSespim->loadQuery($orderid,'interviewees')->result(); 
 		$this->load->view('admin/addscores',$data);
   }
 
   public function insertscores(){
-    $users         = $this->input->post('users');
-    $score         = $this->input->post('score');
-    $score2        = $this->input->post('score2');
+    
+    $users                  = $this->input->post('users');
+    $kode_naskah            = $this->input->post('kode_naskah');
+    $narasumber1            = $this->input->post('narasumber1');
+    $bobot_1_nr1            = $this->input->post('bobot_1_nr1');
+    $bobot_5_nr1            = $this->input->post('bobot_5_nr1');
+    $manfaat_bobot_3_nr1    = $this->input->post('manfaat_bobot_3_nr1');
+    $teknisi_bobot_3_nr1    = $this->input->post('teknisi_bobot_3_nr1');
+    $interviewee_nr1_id     = $this->input->post('narasumber1');
 
-    $data = array(
-      'id'     			    => $users,
-      'score'  			    => $score,
-      'score2'  		    => $score2
-    );
-
-     $this->ModelSespim->insertQuery('scores',$data); 
-     echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Success Data');
-     window.location.href='scores';
-     </script>");
+    $narasumber2            = $this->input->post('narasumber2');
+    $bobot_1_nr2            = $this->input->post('bobot_1_nr2');
+    $bobot_5_nr2            = $this->input->post('bobot_5_nr2');
+    $manfaat_bobot_3_nr2    = $this->input->post('manfaat_bobot_3_nr2');
+    $teknisi_bobot_3_nr2    = $this->input->post('teknisi_bobot_3_nr2');
+    $interviewee_nr2_id     = $this->input->post('narasumber2');
+    $keterangan             = $this->input->post('keterangan');
+    //Narasumber 1
+    $insert_bobot_5_nr1   = $bobot_5_nr1 * 5;
+    $insert_manfaat_3_nr1 = $manfaat_bobot_3_nr1 * 3;
+    $insert_teknisi_3_nr1 = $teknisi_bobot_3_nr1 * 3;
+    $total1               = $bobot_1_nr1 + $insert_bobot_5_nr1 + $insert_manfaat_3_nr1 + $insert_teknisi_3_nr1;
+    $nilai_murni1         = $total1 / 12;
+    
+    //Narasumber 2
+    $insert_bobot_5_nr2   = $bobot_5_nr2 * 5;
+    $insert_manfaat_3_nr2 = $manfaat_bobot_3_nr2 * 3;
+    $insert_teknisi_3_nr2 = $teknisi_bobot_3_nr2 * 3;
+    $total2               = $bobot_1_nr2 + $insert_bobot_5_nr2 + $insert_manfaat_3_nr2 + $insert_teknisi_3_nr2;
+    $nilai_murni2         = $total2 / 12;
+    
+    if($interviewee_nr2_id == NULL){
+      $data = array(
+        'kode_naskah'  			            => $kode_naskah,
+        'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
+        'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
+        'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
+        'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
+        'nilai_murni_narasumber_1_nr1'  => $nilai_murni1,
+        'interviewee_nr1_id'            => $interviewee_nr1_id,
+        'ket'                           => $keterangan,
+        'id'     			                  => $users,
+        'status'                        => '1'
+      );
+    }else{
+      $data = array(
+        'kode_naskah'  			            => $kode_naskah,
+        'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
+        'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
+        'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
+        'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
+        'nilai_murni_narasumber_1_nr1'  => $nilai_murni1,
+        'interviewee_nr1_id'            => $interviewee_nr1_id,
+        'penulisan_bobot_1_nr2'  		    => $bobot_1_nr2,
+        'pembahasan_bobot_5_nr2'  		  => $bobot_5_nr2,
+        'manfaat_bobot_3_nr2'  		      => $manfaat_bobot_3_nr2,
+        'teknisi_bobot_3_nr2'  		      => $teknisi_bobot_3_nr2,
+        'nilai_murni_narasumber_1_nr2'  => $nilai_murni2,
+        'interviewee_nr2_id'            => $interviewee_nr2_id,
+        'ket'                           => $keterangan,
+        'id'     			                  => $users,
+      );
+    }
+    $this->ModelSespim->insertQuery('scores',$data); 
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='scores';
+    </script>");
   }
 
   public function editScores()
@@ -404,20 +453,78 @@ class Sespim extends CI_Controller {
     $row = $query->row();
     $id_user = $row->id;
     $data['users']  = $this->ModelSespim->LoadUsersNotById($id_user)->result();
-		$this->load->view('admin/editscores',$data);
+    $orderid = 'interviewee_id';
+    $data['interviewees']  = $this->ModelSespim->loadQuery($orderid,'interviewees')->result(); 
+    $this->load->view('admin/editscores',$data);
   }
 
   public function updateScores() {
     $id = $this->uri->segment(2);
-    $score         = $this->input->post('score');
-    $score2        = $this->input->post('score2');
-    $user          = $this->input->post('users');
     
-		$data = array(
-      'score'     => $score,
-      'score2'    => $score2,
-      'id'        => $user,
-		);
+    $users                  = $this->input->post('users');
+    $kode_naskah            = $this->input->post('kode_naskah');
+    $narasumber1            = $this->input->post('narasumber1');
+    $bobot_1_nr1            = $this->input->post('bobot_1_nr1');
+    $bobot_5_nr1            = $this->input->post('bobot_5_nr1');
+    $manfaat_bobot_3_nr1    = $this->input->post('manfaat_bobot_3_nr1');
+    $teknisi_bobot_3_nr1    = $this->input->post('teknisi_bobot_3_nr1');
+    $interviewee_nr1_id     = $this->input->post('narasumber1');
+    
+    $narasumber2            = $this->input->post('narasumber2');
+    $bobot_1_nr2            = $this->input->post('bobot_1_nr2');
+    $bobot_5_nr2            = $this->input->post('bobot_5_nr2');
+    $manfaat_bobot_3_nr2    = $this->input->post('manfaat_bobot_3_nr2');
+    $teknisi_bobot_3_nr2    = $this->input->post('teknisi_bobot_3_nr2');
+    $interviewee_nr2_id     = $this->input->post('narasumber2');
+    $keterangan             = $this->input->post('keterangan');
+
+    //Narasumber 1
+    $insert_bobot_5_nr1   = $bobot_5_nr1 * 5;
+    $insert_manfaat_3_nr1 = $manfaat_bobot_3_nr1 * 3;
+    $insert_teknisi_3_nr1 = $teknisi_bobot_3_nr1 * 3;
+    $total1               = $bobot_1_nr1 + $insert_bobot_5_nr1 + $insert_manfaat_3_nr1 + $insert_teknisi_3_nr1;
+    $nilai_murni1         = $total1 / 12;
+    
+    //Narasumber 2
+    $insert_bobot_5_nr2   = $bobot_5_nr2 * 5;
+    $insert_manfaat_3_nr2 = $manfaat_bobot_3_nr2 * 3;
+    $insert_teknisi_3_nr2 = $teknisi_bobot_3_nr2 * 3;
+    $total2               = $bobot_1_nr2 + $insert_bobot_5_nr2 + $insert_manfaat_3_nr2 + $insert_teknisi_3_nr2;
+    $nilai_murni2         = $total2 / 12;
+    
+		if($interviewee_nr2_id == NULL){
+      $data = array(
+        'kode_naskah'  			            => $kode_naskah,
+        'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
+        'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
+        'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
+        'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
+        'nilai_murni_narasumber_1_nr1'  => $nilai_murni1,
+        'interviewee_nr1_id'            => $interviewee_nr1_id,
+        'ket'                           => $keterangan,
+        'id'     			                  => $users,
+        'status'                        => '1'
+      );
+    }else{
+      $data = array(
+        'kode_naskah'  			            => $kode_naskah,
+        'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
+        'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
+        'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
+        'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
+        'nilai_murni_narasumber_1_nr1'  => $nilai_murni1,
+        'interviewee_nr1_id'            => $interviewee_nr1_id,
+        'penulisan_bobot_1_nr2'  		    => $bobot_1_nr2,
+        'pembahasan_bobot_5_nr2'  		  => $bobot_5_nr2,
+        'manfaat_bobot_3_nr2'  		      => $manfaat_bobot_3_nr2,
+        'teknisi_bobot_3_nr2'  		      => $teknisi_bobot_3_nr2,
+        'nilai_murni_narasumber_1_nr2'  => $nilai_murni2,
+        'interviewee_nr2_id'            => $interviewee_nr2_id,
+        'ket'                           => $keterangan,
+        'id'     			                  => $users,
+        'status'                        => '0'
+      );
+    }
 		
 		$where = array(
 			'score_id' => $id
@@ -438,6 +545,89 @@ class Sespim extends CI_Controller {
      window.alert('Delete Data');
      window.location.href='../scores';
      </script>");
+  }
+
+  public function teams()
+	{
+    $id = 'team_id';
+    $data['teams']  = $this->ModelSespim->loadQueryRelationTeams($id,'teams')->result();
+		$this->load->view('admin/table-teams',$data);
+  }
+
+  public function topics()
+	{
+    $id = 'topic_id';
+    $data['topics']  = $this->ModelSespim->loadQueryRelationTopics($id,'topics')->result();
+		$this->load->view('admin/table-topics',$data);
+  }
+
+  public function insertTopics(){    
+
+    $query = $this->db->query("SELECT * FROM users");      
+      while ($row = $query->unbuffered_row()) {
+      
+      $numbers = range(1, 5);
+      shuffle($numbers);
+      foreach($numbers as $number) {
+          $data = array(
+            'id'  			    => $row->id,
+            'topic'  		    => $number
+          );
+      }
+
+        $this->ModelSespim->insertQueryForeach('topics',$data);
+      }
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='topics';
+    </script>");
+  }
+  
+  public function deleteTopics() {
+    $id = $this->uri->segment(2);
+    $this->ModelSespim->deleteQueryAll('topics');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../topics';
+     </script>");
+  }
+
+  public function insertTeams(){    
+
+    $query = $this->db->query("SELECT * FROM users");      
+      while ($row = $query->unbuffered_row()) {
+      
+      $numbers = range(1, 5);
+      shuffle($numbers);
+      foreach($numbers as $number) {
+          $data = array(            
+            'team'  		    => $number,
+            'id'  			    => $row->id
+          );
+      }
+
+        $this->ModelSespim->insertQueryForeach('teams',$data);
+      }
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='teams';
+    </script>");
+  }
+
+  public function deleteTeams() {
+    $id = $this->uri->segment(2);
+    $this->ModelSespim->deleteQueryAll('teams');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../teams';
+     </script>");
+  }
+
+  public function examp()
+	{
+    $id = 'topic_id';
+    $data['topics']  = $this->ModelSespim->loadQueryRelationTopics($id,'topics')->result();
+		$this->load->view('admin/table-topics',$data);
   }
 
   public Function logout(){

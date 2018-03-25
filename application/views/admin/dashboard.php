@@ -91,39 +91,7 @@
                                         <div class="panel border-primary no-border border-3-top">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Total Nilai Terbesar <small> Peringkat 10 Sespim Terbaik </small></h5>
-                                                </div>
-                                            </div>
-                                            <div class="panel-body p-20">
-                                                <div class="tab-content bg-white p-15">
-                                                    <div class="row">
-                                                    <?php 
-                                                        foreach($users as $result){
-                                                    ?>
-                                                        <div class="col-lg-2">
-                                                            <div class="outline-product" style="background: url('<?php echo $result->avatar_url;?>')center no-repeat; background-size:cover; width:150px; border-radius:150%; height:150px; margin-top:20px;">          
-                                                            </div>
-                                                        </div>   
-                                                        <div class="col-lg-4">
-                                                            <div style="background:#f8f8f8; padding:20px; margin-top:40px;">
-                                                                <p style="overflow-wrap: break-word;">
-                                                                    <small>
-                                                                        <b><?php echo $result->first_name;?> <?php echo $result->last_name;?></b> 
-                                                                        <br> <a href="<?php echo base_url();?>pagesprofile/<?php echo $result->id;?>" style="color:blue;"><?php echo $result->email;?></a>
-                                                                        <br>Total Nilai : 
-                                                                        <?php if ($result->total <= 60 ){?>
-                                                                            <span class="color-danger"><?php echo substr($result->total,0,2);?></span>    
-                                                                        <?php 
-                                                                        }else{
-                                                                        ?><?php echo substr($result->total,0,2);?>        
-                                                                        <?php 
-                                                                        }?>
-                                                                    </small>
-                                                                </p>
-                                                            </div>
-                                                        </div>     
-                                                        <?php } ?>  
-                                                    </div>
+                                                    <h5>Nilai NAK Terbesar <small> Peringkat 10 Sespim Terbaik </small></h5>
                                                 </div>
                                             </div>
                                         </div>

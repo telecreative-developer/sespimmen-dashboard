@@ -3837,7 +3837,9 @@ code:not(.language-html) {
 }
 
 .navbar-header .logo {
-  height: 26px;
+  margin-top:-10px;
+  height: 45px;
+  width:130px;
 }
 
 .navbar-header.small-nav-header {
@@ -5736,9 +5738,11 @@ div.tagsinput span.tag a {
 }
 
 .login-bg-color .login-box {
+  margin:auto;
+  width:35%;
   color: #292929 !important;
   padding: 20px;
-  margin-top: 125px;
+  margin-top: 20px;
   border-radius: 4px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 }

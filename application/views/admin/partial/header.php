@@ -1,12 +1,7 @@
 <div class="navbar-header no-padding">
   <a class="navbar-brand" href="index.html">
-    <img src="<?php echo base_url()?>assets/images/sespimmen.jpg" alt="Logo" class="logo">  
+    <img src="<?php echo base_url()?>assets/images/favicon/sispammen-right.jpg" alt="Logo" class="logo">  
   </a> 
-  
-  <p style="margin-top:-10px; height:0px;">
-    <br/>SESPIMMEN
-  </p>
-  
   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
     <span class="sr-only">Toggle navigation</span>
     <i class="fa fa-ellipsis-v"></i>

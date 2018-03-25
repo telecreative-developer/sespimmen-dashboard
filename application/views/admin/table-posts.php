@@ -28,8 +28,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Tables - DataTables</h2>
-                                    <p class="sub-title">One stop solution for perfect admin dashboard!</p>
+                                    <h2 class="title">Tabel Status</h2>
                                 </div>
                                 
                             </div>
@@ -38,7 +37,7 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
                                       <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                      <li class="active">posts</li>
+                                      <li class="active">Status</li>
                                     </ul>
                                 </div>
                             </div>
@@ -55,8 +54,7 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>posts</h5>
-                                                    <!-- <a href="<?php echo base_url()?>addscores"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Scores <i class="fa fa-plus"></i></button></a> -->
+                                                    <h5>Status</h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">
