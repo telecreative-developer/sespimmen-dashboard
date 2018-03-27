@@ -51,7 +51,8 @@
                                         {
                                         ?>
                                             <div class="col-lg-4">
-                                                <img src="<?php echo $row['thumbnail_url'];?>" width="100%;"/>
+                                                <div style="background:url('<?php echo $row['thumbnail_url'];?>')center no-repeat; background-size:100%; color:#fff; padding:100px;">
+                                            </div>
                                             </div>
                                         <?php 
                                         }
