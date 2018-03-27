@@ -24,6 +24,7 @@
                             <div class="row page-title-div">
                                 <div class="col-md-12">
                                     <h2 class="title">Edit Events</h2>
+                                    <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
                             </div>
@@ -31,10 +32,10 @@
                             <div class="row breadcrumb-div">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-                                        <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
+            							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
                                         <li><a href="<?php echo base_url();?>events">Events</li></a>
                                         <li class="active">Edit Events</li>
-                                    </ul>
+            					            	</ul>
                                 </div>
                             </div>
                             <!-- /.row -->
@@ -70,7 +71,7 @@
                                                     <div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Place</label>
                                                 		<div class="col-sm-10">
-                                                			<input type="text" name="place" class="form-control" id="title" placeholder="Place" value="<?php echo $result->place;?>">
+                                                			<input type="text" name="place" class="form-control" id="title" placeholder="Place" value="<?php echo $result->place;?>" >
                                                 		</div>
                                                 	</div>
 

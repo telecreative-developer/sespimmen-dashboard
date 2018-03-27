@@ -55,7 +55,7 @@
                                                 	<div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Title</label>
                                                 		<div class="col-sm-10">
-                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input type title" required="ON">
+                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input type title">
                                                 		</div>
                                                 	</div>
         
