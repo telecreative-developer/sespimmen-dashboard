@@ -120,6 +120,8 @@ $route['insertPok_uji']      = 'Sespim/insertPok_uji';
 $route['deletePok_uji/:any'] = 'Sespim/deletePok_uji';
 
 
+//Content
+$route['pagesposts/:any']    = 'Sespim/pagesposts';
 
 $route['logout'] = 'Sespim/logout';
 $route['404_override'] = '';
