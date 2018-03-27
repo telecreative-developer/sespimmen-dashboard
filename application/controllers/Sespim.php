@@ -374,19 +374,29 @@ class Sespim extends CI_Controller {
 
   public function verifyUsers() {
     $id = $this->uri->segment(2);
-		$data = array(
-      'verified'     => 1,
-		);
-		
-		$where = array(
-			'id' => $id
-    );
+    $this->email->from('kevinhermawanx@gmail.com', 'Rendi simamora');
+    $this->email->to('rendisimamora7127.com');
+    $this->email->cc('another@another-example.com');
+    $this->email->bcc('them@their-example.com');
+
+    $this->email->subject('Email Test');
+    $this->email->message('Testing the email class.');
+
+    $this->email->send();
     
-    $this->ModelSespim->updateQuery($where,$data,'users');
-		echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Update Data');
-     window.location.href='../users';
-     </script>");
+    // $data = array(
+    //   'verified'     => 1,
+		// );
+		
+		// $where = array(
+		// 	'id' => $id
+    // );
+    
+    // $this->ModelSespim->updateQuery($where,$data,'users');
+		// echo ("<script LANGUAGE='JavaScript'>
+    //  window.alert('Update Data');
+    //  window.location.href='../users';
+    //  </script>");
   }
 
   public function deleteUsers() {
