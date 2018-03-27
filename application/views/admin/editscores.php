@@ -24,7 +24,6 @@
                             <div class="row page-title-div">
                                 <div class="col-md-12">
                                     <h2 class="title">Scores</h2>
-                                    <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
                             </div>
