@@ -374,15 +374,12 @@ class Sespim extends CI_Controller {
 
   public function verifyUsers() {
     $id = $this->uri->segment(2);
-    $this->email->from('kevinhermawanx@gmail.com', 'Rendi simamora');
-    $this->email->to('rendisimamora7127.com');
-    $this->email->cc('another@another-example.com');
-    $this->email->bcc('them@their-example.com');
+    $to = "rendisimamora7127@gmail.com";
+    $subject = "My subject";
+    $txt = "Hello world!";
+    $headers = "From: kevinhermawanx@example.com";
 
-    $this->email->subject('Email Test');
-    $this->email->message('Testing the email class.');
-
-    $this->email->send();
+    mail($to,$subject,$txt,$headers);
     
     // $data = array(
     //   'verified'     => 1,
