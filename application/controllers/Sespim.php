@@ -340,7 +340,7 @@ class Sespim extends CI_Controller {
   public function users()
 	{
     $id = 'id';
-    $data['users']  = $this->ModelSespim->loadQueryRelation($id,'users')->result();
+    $data['users']  = $this->ModelSespim->loadQuery($id,'users')->result();
 		$this->load->view('admin/table-users',$data);
   }
 
