@@ -11,7 +11,7 @@ Class ModelDeleteImage extends CI_Model{
     $x = $row->thumbnail_loc;
     
     //$this->db->delete('articles',array('article_id' => $id));
-    $path ='/opt/lampp/htdocs/sespim/assets/images/events/'.$x;
+    $path ='/var/www/sespim/assets/images/events/'.$x;
     if($this->db->affected_rows() >= 1){
       if(unlink($path)){
         return TRUE;
@@ -31,7 +31,7 @@ Class ModelDeleteImage extends CI_Model{
     $x = $row->document_loc;
     
     //$this->db->delete('articles',array('article_id' => $id));
-    $path ='/opt/lampp/htdocs/sespim/assets/images/documents/'.$x;
+    $path ='/var/www/sespim/assets/images/documents/'.$x;
     if($this->db->affected_rows() >= 1){
       if(unlink($path)){
         return TRUE;
