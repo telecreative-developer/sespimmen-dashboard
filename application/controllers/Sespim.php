@@ -64,7 +64,6 @@ class Sespim extends CI_Controller {
       'createdAt'		    => $datenow." ".$timenow,
       'updatedAt'		    => $datenow." ".$timenow
     );
-
      $this->ModelSespim->insertQuery('events',$data); 
      echo ("<script LANGUAGE='JavaScript'>
      window.alert('Success Data');
