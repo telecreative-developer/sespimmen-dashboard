@@ -54,24 +54,17 @@
                                                 foreach($documents as $result){
                                               ?>
                                                 <form method="POST" action="<?php echo base_url()?>update_documents/<?php echo $result->document_id; ?>" class="form-horizontal" enctype="multipart/form-data">
-                                                  
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Title</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input type title" value="<?php echo $result->document_title;?>" required="ON">
-                                                		</div>
-                                                	</div>
-        
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">File</label>
-                                                		<div class="col-sm-10">
-                                                      <input id="file" type="file" class="validate" name="file" >
-                                                    </div>
-                                                  </div>
-                                                  
                                                   <?php 
                                                     if($result->document_type == "standar-kompetensi"){
                                                     ?>
+            
+                                                      <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">File</label>
+                                                        <div class="col-sm-10">
+                                                          <input id="file" type="file" class="validate" name="file" >
+                                                        </div>
+                                                      </div>
+                                                      
                                                       <div class="form-group">
                                                         <label for="text1" class="col-sm-2 control-label">Tipe</label>
                                                         <div class="col-sm-10">
@@ -83,6 +76,21 @@
                                                     <?php 
                                                     }else if($result->document_type == "data-serdik"){
                                                     ?> 
+                                                       
+                                                      <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">Title</label>
+                                                        <div class="col-sm-10">
+                                                          <input type="text" name="title" class="form-control" id="title" placeholder="Input type title" value="<?php echo $result->document_title;?>" required="ON">
+                                                        </div>
+                                                      </div>
+            
+                                                      <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">File</label>
+                                                        <div class="col-sm-10">
+                                                          <input id="file" type="file" class="validate" name="file" >
+                                                        </div>
+                                                      </div>
+                                                      
                                                       <div class="form-group">
                                                         <label for="text1" class="col-sm-2 control-label">Tipe</label>
                                                         <div class="col-sm-10">
@@ -95,6 +103,21 @@
                                                     <?php 
                                                     }else{
                                                     ?>
+                                                       
+                                                      <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">Title</label>
+                                                        <div class="col-sm-10">
+                                                          <input type="text" name="title" class="form-control" id="title" placeholder="Input type title" value="<?php echo $result->document_title;?>" required="ON">
+                                                        </div>
+                                                      </div>
+            
+                                                      <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">File</label>
+                                                        <div class="col-sm-10">
+                                                          <input id="file" type="file" class="validate" name="file" >
+                                                        </div>
+                                                      </div>
+                                                      
                                                       <div class="form-group">
                                                         <label for="text1" class="col-sm-2 control-label">Tipe</label>
                                                         <div class="col-sm-10">
