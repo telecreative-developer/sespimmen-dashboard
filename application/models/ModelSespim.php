@@ -78,6 +78,15 @@ Class ModelSespim extends CI_Model{
 		return $db;
   }
 
+  public function loadQueryRelationPostWhere($id){
+    $this->db->select('*');
+    $this->db->from('posts');
+    $this->db->join('users', 'posts.id = users.id');
+    $this->db->where('posts.post_id',$id);
+		$db = $this->db->get("");
+		return $db;
+  }
+
   public function loadQueryLimit(){
     $this->db->select('*');
     $this->db->from('users');
