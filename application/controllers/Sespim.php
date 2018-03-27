@@ -7,7 +7,7 @@ class Sespim extends CI_Controller {
     parent::__construct();
     $this->load->helper('date');
     $this->load->library('pagination');
-
+    $this->load->library('email');
 		if($this->session->userdata('username') == ""){
 			redirect('../');	
 		}
