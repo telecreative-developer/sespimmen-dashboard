@@ -7,7 +7,6 @@ class Sespim extends CI_Controller {
     parent::__construct();
     $this->load->helper('date');
     $this->load->library('pagination');
-    $this->load->library('email');
 		if($this->session->userdata('username') == ""){
 			redirect('../');	
 		}
@@ -374,12 +373,22 @@ class Sespim extends CI_Controller {
 
   public function verifyUsers() {
     $id = $this->uri->segment(2);
-    $to = "rendisimamora7127@gmail.com";
-    $subject = "My subject";
-    $txt = "Hello world!";
-    $headers = "From: kevinhermawanx@example.com";
+    $from_email = "kevinhermawanx@gmail.com"; 
 
-    mail($to,$subject,$txt,$headers);
+    //Load email library 
+    $this->load->library('email'); 
+
+    $this->email->from('kevinhermawanx@gmail.com'); 
+    $this->email->to("rendisimamora7127@gmail.com");
+    $this->email->subject('Email Test'); 
+    $this->email->message('Testing the email class.'); 
+
+    //Send mail 
+    if($this->email->send()) 
+    $this->session->set_flashdata("email_sent","Email sent successfully."); 
+    else 
+    $this->session->set_flashdata("email_sent","Error in sending Email."); 
+    $this->load->view('email_form'); 
     
     // $data = array(
     //   'verified'     => 1,
