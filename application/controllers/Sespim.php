@@ -39,7 +39,7 @@ class Sespim extends CI_Controller {
     
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/var/www/sespim/assets/images/events/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
 
@@ -51,20 +51,37 @@ class Sespim extends CI_Controller {
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
 
-    $data = array(
-      'title'  			    => $title,
-      'thumbnail_url'	  => $imageUrl."assets/images/events/".$fileName,
-      'thumbnail_loc'	  => $fileName,
-      'description'  		=> $description,
-      'place'		        => $place,
-      'date'		        => $date,
-      'time_start'		  => $time_start,
-      'time_end'   		  => $time_end,
-      'admin_id'		    => $admin_id,
-      'createdAt'		    => $datenow." ".$timenow,
-      'updatedAt'		    => $datenow." ".$timenow
-    );
-     $this->ModelSespim->insertQuery('events',$data); 
+    $x = substr($fileName,10);
+
+    if($x == ""){
+      $data = array(
+        'title'  			    => $title,
+        'description'  		=> $description,
+        'place'		        => $place,
+        'date'		        => $date,
+        'time_start'		  => $time_start,
+        'time_end'   		  => $time_end,
+        'admin_id'		    => $admin_id,
+        'createdAt'		    => $datenow." ".$timenow,
+        'updatedAt'		    => $datenow." ".$timenow
+      );
+      $this->ModelSespim->insertQuery('events',$data); 
+    }else{
+      $data = array(
+        'title'  			    => $title,
+        'thumbnail_url'	  => $imageUrl."assets/images/events/".$fileName,
+        'thumbnail_loc'	  => $fileName,
+        'description'  		=> $description,
+        'place'		        => $place,
+        'date'		        => $date,
+        'time_start'		  => $time_start,
+        'time_end'   		  => $time_end,
+        'admin_id'		    => $admin_id,
+        'createdAt'		    => $datenow." ".$timenow,
+        'updatedAt'		    => $datenow." ".$timenow
+      );
+      $this->ModelSespim->insertQuery('events',$data); 
+    }
      echo ("<script LANGUAGE='JavaScript'>
      window.alert('Success Data');
      window.location.href='events';
