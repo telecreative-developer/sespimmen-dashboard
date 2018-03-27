@@ -16,12 +16,30 @@ Class ModelSespim extends CI_Model{
 		return $db;
   }
 
+  public function loadQueryRelationPost(){
+    $this->db->select('*');
+    $this->db->from('posts');
+    $this->db->join('users', 'users.id = posts.id');
+    $db = $this->db->get();
+		return $db;
+  }
+
   public function loadQueryRelation(){
     $this->db->select('*');
     $this->db->from('scores');
+    $this->db->select('kodenaskah.kode_naskah as kn');
     $this->db->join('users', 'scores.id = users.id');
+    $this->db->join('kodenaskah', 'users.id = kodenaskah.id');
     $this->db->join('interviewees', 'interviewees.interviewee_id = scores.interviewee_nr1_id');
     $this->db->order_by('scores.id','desc');
+    $db = $this->db->get();
+		return $db;
+  }
+
+  public function loadQueryRelationPokUji(){
+    $this->db->select('*');
+    $this->db->from('pok_uji');
+    $this->db->join('kodenaskah', 'kodenaskah.id = pok_uji.id');
     $db = $this->db->get();
 		return $db;
   }
@@ -38,6 +56,14 @@ Class ModelSespim extends CI_Model{
     $this->db->select('*');
 		$this->db->from('topics');
 		$this->db->join('users', 'users.id = topics.id');
+		$db = $this->db->get();
+		return $db;
+  }
+
+  public function loadQueryRelationKodeNaskah(){    
+    $this->db->select('*');
+		$this->db->from('kodenaskah');
+		$this->db->join('users', 'kodenaskah.id = users.id');
 		$db = $this->db->get();
 		return $db;
   }

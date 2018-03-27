@@ -26,7 +26,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Tabel Kelompok</h2>
+                                    <h2 class="title">Tabel Pokjar</h2>
                                 </div>
                                 
                             </div>
@@ -35,7 +35,7 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
                                       <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                      <li class="active">Kelompok</li>
+                                      <li class="active">Pokjar</li>
                                     </ul>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Kelompok</h5>
+                                                    <h5>Pokjar</h5>
                                                     <?php 
                                                     $query = $this->db->query("SELECT * FROM teams");
                                                     $buttonDisable = $query->num_rows();

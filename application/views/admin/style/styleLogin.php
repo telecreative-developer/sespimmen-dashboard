@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sespimmen - Admin</title>
+<title>Sipamen - Admin</title>
 </head>
 <link rel="shortcut icon" href="<?php echo base_url();?>assets/images/favicon/favicon.png">
 <link rel="stylesheet" href="<?php echo base_url()?>assets/css/bootstrap.min.css" media="screen" >

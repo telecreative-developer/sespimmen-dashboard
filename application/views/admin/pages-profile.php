@@ -58,23 +58,13 @@
                                             <div class="row">
                                                 <div class="col-md-8 col-md-offset-2">
                                                 <?php 
-                                                      if($result->avatar_url == ""){
-                                                        if($result->gender == '1'){
-                                                        ?>    
+                                                    if($result->avatar_url == ""){
+                                                       ?>  
                                                           <center>
-                                                            <div class="outline-product" style="background: url('http://www.tlcteignmouth.co.uk/wp-content/uploads/2015/06/default-avatar_man.png')center no-repeat; background-size:cover; width:200px; border-radius:100%; height:200px;">
+                                                            <div class="outline-product" style="background: url('<?php echo base_url();?>assets/images/favicon/default.jpg')center no-repeat; background-size:cover; width:200px; border-radius:100%; height:200px;">
                                                             </div>  
                                                           </center>
-                                                        <?php 
-                                                          }else{
-                                                            ?>
-                                                            <center>
-                                                              <div class="outline-product" style="background: url('http://usvirtualcareers.com/wp-content/uploads/2016/06/default-avatar_women.png')center no-repeat; background-size:cover; width:200px; border-radius:100%; height:200px;">
-                                                              </div>  
-                                                            </center>
-                                                        <?php  
-                                                        }
-
+                                                    <?php
                                                       }else{  
                                                       ?> 
                                                       <center>
@@ -125,38 +115,91 @@
                                                                 <p style="word-break:break-all; margin-bottom:0px;"><?php echo $result->phone;?></p>
                                                             </td>
                                                         </tr>
-
-                                                        <tr>
-                                                            <th width="0%">NAK <span style="float:right;"> : </span> </th>
-                                                            <td width="60%">
-                                                                <?php 
-                                                                    if($result->status == '0'){
-                                                                    ?>
-                                                                        <p style="word-break:break-all; margin-bottom:0px; color:#28af5f; font-weight:bold;">
-                                                                            <?php 
-                                                                                $x = $result->nilai_murni_narasumber_1_nr1;
-                                                                                $y = $result->nilai_murni_narasumber_1_nr2;
-                                                                                $z = ($x + $y) / 2;
-                                                                                echo $z;
-                                                                            ?>
-                                                                        </p>
-
-                                                                    <?php
-                                                                    }else{
-                                                                    ?>
-                                                                        <p style="word-break:break-all; margin-bottom:0px; color:#28af5f; font-weight:bold;">
-                                                                            <?php 
-                                                                                echo $result->nilai_murni_narasumber_1_nr1;
-                                                                            ?>
-                                                                        </p>
-                                                                    <?php
-                                                                    }
-                                                                ?>
-                                                            </td>
-                                                        </tr>
                                                 	</tbody>
                                                 </table>
                                             </div>
+                                            <?php 
+                                            if($result->status == '0'){
+                                            ?>
+                                                <?php 
+                                                    $x = $result->nilai_murni_narasumber_1_nr1;
+                                                    $y = $result->nilai_murni_narasumber_2_nr2;
+                                                    $z = ($x + $y) / 2;
+                                                    
+                                                ?>
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <a class="dashboard-stat-2" style="background:#27ae5f; color:#fff;" href="#">
+                                                                <div class="stat-content">
+                                                                    <span class="number counter"><?php echo $z?></span>
+                                                                    <span class="name">NAK<br/>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+
+                                                        <?php 
+                                                            $team = $result->team;
+                                                            $query = $this->db->query("SELECT SUM(nak) as nilai FROM scores WHERE team = '$team'");
+                                                            $row = $query->row();
+
+                                                            $query2 = $this->db->query("SELECT COUNT(team) as teams FROM scores WHERE team = '$team'");
+                                                            $row2 = $query2->row();
+                                                            
+                                                            $query3 = $this->db->query("SELECT STDDEV(nak) as spk FROM scores WHERE team = '$team'");
+                                                            $row3 = $query3->row();
+
+                                                            $nilai = $row->nilai;
+                                                            $totalUser =  $row2->teams;
+                                                            $SPK = $row3->spk;
+
+                                                            $NRK = $nilai / $totalUser;
+                                                            $nakUser = $result->nak;
+                                                            $PKS = $nakUser - $NRK;
+                                                            
+                                                        ?>
+
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <a class="dashboard-stat-2" style="background:#27ae5f; color:#fff;" href="#">
+                                                                <div class="stat-content">
+                                                                   
+                                                                    
+                                                                    <span class="number counter"><?php echo $NRK?></span>
+                                                                    <span class="name">NRK<br/>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <a class="dashboard-stat-2" style="background:#27ae5f; color:#fff;" href="#">
+                                                                <div class="stat-content">
+                                                                   
+                                                                    
+                                                                    <span class="number counter"><?php echo $PKS?></span>
+                                                                    <span class="name">PKS<br/>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                <?php
+                                                }else{
+                                                ?>
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <a class="dashboard-stat-2" style="background:#675c5a; color:#fff;" href="#">
+                                                                <div class="stat-content">
+                                                                    <span class="number counter"><?php echo $result->nilai_murni_narasumber_1_nr1; ?></span>
+                                                                    <span class="name">NAK<br/>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                }
+                                            ?>
+
                                         </div>
                                     </div>
                                 </div>

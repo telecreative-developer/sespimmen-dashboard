@@ -24,7 +24,12 @@
         <div class="user-menu">
           <div class="user-menu-item">
             <div class="user-name-wrapper" style="margin-top:12px;">
-              Administrator <i class="fa fa-caret-down"></i>
+              <?php 
+              $admin_id = $this->session->userdata('admin_id');
+              $query = $this->db->query("SELECT * FROM admin WHERE admin_id = '$admin_id'");
+              $row = $query->row();
+              ?>
+              <?php echo $row->username;?><i class="fa fa-caret-down"></i>
             </div>
           </div>
           <div class="user-dropdown">

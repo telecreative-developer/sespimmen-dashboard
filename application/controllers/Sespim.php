@@ -260,7 +260,7 @@ class Sespim extends CI_Controller {
   public function posts()
 	{
     $id = 'id';
-    $data['posts']  = $this->ModelSespim->loadQuery($id,'posts')->result();
+    $data['posts']  = $this->ModelSespim->loadQueryRelationPost()->result();
 		$this->load->view('admin/table-posts',$data);
   }
 
@@ -349,11 +349,104 @@ class Sespim extends CI_Controller {
 		$this->load->view('admin/addusers');
   }
 
+  public function verifyUsers() {
+    $id = $this->uri->segment(2);
+		$data = array(
+      'verified'     => 1,
+		);
+		
+		$where = array(
+			'id' => $id
+    );
+    
+    $this->ModelSespim->updateQuery($where,$data,'users');
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../users';
+     </script>");
+  }
+
+  public function deleteUsers() {
+    $id = $this->uri->segment(2);
+    $idwhere = 'id';
+    $this->ModelSespim->deleteQuery($idwhere,$id,'users');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../users';
+     </script>");
+  }
+
   public function pagesprofile()
 	{
     $id = $this->uri->segment(2);
     $data['users']  = $this->ModelSespim->loadQueryRelationWhere($id)->result();
 		$this->load->view('admin/pages-profile',$data);
+  }
+
+  public function admin()
+	{
+    $id = 'admin_id';
+    $data['admin']  = $this->ModelSespim->loadQuery($id,'admin')->result();
+		$this->load->view('admin/table-admin',$data);
+  }
+
+  public function addAdmin()
+	{
+		$this->load->view('admin/addAdmin');
+  }
+
+  public function insertAdmin(){
+    $imageUrl = base_url();
+    $first_name    = $this->input->post('first_name');
+    $last_name     = $this->input->post('last_name');
+    $username      = $this->input->post('username');
+    $password      = SHA1($this->input->post('password'));
+    $cpassword     = SHA1($this->input->post('cpassword'));
+
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+
+    $query = $this->db->query("SELECT * FROM admin WHERE username ='$username'");
+    $total = $query->num_rows();
+    
+    if($total >= 1){
+      echo ("<script LANGUAGE='JavaScript'>
+      window.alert('Username sudah dipakai');
+      window.history.back();
+      </script>");
+    }else{
+      if($password == $cpassword){
+        $data = array(
+          'first_name'	    => $first_name,
+          'last_name'	      => $last_name,
+          'username'	      => $username,
+          'password'	      => $password,
+          'createdAt'		    => $datenow." ".$timenow,
+          'updatedAt'		    => $datenow." ".$timenow
+        );
+    
+         $this->ModelSespim->insertQuery('admin',$data); 
+         echo ("<script LANGUAGE='JavaScript'>
+         window.alert('Success Data');
+         window.location.href='admin';
+         </script>");
+      }else{
+        echo ("<script LANGUAGE='JavaScript'>
+        window.alert('Password tidak sama');
+        window.history.back();
+        </script>");
+      }
+    }
+  }
+
+  public function deleteAdmin() {
+    $id = $this->uri->segment(2);
+    $idwhere = 'admin_id';
+    $this->ModelSespim->deleteQuery($idwhere,$id,'admin');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../admin';
+     </script>");
   }
 
 
@@ -373,9 +466,15 @@ class Sespim extends CI_Controller {
   }
 
   public function insertscores(){
-    
-    $users                  = $this->input->post('users');
-    $kode_naskah            = $this->input->post('kode_naskah');
+    error_reporting(0);
+    $users = $this->input->post('users');
+    $query = $this->db->query("SELECT * FROM users WHERE id = '$users'");
+    $row = $query->row();
+    $id_user = $row->id;
+
+    $query = $this->db->query("SELECT * FROM teams WHERE id = '$id_user'");
+    $rows1 = $query->row();
+    $id_teams = $rows1->team;
     $narasumber1            = $this->input->post('narasumber1');
     $bobot_1_nr1            = $this->input->post('bobot_1_nr1');
     $bobot_5_nr1            = $this->input->post('bobot_5_nr1');
@@ -390,6 +489,7 @@ class Sespim extends CI_Controller {
     $teknisi_bobot_3_nr2    = $this->input->post('teknisi_bobot_3_nr2');
     $interviewee_nr2_id     = $this->input->post('narasumber2');
     $keterangan             = $this->input->post('keterangan');
+    
     //Narasumber 1
     $insert_bobot_5_nr1   = $bobot_5_nr1 * 5;
     $insert_manfaat_3_nr1 = $manfaat_bobot_3_nr1 * 3;
@@ -403,23 +503,25 @@ class Sespim extends CI_Controller {
     $insert_teknisi_3_nr2 = $teknisi_bobot_3_nr2 * 3;
     $total2               = $bobot_1_nr2 + $insert_bobot_5_nr2 + $insert_manfaat_3_nr2 + $insert_teknisi_3_nr2;
     $nilai_murni2         = $total2 / 12;
+
+    $nak = ( $nilai_murni1 + $nilai_murni2 ) / 2;
     
     if($interviewee_nr2_id == NULL){
       $data = array(
-        'kode_naskah'  			            => $kode_naskah,
         'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
         'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
         'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
         'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
-        'nilai_murni_narasumber_1_nr1'  => $nilai_murni1,
+        'nilai_murni_narasumber_2_nr1'  => $nilai_murni1,
         'interviewee_nr1_id'            => $interviewee_nr1_id,
         'ket'                           => $keterangan,
         'id'     			                  => $users,
+        'team'     			                => $id_teams,
+        'nak'     			                => $nilai_murni1,
         'status'                        => '1'
       );
     }else{
       $data = array(
-        'kode_naskah'  			            => $kode_naskah,
         'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
         'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
         'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
@@ -430,9 +532,11 @@ class Sespim extends CI_Controller {
         'pembahasan_bobot_5_nr2'  		  => $bobot_5_nr2,
         'manfaat_bobot_3_nr2'  		      => $manfaat_bobot_3_nr2,
         'teknisi_bobot_3_nr2'  		      => $teknisi_bobot_3_nr2,
-        'nilai_murni_narasumber_1_nr2'  => $nilai_murni2,
+        'nilai_murni_narasumber_2_nr2'  => $nilai_murni2,
         'interviewee_nr2_id'            => $interviewee_nr2_id,
         'ket'                           => $keterangan,
+        'team'     			                => $id_teams,
+        'nak'     			                => $nak,
         'id'     			                  => $users,
       );
     }
@@ -460,9 +564,16 @@ class Sespim extends CI_Controller {
 
   public function updateScores() {
     $id = $this->uri->segment(2);
+    $users = $this->input->post('users');
+    $query = $this->db->query("SELECT * FROM users WHERE id = '$users'");
+    $row = $query->row();
+    $id_user = $row->id;
+
+    $query = $this->db->query("SELECT * FROM teams WHERE id = '$id_user'");
+    $rows1 = $query->row();
+    $id_teams = $rows1->team;
     
     $users                  = $this->input->post('users');
-    $kode_naskah            = $this->input->post('kode_naskah');
     $narasumber1            = $this->input->post('narasumber1');
     $bobot_1_nr1            = $this->input->post('bobot_1_nr1');
     $bobot_5_nr1            = $this->input->post('bobot_5_nr1');
@@ -491,23 +602,25 @@ class Sespim extends CI_Controller {
     $insert_teknisi_3_nr2 = $teknisi_bobot_3_nr2 * 3;
     $total2               = $bobot_1_nr2 + $insert_bobot_5_nr2 + $insert_manfaat_3_nr2 + $insert_teknisi_3_nr2;
     $nilai_murni2         = $total2 / 12;
+
+    $nak = ( $nilai_murni1 + $nilai_murni2 ) / 2;
     
 		if($interviewee_nr2_id == NULL){
       $data = array(
-        'kode_naskah'  			            => $kode_naskah,
         'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
         'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
         'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
         'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
-        'nilai_murni_narasumber_1_nr1'  => $nilai_murni1,
+        'nilai_murni_narasumber_2_nr1'  => $nilai_murni1,
         'interviewee_nr1_id'            => $interviewee_nr1_id,
         'ket'                           => $keterangan,
         'id'     			                  => $users,
+        'team'     			                => $id_teams,
+        'nak'     			                => $nilai_murni1,
         'status'                        => '1'
       );
     }else{
       $data = array(
-        'kode_naskah'  			            => $kode_naskah,
         'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
         'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
         'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
@@ -518,10 +631,12 @@ class Sespim extends CI_Controller {
         'pembahasan_bobot_5_nr2'  		  => $bobot_5_nr2,
         'manfaat_bobot_3_nr2'  		      => $manfaat_bobot_3_nr2,
         'teknisi_bobot_3_nr2'  		      => $teknisi_bobot_3_nr2,
-        'nilai_murni_narasumber_1_nr2'  => $nilai_murni2,
+        'nilai_murni_narasumber_2_nr2'  => $nilai_murni2,
         'interviewee_nr2_id'            => $interviewee_nr2_id,
         'ket'                           => $keterangan,
         'id'     			                  => $users,
+        'team'     			                => $id_teams,
+        'nak'     			                => $nak,
         'status'                        => '0'
       );
     }
@@ -532,9 +647,9 @@ class Sespim extends CI_Controller {
     
     $this->ModelSespim->updateQuery($where,$data,'scores');
 		echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Update Data');
-     window.location.href='../scores';
-     </script>");
+    window.alert('Update Data');
+    window.location.href='../scores';
+    </script>");
   }
 
   public function deleteScores() {
@@ -562,7 +677,6 @@ class Sespim extends CI_Controller {
   }
 
   public function insertTopics(){    
-
     $query = $this->db->query("SELECT * FROM users");      
       while ($row = $query->unbuffered_row()) {
       
@@ -574,9 +688,8 @@ class Sespim extends CI_Controller {
             'topic'  		    => $number
           );
       }
-
-        $this->ModelSespim->insertQueryForeach('topics',$data);
-      }
+      $this->ModelSespim->insertQueryForeach('topics',$data);
+    }
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Success Data');
     window.location.href='topics';
@@ -623,11 +736,77 @@ class Sespim extends CI_Controller {
      </script>");
   }
 
-  public function examp()
+  public function kodenaskah()
 	{
-    $id = 'topic_id';
-    $data['topics']  = $this->ModelSespim->loadQueryRelationTopics($id,'topics')->result();
-		$this->load->view('admin/table-topics',$data);
+    $data['kode_naskah']  = $this->ModelSespim->loadQueryRelationKodeNaskah()->result();    
+		$this->load->view('admin/table-kodenaskah',$data);
+  }
+
+  public function deleteKode() {
+    $id = $this->uri->segment(2);
+    $this->ModelSespim->deleteQueryAll('kodenaskah');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../kodenaskah';
+     </script>");
+  }
+
+  public function insertKode(){    
+    $query = $this->db->query("SELECT * FROM users");          
+      function angkaangkaunik($start, $end, $banyak) {
+        $angka = range($start, $end);
+        shuffle($angka);
+        return array_slice($angka, 0, $banyak);
+      }
+      $x = angkaangkaunik(1, 160, 160);
+      $i = 0;
+      $query = $this->db->query("SELECT * FROM users");  
+        while ($row = $query->unbuffered_row()) {
+            $data = array(
+              'kode_naskah'   => $x[$i++],
+              'id'            => $row->id
+            );
+            $this->ModelSespim->insertQueryForeach('kodenaskah',$data);    
+        }    
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='kodenaskah';
+    </script>");  
+  }
+
+  public function exam()
+	{
+    $data['pok_uji']  = $this->ModelSespim->loadQueryRelationPokUji()->result();
+		$this->load->view('admin/table-exam',$data);
+  }
+
+  public function insertPok_uji(){    
+    $query = $this->db->query("SELECT * FROM users");      
+      while ($row = $query->unbuffered_row()) {
+      
+      $numbers = range(1, 25);
+      shuffle($numbers);
+      foreach($numbers as $number) {
+          $data = array(
+            'id'  			    => $row->id,
+            'pok_uji'  		  => $number
+          );
+      }
+      $this->ModelSespim->insertQueryForeach('pok_uji',$data);
+    }
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='exam';
+    </script>");  
+  }
+
+  public function deletePok_uji() {
+    $id = $this->uri->segment(2);
+    $this->ModelSespim->deleteQueryAll('pok_uji');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../exam';
+     </script>");
   }
 
   public Function logout(){

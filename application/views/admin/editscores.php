@@ -69,13 +69,6 @@
                                                                 </select>
                                                             </div>
                                                         </div>   
-                                                        
-                                                        <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">Kode Naskah</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="number" name="kode_naskah" class="form-control" id="kode_naskah" placeholder="Kode Naskah" value="<?php echo $result->kode_naskah;?>">
-                                                            </div>
-                                                        </div> 
                                                     </div>
 
                                                     <div class="col-lg-6">

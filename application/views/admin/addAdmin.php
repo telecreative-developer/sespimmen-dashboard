@@ -23,8 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Users</h2>
-                                    <p class="sub-title">One stop solution for perfect admin dashboard!</p>
+                                    <h2 class="title">Admin</h2>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
                             </div>
@@ -33,8 +32,8 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
             							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>events">Users</li></a>
-                                        <li class="active">Add Users</li>
+                                        <li><a href="<?php echo base_url();?>events">Admin</li></a>
+                                        <li class="active">Add Admin</li>
             						            </ul>
                                 </div>
                             </div>
@@ -52,7 +51,7 @@
                                             </div>
                                             <div class="panel-body">
 
-                                                <form method="POST" id="Formaddusers" class="form-horizontal">
+                                                <form method="POST" action="<?php echo base_url()?>insertAdmin" class="form-horizontal" enctype="multipart/form-data">
                                                 	<div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">First Name</label>
                                                 		<div class="col-sm-4">
@@ -66,20 +65,13 @@
                                                 			<input type="text" name="last_name" class="form-control" id="lastname" placeholder="Lastname" required="ON">
                                                 		</div>
                                                   </div>
-        
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Email</label>
-                                                		<div class="col-sm-4">
-                                                			<input type="text" name="email" class="form-control" id="email" placeholder="Email" required="ON">
-                                                		</div>
-                                                	</div>
 
                                                   <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Force Of</label>
+                                                    <label for="text1" class="col-sm-2 control-label">Username</label>
                                                 		<div class="col-sm-4">
-                                                			<input type="number" name="force_of" class="form-control" id="force_of" placeholder="Force Of" required="ON">
+                                                			<input type="text" name="username" class="form-control" id="username" placeholder="Lastname" required="ON">
                                                 		</div>
-                                                	</div>
+                                                  </div>
 
                                                   <div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Password</label>
@@ -115,36 +107,3 @@
 
         </div>
 <?php include "style/javascriptDashboard.php";?>
-<script>
-
-$(function () {
-  $('form').on('submit', function (e) {
-    var password = document.getElementById("password").value;
-    var cpassword = document.getElementById("cpassword").value;
-    if(password == cpassword){
-      e.preventDefault();
-      $.ajax({
-        type: 'POST',
-        url: 'http://45.77.45.112/users',
-        data: $('form').serialize(),
-        statusCode: {
-          201: function () {
-            alert("Success add Users");
-            document.getElementById("Formaddusers").reset();
-            window.location.href = "users";
-          },
-          400: function () {
-           alert("username or password already in use");
-          }
-        }
-      }
-      );
-
-    }else{
-      e.preventDefault();
-      document.getElementById("demo").innerHTML = "Password anda tidak sama";
-    }
-  });
-});
-
-</script>

@@ -16,8 +16,6 @@
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">
-
-                    
                     <div class="left-sidebar fixed-sidebar bg-primary box-shadow tour-three">
                         <div class="sidebar-content">
                             <?php include "partial/navigation.php" ?>
@@ -28,7 +26,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Tabel Users</h2>
+                                    <h2 class="title">Tabel Kode Naskah</h2>
                                 </div>
                                 
                             </div>
@@ -37,7 +35,7 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
                                       <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                      <li class="active">Users</li>
+                                      <li class="active">Kode Naskah</li>
                                     </ul>
                                 </div>
                             </div>
@@ -54,61 +52,47 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Users </h5>
-                                                    <a href="<?php echo base_url()?>addusers"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Users <i class="fa fa-plus"></i></button></a>
+                                                    <h5>Kode Naskah</h5>
+                                                    <?php 
+                                                    $query = $this->db->query("SELECT * FROM kodenaskah");
+                                                    $buttonDisable = $query->num_rows();
+                                                
+                                                        if($buttonDisable == 0){
+                                                        ?>
+                                                            <a href="<?php echo base_url()?>insertKode"><button type="button" class="btn btn-primary btn-xs btn-labeled">Random Kode Naskah <i class="fa fa-plus"></i></button></a>
+                                                            <button type="button" class="btn btn-default btn-xs btn-labeled" disabled>Hapus Kode Naskah <i class="fa fa-minus"></i></button>
+                                                        <?php
+                                                        }else{
+                                                            echo "<button type='button' class='btn btn-default btn-xs btn-labeled' disabled>Random Kode Naskah <i class='fa fa-plus'></i></button>";
+                                                        ?>
+                                                            <a href="<?php echo base_url()?>deleteKode/all" onclick="javascript:return confirm('Are you sure want to delete ?')" ><button type="button" class="btn btn-danger btn-xs btn-labeled">Hapus Kode Naskah <i class="fa fa-minus"></i></button></a>
+                                                        <?php
+                                                        }
+                                                    ?>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">
+
                                                 <table id="example" class="display table-responsive table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th width="15%">Nomor Serdik</th>
-                                                            <th>Name</th>
-                                                            <th>Username / Email</th>
-                                                            <th>Verify</th>
-                                                            <th width="3%">Action</th>
+                                                            <th>No Serdik</th>
+                                                            <th>Nama</th>
+                                                            <th>Kode Naskah</th>
                                                         </tr>
                                                     </thead>
                                                     
                                                     <tbody>
                                                         <?php
                                                             $no = 1; 
-                                                            foreach ($users as $result) {
+                                                            foreach ($kode_naskah as $result) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
                                                             <td><?php echo $result->no_serdik;?></td>
-                                                            <td><a href="pagesprofile/<?php echo $result->no_serdik?>" span style="color:blue;"><?php echo $result->first_name;?> <?php echo $result->last_name?></a></td>
-                                                            <td><?php echo $result->email;?></td>
-                                                            <td>
-                                                                <?php 
-                                                                    if($result->verified == '0'){
-                                                                    ?>
-                                                                        <button type="button" class="btn btn-danger btn-xs btn-labeled">Belum Terverifikasi</button>
-                                                                    <?php 
-                                                                    }else{
-                                                                    ?>
-                                                                        <button type="button" class="btn btn-success btn-xs btn-labeled">Sudah Terverifikasi</button>  
-                                                                    <?php
-                                                                    }
-                                                                ?>
-                                                            </td>
-                                                                
-                                                            <td>
-                                                                <?php 
-                                                                    if($result->verified == '0'){
-                                                                ?>
-                                                                
-                                                                    <a onclick="javascript:return confirm('Verifikasi ?')" href="<?php echo base_url();?>verifyUsers/<?php echo $result->id;?>"><button type="button" class="btn btn-success btn-xs btn-labeled"><i class="fa fa-check"></i></button></a>
-                                                                
-                                                                <?php 
-                                                                    }else{
-                                                                        
-                                                                    }
-                                                                ?>
-                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteUsers/<?php echo $result->id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
-                                                            </td>
+                                                            <td><?php echo $result->first_name;?> <?php echo $result->last_name;?></td>
+                                                            <td><?php echo $result->kode_naskah?></td>
                                                         </tr>
                                                         <?php 
                                                             $no++;
@@ -116,8 +100,6 @@
                                                         ?>
                                                     </tbody>
                                                 </table>
-
-                                                
                                             </div>
                                         </div>
                                     </div>

@@ -3837,8 +3837,8 @@ code:not(.language-html) {
 }
 
 .navbar-header .logo {
-  margin-top:-10px;
-  height: 45px;
+  margin-top:-45px;
+  height: 120px;
   width:130px;
 }
 

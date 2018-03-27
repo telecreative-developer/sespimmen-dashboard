@@ -88,6 +88,14 @@ $route['deleteInterviewees/:any']     = 'Sespim/deleteInterviewees';
 $route['users']                = 'Sespim/users';
 $route['pagesprofile/:any']    = 'Sespim/pagesprofile';
 $route['addusers']             = 'Sespim/addusers';
+$route['verifyUsers/:any']     = 'Sespim/verifyUsers';
+$route['deleteUsers/:any']     = 'Sespim/deleteUsers';
+
+// Route Admin
+$route['admin']                = 'Sespim/admin';
+$route['addAdmin']             = 'Sespim/addAdmin';
+$route['insertAdmin']          = 'Sespim/insertAdmin';
+$route['deleteAdmin/:any']     = 'Sespim/deleteAdmin';
 
 // Route Scores
 $route['scores']             = 'Sespim/scores';
@@ -104,6 +112,13 @@ $route['insertTopics']       = 'Sespim/insertTopics';
 $route['deleteTopics/:any']  = 'Sespim/deleteTopics';
 $route['insertTeams']        = 'Sespim/insertTeams';
 $route['deleteTeams/:any']   = 'Sespim/deleteTeams';
+$route['kodenaskah']         = 'Sespim/kodenaskah';
+$route['insertKode']         = 'Sespim/insertKode';
+$route['deleteKode/:any']    = 'Sespim/deleteKode';
+$route['exam']               = 'Sespim/exam';
+$route['insertPok_uji']      = 'Sespim/insertPok_uji';
+$route['deletePok_uji/:any'] = 'Sespim/deletePok_uji';
+
 
 
 $route['logout'] = 'Sespim/logout';

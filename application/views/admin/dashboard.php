@@ -47,7 +47,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <a class="dashboard-stat" style="background:#27ae60;" href="#">
+                                        <a class="dashboard-stat" style="background:#27ae60;" href="<?php echo base_url();?>events">
                                             <?php $query = $this->db->query("SELECT * FROM events"); ?>
                                             <span class="number" style="color:#fff;"><?php echo $query->num_rows();?></span>
                                             <span class="name" style="color:#fff;">Events</span>
@@ -57,17 +57,17 @@
                                     </div>
                                     
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <a class="dashboard-stat" style="background:#27ae60;" href="#">
-                                            <?php $query = $this->db->query("SELECT * FROM posts"); ?>
+                                        <a class="dashboard-stat" style="background:#27ae60;" href="<?php echo base_url();?>documents">
+                                            <?php $query = $this->db->query("SELECT * FROM documents"); ?>
                                             <span class="number" style="color:#fff;"><?php echo $query->num_rows();?></span>
-                                            <span class="name" style="color:#fff;">Articles</span>
+                                            <span class="name" style="color:#fff;">Documents</span>
                                             <span class="bg-icon"><i class="fa fa-newspaper-o"></i></span>
                                         </a>
                                         <!-- /.dashboard-stat -->
                                     </div>
                                     
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <a class="dashboard-stat" style="background:#27ae60;" href="#">
+                                        <a class="dashboard-stat" style="background:#27ae60;" href="<?php echo base_url();?>users">
                                             <?php $query = $this->db->query("SELECT * FROM users"); ?>
                                             <span class="number" style="color:#fff;"><?php echo $query->num_rows();?></span>
                                             <span class="name" style="color:#fff;">User</span>
@@ -84,7 +84,7 @@
                         <!-- /.section -->
 
 
-                        <section class="section pt-n">
+                        <!-- <section class="section pt-n">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -96,13 +96,10 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-                                <!-- /.row -->
                             </div>
-                            <!-- /.container-fluid -->
-                        </section>
-                        <!-- /.section -->
+                        </section> -->
+                    
 
                         
                     </div>

@@ -9,7 +9,7 @@
                         <div class="panel login-box">
                             <div class="panel-heading">
                                 <div class="panel-title text-center">
-                                    <img src="<?php echo base_url();?>assets/images/logo_sispammen.jpg" width="100%"/>
+                                    <img src="<?php echo base_url();?>assets/images/favicon/logo.jpg" width="100%"/>
                                 </div>
                             </div>
                             <div class="panel-body p-20">

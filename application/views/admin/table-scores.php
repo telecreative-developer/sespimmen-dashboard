@@ -85,7 +85,7 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><?php echo $result->kode_naskah;?></td>
+                                                            <td><?php echo $result->kn;?></td>
                                                             <td><a href="pagesprofile/<?php echo $result->no_serdik?>" span style="color:blue;"><?php echo $result->first_name;?> <?php echo $result->last_name?></a></td>
                                                             <td>
                                                                 <?php 
@@ -106,7 +106,7 @@
                                                                 }
                                                                 ?>
                                                             </td>
-                                                            <td><?php echo $result->nilai_murni_narasumber_1_nr2;?></td>
+                                                            <td><?php echo $result->nilai_murni_narasumber_2_nr2;?></td>
                                                             <td>
                                                                 
                                                                 <?php 

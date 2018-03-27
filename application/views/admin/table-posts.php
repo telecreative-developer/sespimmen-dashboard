@@ -63,8 +63,8 @@
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th width="5%">Picture</th>
                                                             <th>Content</th>
+                                                            <th>Name</th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
@@ -76,8 +76,8 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><img src="<?php echo $result->image;?>" width="100%"/></td>
                                                             <td><a href=""><?php echo $result->post;?></a></td>
+                                                            <td><a href=""><?php echo $result->first_name;?> <?php echo $result->last_name;?></a></td>
                                                             <td>
                                                             <center>
                                                                 <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deletePosts/<?php echo $result->post_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
