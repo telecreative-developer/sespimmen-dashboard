@@ -39,7 +39,7 @@ class Sespim extends CI_Controller {
     
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/events/'; 
+    $targetPath		= '/var/www/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
 
@@ -96,7 +96,7 @@ class Sespim extends CI_Controller {
 
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/events/'; 
+    $targetPath		 = '/var/www/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     
@@ -171,7 +171,7 @@ class Sespim extends CI_Controller {
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
+    $targetPath		= '/var/www/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -208,7 +208,7 @@ class Sespim extends CI_Controller {
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
+    $targetPath		= '/var/www/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
