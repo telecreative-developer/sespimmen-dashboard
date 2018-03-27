@@ -76,7 +76,7 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><a href=""><?php echo $result->post;?></a></td>
+                                                            <td><a span style="color:blue;" href="<?php echo base_url()?>pagesposts/<?php echo $result->post_id;?>"><?php echo $result->post;?></a></td>
                                                             <td><a href=""><?php echo $result->first_name;?> <?php echo $result->last_name;?></a></td>
                                                             <td>
                                                             <center>
@@ -90,8 +90,6 @@
                                                         ?>
                                                     </tbody>
                                                 </table>
-
-                                                
                                             </div>
                                         </div>
                                     </div>

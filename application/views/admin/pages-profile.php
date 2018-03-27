@@ -21,13 +21,14 @@
                             <?php include "partial/navigation.php" ?>
                         </div>
                     </div>
-
+                    <?php 
+                        foreach($users as $result){
+                    ?>
                     <div class="main-page">
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-6">
-                                    <h4 class="title">John Doe <small class="ml-10">My Profile</small></h4>
-                                    <p class="sub-title">One stop solution for perfect admin dashboard!</p>
+                                    <h4 class="title"><?php echo $result->first_name ?> <?php echo $result->last_name;?> <small class="ml-10">My Profile</small></h4>
                                 </div>
                                 <!-- /.col-md-6 -->
                             </div>
@@ -42,10 +43,6 @@
                                 
                             </div>
                             <!-- /.row -->
-
-                            <?php 
-                                foreach($users as $result){
-                            ?>
                             <div class="row mt-30">
                                 <div class="col-md-5">
                                     <div class="panel border-primary no-border border-3-top">
@@ -335,15 +332,16 @@
                                     <?php
                                     }
                                 ?>
-                            <?php 
-                                }
-                            ?>
+                            
                             <!-- /.row -->
                         </div>
                         <!-- /.container-fluid -->
 
 
                     </div>
+                    <?php 
+                        }
+                    ?>
                     <!-- /.main-page -->
 
                 </div>

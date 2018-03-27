@@ -32,10 +32,10 @@
                             <div class="row breadcrumb-div">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-                                        <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
+            							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
                                         <li><a href="<?php echo base_url();?>interviewees">Interviewees</li></a>
                                         <li class="active">Edit Interviewees</li>
-                                    </ul>
+            						            </ul>
                                 </div>
                             </div>
                             <!-- /.row -->
