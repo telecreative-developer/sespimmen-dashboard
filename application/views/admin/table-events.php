@@ -65,11 +65,11 @@
                                                         <tr>
                                                             <th width="3%">No</th>
                                                             <th width="5%">Thumbnail</th>
-                                                            <th>Title</th>
-                                                            <th>Description</th>
-                                                            <th>Place</th>
-                                                            <th>Date</th>
-                                                            <th>Time</th>
+                                                            <th width="20%">Title</th>
+                                                            <th width="20%">Description</th>
+                                                            <th width="10%">Place</th>
+                                                            <th width="20%">Date</th>
+                                                            <th width="20%">Time</th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>

@@ -7,6 +7,7 @@ class Sespim extends CI_Controller {
     parent::__construct();
     $this->load->helper('date');
     $this->load->library('pagination');
+    $this->load->library('email');
 		if($this->session->userdata('username') == ""){
 			redirect('../');	
 		}
@@ -166,6 +167,86 @@ class Sespim extends CI_Controller {
      window.alert('Delete Data');
      window.location.href='../events';
      </script>");
+  }
+
+  public function banner()
+	{
+    $id = 'banner_id';
+    $data['banners']  = $this->ModelSespim->loadQuery($id,'banners')->result();
+		$this->load->view('admin/table-banners',$data);
+  }
+
+  public function addbanner()
+	{
+		$this->load->view('admin/addbanners');
+  }
+
+  public function insertbanner(){
+    $imageUrl = base_url();
+    $tempFile 		= $_FILES['picture']['tmp_name'];
+		$fileName 		= time().$_FILES['picture']['name'];	  
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/banners/'; 
+		$targetFile 	= $targetPath . $fileName;
+    move_uploaded_file($tempFile, $targetFile);
+    $x = substr($fileName,10);
+
+      $data = array(
+        'banner_url'	  => $imageUrl."assets/images/banners/".$fileName,
+        'banner_loc'	  => $fileName
+      );
+    $this->ModelSespim->insertQuery('banners',$data); 
+    
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='banner';
+    </script>");
+  }
+
+  public function editbanner()
+	{
+    $id = $this->uri->segment(2);
+    $where = 'banner_id';
+    $data['banner'] = $this->ModelSespim->loadQueryById($where,$id,'banners')->result();
+		$this->load->view('admin/editbanners',$data);
+  }
+
+  public function updatebanner() {
+    $imageUrl = base_url();
+    $id = $this->uri->segment(2);
+    $tempFile 		= $_FILES['picture']['tmp_name'];
+		$fileName 		= time().$_FILES['picture']['name'];	  
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/banners/'; 
+		$targetFile 	= $targetPath . $fileName;
+    move_uploaded_file($tempFile, $targetFile);
+   
+
+    $file = substr($fileName,10);
+    
+    $data = array(
+        'banner_url'	  => $imageUrl."assets/images/banners/".$fileName,
+        'banner_loc'	  => $fileName
+    );
+    $where = array(
+        'banner_id' => $id
+    );
+    $this->ModelDeleteImage->deletebanner($id);
+    $this->ModelSespim->updateQuery($where,$data,'banners');
+    
+		echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Update Data');
+    window.location.href='../banner';
+    </script>");
+  }
+
+  public function delete_banner() {
+    $id = $this->uri->segment(2);
+    $idwhere = 'banner_id';
+    $this->ModelDeleteImage->deletebanner($id);
+    $this->ModelSespim->deleteQuery($idwhere,$id,'banners');
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Delete Data');
+    window.location.href='../banner';
+    </script>");
   }
 
   public function documents()
@@ -373,22 +454,30 @@ class Sespim extends CI_Controller {
 
   public function verifyUsers() {
     $id = $this->uri->segment(2);
-    $from_email = "kevinhermawanx@gmail.com"; 
+    
+    $config = array();
+    $config['useragent']	= "CodeIgniter";
+    $config['mailpath']	= "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
+    $config['protocol']	= "smtp";
+    $config['smtp_host']	= "localhost";
+    $config['smtp_port']	= "25";
+    $config['mailtype']	= 'html';
+    $config['charset']	= 'utf-8';
+    $config['newline']	= "\r\n";
+    $config['wordwrap']	= TRUE;
 
-    //Load email library 
-    $this->load->library('email'); 
+    $this->email->initialize($config);
+    $this->email->from('trisakticonnect@gmail.com', 'Rendi simamora');
+    $this->email->to('rendisimamora7127@gmail.com');
+    $this->email->cc('another@another-example.com');
+    $this->email->bcc('them@their-example.com');
 
-    $this->email->from('kevinhermawanx@gmail.com'); 
-    $this->email->to("rendisimamora7127@gmail.com");
-    $this->email->subject('Email Test'); 
-    $this->email->message('Testing the email class.'); 
+    $this->email->subject('Email Test');
+    $this->email->message('Testing the email class.');
 
-    //Send mail 
-    if($this->email->send()) 
-    $this->session->set_flashdata("email_sent","Email sent successfully."); 
-    else 
-    $this->session->set_flashdata("email_sent","Error in sending Email."); 
-    $this->load->view('email_form'); 
+    $this->email->send();
+
+   
     
     // $data = array(
     //   'verified'     => 1,

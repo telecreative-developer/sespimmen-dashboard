@@ -101,9 +101,33 @@
                                                         </div>
                                                       </div> 
                                                     <?php 
+                                                    } else if($result->document_type == "info-sespim"){
+                                                    ?>       
+                                                      <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">Title</label>
+                                                        <div class="col-sm-10">
+                                                          <input type="text" name="title" class="form-control" id="title" placeholder="Input type title" value="<?php echo $result->document_title;?>" required="ON">
+                                                        </div>
+                                                      </div>
+            
+                                                      <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">File</label>
+                                                        <div class="col-sm-10">
+                                                          <input id="file" type="file" class="validate" name="file" >
+                                                        </div>
+                                                      </div>
+                                                      
+                                                      <div class="form-group">
+                                                        <label for="text1" class="col-sm-2 control-label">Tipe</label>
+                                                        <div class="col-sm-10">
+                                                          <select name="tipe" class="form-control">
+                                                            <option value="<?php echo $result->document_type;?>">Info Sespim</option>
+                                                          </select>
+                                                        </div>
+                                                      </div> 
+                                                    <?php 
                                                     }else{
-                                                    ?>
-                                                       
+                                                    ?>    
                                                       <div class="form-group">
                                                         <label for="text1" class="col-sm-2 control-label">Title</label>
                                                         <div class="col-sm-10">

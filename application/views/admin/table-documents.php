@@ -87,7 +87,10 @@
                                                                         echo "Data Serdik";
                                                                     }else if($result->document_type == "handbook"){
                                                                         echo "Handbook";
-                                                                    }else{
+                                                                    }else if($result->document_type == "info-sespim"){
+                                                                        echo "Info Sespimmen";
+                                                                    }
+                                                                    else{
                                                                         echo "";
                                                                     }
                                                                 ?>
@@ -99,7 +102,12 @@
                                                                 ?>
                                                                     <a href="<?php echo base_url();?>edit_documents/<?php echo $result->document_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
                                                                 <?php 
-                                                                    }else{
+                                                                    }else if($result->document_type == 'info-sespim'){
+                                                                ?>
+                                                                    <a href="<?php echo base_url();?>edit_documents/<?php echo $result->document_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
+                                                                <?php
+                                                                    }
+                                                                    else{
                                                                 ?>
                                                                     <a href="<?php echo base_url();?>edit_documents/<?php echo $result->document_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
                                                                     <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>delete_documents/<?php echo $result->document_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
