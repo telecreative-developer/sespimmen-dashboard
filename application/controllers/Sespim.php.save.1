@@ -7,8 +7,6 @@ class Sespim extends CI_Controller {
     parent::__construct();
     $this->load->helper('date');
     $this->load->library('pagination');
-$this->load->library('email');
-
 		if($this->session->userdata('username') == ""){
 			redirect('../');	
 		}
@@ -40,7 +38,7 @@ $this->load->library('email');
     
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/var/www/sespim/assets/images/events/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
 
@@ -113,7 +111,7 @@ $this->load->library('email');
 
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		 = '/var/www/sespim/assets/images/events/'; 
+    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     
@@ -188,7 +186,7 @@ $this->load->library('email');
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/var/www/sespim/assets/images/documents/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -225,7 +223,7 @@ $this->load->library('email');
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/var/www/htdocs/sespim/assets/images/documents/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -375,20 +373,46 @@ $this->load->library('email');
 
   public function verifyUsers() {
     $id = $this->uri->segment(2);
+    $config['protocol'] = 'sendmail';
+$config['mailpath'] = '/usr/sbin/sendmail';
+$config['charset'] = 'iso-8859-1';
+$config['wordwrap'] = TRUE;
 
-     $data = array(
-       'verified'     => 1,
- );
+$this->load->library('email');
+
+$this->email->from('your@example.com', 'Your Name');
+$this->email->to('someone@example.com');
+$this->email->cc('another@another-example.com');
+$this->email->bcc('them@their-example.com');
+
+$this->email->subject('Email Test');
+$this->email->message('Testing the email class.');
+
+$this->email->send();
+$this->email->initialize($config);
+
+$this->email->from('asdasd@asdasd.com', 'Your Name');
+$this->email->to('rendisimamora7127@gmail.com.com');
+$this->email->cc('another@another-example.com');
+$this->email->bcc('them@their-example.com');
+
+$this->email->subject('Email Test');
+$this->email->message('Testing the email class.');
+
+$this->email->send();
+    // $data = array(
+    //   'verified'     => 1,
+		// );
 		
-		 $where = array(
-		 	'id' => $id
-     );
+		// $where = array(
+		// 	'id' => $id
+    // );
     
-     $this->ModelSespim->updateQuery($where,$data,'users');
-		 echo ("<script LANGUAGE='JavaScript'>
-      window.alert('Update Data');
-      window.location.href='../users';
-      </script>");
+    // $this->ModelSespim->updateQuery($where,$data,'users');
+		// echo ("<script LANGUAGE='JavaScript'>
+    //  window.alert('Update Data');
+    //  window.location.href='../users';
+    //  </script>");
   }
 
   public function deleteUsers() {

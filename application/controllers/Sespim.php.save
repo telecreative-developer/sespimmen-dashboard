@@ -7,7 +7,6 @@ class Sespim extends CI_Controller {
     parent::__construct();
     $this->load->helper('date');
     $this->load->library('pagination');
-$this->load->library('email');
 
 		if($this->session->userdata('username') == ""){
 			redirect('../');	
@@ -32,7 +31,7 @@ $this->load->library('email');
 		$this->load->view('admin/addevents');
   }
 
-  public function insertEvents(){
+  public function EvinsertEvents(){
     $imageUrl = base_url();
     $admin_id = $this->session->userdata('admin_id');
     $title    = $this->input->post('title');
@@ -52,37 +51,21 @@ $this->load->library('email');
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
 
-    $x = substr($fileName,10);
+    $data = array(
+      'title'  			    => $title,
+      'thumbnail_url'	  => $imageUrl."assets/images/events/".$fileName,
+      'thumbnail_loc'	  => $fileName,
+      'description'  		=> $description,
+      'place'		        => $place,
+      'date'		        => $date,
+      'time_start'		  => $time_start,
+      'time_end'   		  => $time_end,
+      'admin_id'		    => $admin_id,
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
 
-    if($x == ""){
-      $data = array(
-        'title'  			    => $title,
-        'description'  		=> $description,
-        'place'		        => $place,
-        'date'		        => $date,
-        'time_start'		  => $time_start,
-        'time_end'   		  => $time_end,
-        'admin_id'		    => $admin_id,
-        'createdAt'		    => $datenow." ".$timenow,
-        'updatedAt'		    => $datenow." ".$timenow
-      );
-      $this->ModelSespim->insertQuery('events',$data); 
-    }else{
-      $data = array(
-        'title'  			    => $title,
-        'thumbnail_url'	  => $imageUrl."assets/images/events/".$fileName,
-        'thumbnail_loc'	  => $fileName,
-        'description'  		=> $description,
-        'place'		        => $place,
-        'date'		        => $date,
-        'time_start'		  => $time_start,
-        'time_end'   		  => $time_end,
-        'admin_id'		    => $admin_id,
-        'createdAt'		    => $datenow." ".$timenow,
-        'updatedAt'		    => $datenow." ".$timenow
-      );
-      $this->ModelSespim->insertQuery('events',$data); 
-    }
+     $this->ModelSespim->insertQuery('events',$data); 
      echo ("<script LANGUAGE='JavaScript'>
      window.alert('Success Data');
      window.location.href='events';
@@ -225,7 +208,7 @@ $this->load->library('email');
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/var/www/htdocs/sespim/assets/images/documents/'; 
+    $targetPath		= '/var/www/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -279,13 +262,6 @@ $this->load->library('email');
     $id = 'id';
     $data['posts']  = $this->ModelSespim->loadQueryRelationPost()->result();
 		$this->load->view('admin/table-posts',$data);
-  }
-
-  public function pagesposts()
-	{
-    $id = $this->uri->segment(2);
-    $data['posts']  = $this->ModelSespim->loadQueryRelationPostWhere($id)->result();
-		$this->load->view('admin/pages-posts',$data);
   }
 
   public function deletePosts() {
@@ -375,20 +351,19 @@ $this->load->library('email');
 
   public function verifyUsers() {
     $id = $this->uri->segment(2);
-
-     $data = array(
-       'verified'     => 1,
- );
+		$data = array(
+      'verified'     => 1,
+		);
 		
-		 $where = array(
-		 	'id' => $id
-     );
+		$where = array(
+			'id' => $id
+    );
     
-     $this->ModelSespim->updateQuery($where,$data,'users');
-		 echo ("<script LANGUAGE='JavaScript'>
-      window.alert('Update Data');
-      window.location.href='../users';
-      </script>");
+    $this->ModelSespim->updateQuery($where,$data,'users');
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../users';
+     </script>");
   }
 
   public function deleteUsers() {
