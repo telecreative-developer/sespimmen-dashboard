@@ -84,6 +84,14 @@ $route['editinterviewees/:any']       = 'Sespim/editinterviewees';
 $route['updateInterviewees/:any']     = 'Sespim/updateinterviewees';
 $route['deleteInterviewees/:any']     = 'Sespim/deleteInterviewees';
 
+// Route banner
+$route['banner']                = 'Sespim/banner';
+$route['addbanner']             = 'Sespim/addbanner';
+$route['insert_banner']         = 'Sespim/insertbanner';
+$route['editbanner/:any']       = 'Sespim/editbanner';
+$route['updatebanner/:any']     = 'Sespim/updatebanner';
+$route['delete_banner/:any']    = 'Sespim/delete_banner';
+
 // Route Users
 $route['users']                = 'Sespim/users';
 $route['pagesprofile/:any']    = 'Sespim/pagesprofile';

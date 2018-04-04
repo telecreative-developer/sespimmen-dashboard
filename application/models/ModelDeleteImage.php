@@ -43,4 +43,24 @@ Class ModelDeleteImage extends CI_Model{
     }
   }
 
+  public function deletebanner($id){
+    error_reporting(0);
+    $this->db->where('banner_id',$id);
+    $query = $this->db->get('banners');
+    $row = $query->row();
+    $x = $row->banner_loc;
+    
+    //$this->db->delete('articles',array('article_id' => $id));
+    $path ='/var/www/sespim/assets/images/banners/'.$x;
+    if($this->db->affected_rows() >= 1){
+      if(unlink($path)){
+        return TRUE;
+        } else {
+            return FALSE;
+        }
+    }else{
+
+    }
+  }
+
 }

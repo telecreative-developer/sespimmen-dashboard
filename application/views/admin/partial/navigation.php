@@ -10,19 +10,9 @@
   <span class="">Main Page</span>
 </li>
 <li><a href="<?php echo base_url()?>dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-
-<li class="nav-header">
-  <span class="">All Schedule</span>
-</li>
 <li><a href="<?php echo base_url()?>events"><i class="fa fa-calendar-check-o"></i> <span>Events</span></a></li>
-
-<li class="nav-header">
-  <span class="">All Documents</span>
-</li>
+<li><a href="<?php echo base_url()?>banner"><i class="fa fa-picture-o"></i> <span>Banners</span></a></li>
 <li><a href="<?php echo base_url()?>documents"><i class="fa fa-newspaper-o"></i> <span>Documents</span></a></li>
-<li class="nav-header">
-  <span class="">All Activities</span>
-</li>
 <li><a href="<?php echo base_url()?>posts"><i class="fa fa-briefcase"></i> <span>Kegiatan</span></a></li>
 
 <!--
