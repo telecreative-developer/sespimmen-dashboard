@@ -520,7 +520,7 @@ $id = $this->uri->segment(2);
               <tr>
                 <td valign='top' align='center' class='specbundle'><div class='contentEditableContainer contentTextEditable'>
                     <div class='contentEditable'>
-                      <p style='text-align:center;font-family:Georgia,Time,sans-serif;font-size:20px;color:#222222;'><span class='specbundle2'><span class='font1'>Sipamen - Sistem Informasi Pendidikan Sespimen&nbsp;</span></span></p>
+                      <p style='text-align:center;font-family:Georgia,Time,sans-serif;font-size:20px;color:#222222;'><span class='specbundle2'><span class='font1'>Sipamen - Sistem Informasi Pendidikan Sespimmen&nbsp;</span></span></p>
                     </div>
                   </div></td>
                 <td valign='top' class='specbundle'><div class='contentEditableContainer contentTextEditable'>
@@ -552,7 +552,11 @@ $id = $this->uri->segment(2);
               </div>
                 <div class='movableContent' style='border: 0px; padding-top: 0px; position: relative;'>
                 <table width='100%' border='0' cellspacing='0' cellpadding='0' align='center'>
-                <tr><td height='55'></td></tr>
+		<tr>
+                  <td height='55'>
+                    <center><img src='https://res.cloudinary.com/rendisimamora/image/upload/v1522840764/default_ze1slc.jpg' width='200px'/></center>
+                  </td>
+                </tr>
                     <tr>
                       <td align='left'>
                         <div class='contentEditableContainer contentTextEditable'>
