@@ -7,8 +7,7 @@ class Sespim extends CI_Controller {
     parent::__construct();
     $this->load->helper('date');
     $this->load->library('pagination');
-$this->load->library('email');
-
+    $this->load->library('email');
 		if($this->session->userdata('username') == ""){
 			redirect('../');	
 		}
@@ -167,6 +166,114 @@ $this->load->library('email');
     echo ("<script LANGUAGE='JavaScript'>
      window.alert('Delete Data');
      window.location.href='../events';
+     </script>");
+  }
+
+  public function announcement()
+	{
+    $orderid = 'announcement_id';
+    $data['announcements']  = $this->ModelSespim->loadQuery($orderid,'announcements')->result();
+		$this->load->view('admin/table-announcements',$data);
+  }
+
+  public function addannouncement()
+	{
+		$this->load->view('admin/addannouncements');
+  }
+
+  public function insertannouncement(){
+
+    function sendMessage(){
+      $content = array(
+        "en" => 'English Message'
+        );
+      
+      $fields = array(
+        'app_id' => "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
+        'included_segments' => array("All"),
+        'data' => array("foo" => "bar"),
+        'contents' => $content
+      );
+      
+      $fields = json_encode($fields);
+        print("\nJSON sent:\n");
+        print($fields);
+      
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, "AIzaSyChUVwGtEQ3GwxlLli5o5cUbrXRChRNSVM");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8','Authorization: Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj'));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+      curl_setopt($ch, CURLOPT_HEADER, FALSE);
+      curl_setopt($ch, CURLOPT_POST, TRUE);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  
+      $response = curl_exec($ch);
+      curl_close($ch);
+      return $response;
+    }
+    
+    $response = sendMessage();
+    $return["allresponses"] = $response;
+    $return = json_encode( $return);
+    
+    print("\n\nJSON received:\n");
+    print($return);
+    print("\n");
+
+    // $imageUrl = base_url();
+    // $description   = $this->input->post('description');
+    // $datenow = date("Y-m-d");
+    // $timenow = date("h:i:s");
+    
+    // $data = array(
+    //   'announcement'	  => $description,
+    //   'createdAt'		    => $datenow." ".$timenow,
+    //   'updatedAt'		    => $datenow." ".$timenow
+    // );
+    // $this->ModelSespim->insertQuery('announcements',$data); 
+    
+    // echo ("<script LANGUAGE='JavaScript'>
+    // window.alert('Success Data');
+    // window.location.href='announcement';
+    // </script>");
+  }
+
+  public function editannouncement()
+	{
+    $id = $this->uri->segment(2);
+    $where = 'announcement_id';
+    $data['announcements'] = $this->ModelSespim->loadQueryById($where,$id,'announcements')->result();
+		$this->load->view('admin/editannouncements',$data);
+  }
+
+  public function updateannouncement() {
+    $id = $this->uri->segment(2);
+    $description   = $this->input->post('description');
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+    $data = array(
+      'announcement'    => $description,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+    $where = array(
+      'announcement_id' => $id
+    );
+    $this->ModelSespim->updateQuery($where,$data,'announcements');
+    
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../announcement';
+     </script>");
+  }
+
+  public function delete_announcement() {
+    $id = $this->uri->segment(2);
+    $idwhere = 'announcement_id';
+    $this->ModelSespim->deleteQuery($idwhere,$id,'announcements');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../announcement';
      </script>");
   }
 
@@ -336,10 +443,10 @@ $this->load->library('email');
       $this->ModelDeleteImage->deleteFile($id);
       $this->ModelSespim->updateQuery($where,$data,'documents');
     }
-     echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Update Data');
-     window.location.href='../documents';
-     </script>");
+		echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Update Data');
+    window.location.href='../documents';
+    </script>");
   }
 
   public function delete_documents() {
@@ -453,9 +560,8 @@ $this->load->library('email');
 		$this->load->view('admin/addusers');
   }
 
-   public function verifyUsers() {
-   error_reporting(0);
-$id = $this->uri->segment(2);
+  public function verifyUsers() {
+    $id = $this->uri->segment(2);
     $query = $this->db->query("SELECT * FROM users WHERE id = '$id'");
     $row = $query->row();
     $first = $row->first_name;
@@ -465,7 +571,7 @@ $id = $this->uri->segment(2);
     $this->email->from('donihermawanj11@gmail.com','Aktifasi Akun'); 
     $this->email->to($row->email); 
     $this->email->subject('Aktifasi Akun'); 
-     echo $this->email->message(
+    echo $this->email->message(
       "
     <html xmlns='http://www.w3.org/1999/xhtml'>
       <head>
@@ -520,7 +626,7 @@ $id = $this->uri->segment(2);
               <tr>
                 <td valign='top' align='center' class='specbundle'><div class='contentEditableContainer contentTextEditable'>
                     <div class='contentEditable'>
-                      <p style='text-align:center;font-family:Georgia,Time,sans-serif;font-size:20px;color:#222222;'><span class='specbundle2'><span class='font1'>Sipamen - Sistem Informasi Pendidikan Sespimmen&nbsp;</span></span></p>
+                      <p style='text-align:center;font-family:Georgia,Time,sans-serif;font-size:20px;color:#222222;'><span class='specbundle2'><span class='font1'>Sipamen - Sistem Informasi Pendidikan Sespimen&nbsp;</span></span></p>
                     </div>
                   </div></td>
                 <td valign='top' class='specbundle'><div class='contentEditableContainer contentTextEditable'>
@@ -552,7 +658,7 @@ $id = $this->uri->segment(2);
               </div>
                 <div class='movableContent' style='border: 0px; padding-top: 0px; position: relative;'>
                 <table width='100%' border='0' cellspacing='0' cellpadding='0' align='center'>
-		<tr>
+                <tr>
                   <td height='55'>
                     <center><img src='https://res.cloudinary.com/rendisimamora/image/upload/v1522840764/default_ze1slc.jpg' width='200px'/></center>
                   </td>
@@ -561,7 +667,7 @@ $id = $this->uri->segment(2);
                       <td align='left'>
                         <div class='contentEditableContainer contentTextEditable'>
                           <div class='contentEditable' align='center'>
-                            <h2>Hai ".$x."</h2>
+                            <h2>Hai".$x."</h2>
                           </div>
                         </div>
                       </td>
@@ -649,7 +755,7 @@ $id = $this->uri->segment(2);
     </html>
 
     ");   
-     
+    
     
     $data = array(
       'verified'     => 1,
@@ -660,10 +766,10 @@ $id = $this->uri->segment(2);
     );
     $this->email->send(); 
     $this->ModelSespim->updateQuery($where,$data,'users');
-    echo ("<script LANGUAGE='JavaScript'>
-    window.alert('Update Data');
-    window.location.href='../users';
-    </script>");
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../users';
+     </script>");
   }
 
   public function deleteUsers() {

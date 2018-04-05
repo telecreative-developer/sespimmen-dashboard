@@ -92,6 +92,14 @@ $route['editbanner/:any']       = 'Sespim/editbanner';
 $route['updatebanner/:any']     = 'Sespim/updatebanner';
 $route['delete_banner/:any']    = 'Sespim/delete_banner';
 
+//Route Announcement
+$route['announcement']                = 'Sespim/announcement';
+$route['addannouncement']             = 'Sespim/addannouncement';
+$route['insert_announcement']         = 'Sespim/insertannouncement';
+$route['edit_announcement/:any']      = 'Sespim/editannouncement';
+$route['update_announcement/:any']    = 'Sespim/updateannouncement';
+$route['delete_announcement/:any']    = 'Sespim/delete_announcement';
+
 // Route Users
 $route['users']                = 'Sespim/users';
 $route['pagesprofile/:any']    = 'Sespim/pagesprofile';

@@ -14,6 +14,7 @@
 <li><a href="<?php echo base_url()?>banner"><i class="fa fa-picture-o"></i> <span>Banners</span></a></li>
 <li><a href="<?php echo base_url()?>documents"><i class="fa fa-newspaper-o"></i> <span>Documents</span></a></li>
 <li><a href="<?php echo base_url()?>posts"><i class="fa fa-briefcase"></i> <span>Kegiatan</span></a></li>
+<li><a href="<?php echo base_url()?>announcement"><i class="fa fa-bullhorn"></i> <span>Pengumuman</span></a></li>
 
 <!--
 <li class="nav-header">
