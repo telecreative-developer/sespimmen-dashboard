@@ -228,8 +228,7 @@ class Sespim extends CI_Controller {
       'updatedAt'		    => $datenow." ".$timenow
     );
     $this->ModelSespim->insertQuery('announcements',$data); 
-    $this->ModelSespim->insertQuery('notifications',$data_notif); 
-    
+    $this->ModelSespim->insertQuery('notifications',$data_notif);  
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Success Data');
     window.location.href='announcement';
@@ -237,7 +236,7 @@ class Sespim extends CI_Controller {
 
     $response = curl_exec($ch);
     curl_close($ch);
-    
+   
     return $response;
     $response = sendMessage();
     $return["allresponses"] = $response;
@@ -257,6 +256,7 @@ class Sespim extends CI_Controller {
     $description   = $this->input->post('description');
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
+  
     $data = array(
       'announcement'    => $description,
       'updatedAt'		    => $datenow." ".$timenow
@@ -267,9 +267,9 @@ class Sespim extends CI_Controller {
     $this->ModelSespim->updateQuery($where,$data,'announcements');
     
 		echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Update Data');
-     window.location.href='../announcement';
-     </script>");
+    window.alert('Update Data');
+    window.location.href='../announcement';
+    </script>");
   }
 
   public function delete_announcement() {
@@ -870,87 +870,22 @@ class Sespim extends CI_Controller {
   public function addscores()
 	{
     $id = 'id';
-    $data['users']  = $this->ModelSespim->loadQuery($id,'users')->result();
-    $orderid = 'interviewee_id';
-    $data['interviewees']  = $this->ModelSespim->loadQuery($orderid,'interviewees')->result(); 
+    $data['users']  = $this->ModelSespim->loadQueryUserForce58()->result(); 
 		$this->load->view('admin/addscores',$data);
   }
 
   public function insertscores(){
-    error_reporting(0);
-    $users = $this->input->post('users');
-    $query = $this->db->query("SELECT * FROM users WHERE id = '$users'");
-    $row = $query->row();
-    $id_user = $row->id;
-
-    $query = $this->db->query("SELECT * FROM teams WHERE id = '$id_user'");
-    $rows1 = $query->row();
-    $id_teams = $rows1->team;
-    $narasumber1            = $this->input->post('narasumber1');
-    $bobot_1_nr1            = $this->input->post('bobot_1_nr1');
-    $bobot_5_nr1            = $this->input->post('bobot_5_nr1');
-    $manfaat_bobot_3_nr1    = $this->input->post('manfaat_bobot_3_nr1');
-    $teknisi_bobot_3_nr1    = $this->input->post('teknisi_bobot_3_nr1');
-    $interviewee_nr1_id     = $this->input->post('narasumber1');
-
-    $narasumber2            = $this->input->post('narasumber2');
-    $bobot_1_nr2            = $this->input->post('bobot_1_nr2');
-    $bobot_5_nr2            = $this->input->post('bobot_5_nr2');
-    $manfaat_bobot_3_nr2    = $this->input->post('manfaat_bobot_3_nr2');
-    $teknisi_bobot_3_nr2    = $this->input->post('teknisi_bobot_3_nr2');
-    $interviewee_nr2_id     = $this->input->post('narasumber2');
-    $keterangan             = $this->input->post('keterangan');
+    $id                     = $this->input->post('users');
+    $akademic_score         = $this->input->post('akademik');
+    $personality_score      = $this->input->post('kepribadian');
+    $health_score           = $this->input->post('kesehatan');
+    $data = array(
+      'academic_score'  		=> $akademic_score,
+      'personality_score'   => $personality_score,
+      'health_score'  		  => $health_score,
+      'id'  		            => $id,
+    );
     
-    //Narasumber 1
-    $insert_bobot_5_nr1   = $bobot_5_nr1 * 5;
-    $insert_manfaat_3_nr1 = $manfaat_bobot_3_nr1 * 3;
-    $insert_teknisi_3_nr1 = $teknisi_bobot_3_nr1 * 3;
-    $total1               = $bobot_1_nr1 + $insert_bobot_5_nr1 + $insert_manfaat_3_nr1 + $insert_teknisi_3_nr1;
-    $nilai_murni1         = $total1 / 12;
-    
-    //Narasumber 2
-    $insert_bobot_5_nr2   = $bobot_5_nr2 * 5;
-    $insert_manfaat_3_nr2 = $manfaat_bobot_3_nr2 * 3;
-    $insert_teknisi_3_nr2 = $teknisi_bobot_3_nr2 * 3;
-    $total2               = $bobot_1_nr2 + $insert_bobot_5_nr2 + $insert_manfaat_3_nr2 + $insert_teknisi_3_nr2;
-    $nilai_murni2         = $total2 / 12;
-
-    $nak = ( $nilai_murni1 + $nilai_murni2 ) / 2;
-    
-    if($interviewee_nr2_id == NULL){
-      $data = array(
-        'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
-        'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
-        'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
-        'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
-        'nilai_murni_narasumber_2_nr1'  => $nilai_murni1,
-        'interviewee_nr1_id'            => $interviewee_nr1_id,
-        'ket'                           => $keterangan,
-        'id'     			                  => $users,
-        'team'     			                => $id_teams,
-        'nak'     			                => $nilai_murni1,
-        'status'                        => '1'
-      );
-    }else{
-      $data = array(
-        'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
-        'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
-        'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
-        'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
-        'nilai_murni_narasumber_1_nr1'  => $nilai_murni1,
-        'interviewee_nr1_id'            => $interviewee_nr1_id,
-        'penulisan_bobot_1_nr2'  		    => $bobot_1_nr2,
-        'pembahasan_bobot_5_nr2'  		  => $bobot_5_nr2,
-        'manfaat_bobot_3_nr2'  		      => $manfaat_bobot_3_nr2,
-        'teknisi_bobot_3_nr2'  		      => $teknisi_bobot_3_nr2,
-        'nilai_murni_narasumber_2_nr2'  => $nilai_murni2,
-        'interviewee_nr2_id'            => $interviewee_nr2_id,
-        'ket'                           => $keterangan,
-        'team'     			                => $id_teams,
-        'nak'     			                => $nak,
-        'id'     			                  => $users,
-      );
-    }
     $this->ModelSespim->insertQuery('scores',$data); 
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Success Data');
@@ -975,83 +910,16 @@ class Sespim extends CI_Controller {
 
   public function updateScores() {
     $id = $this->uri->segment(2);
-    $users = $this->input->post('users');
-    $query = $this->db->query("SELECT * FROM users WHERE id = '$users'");
-    $row = $query->row();
-    $id_user = $row->id;
-
-    $query = $this->db->query("SELECT * FROM teams WHERE id = '$id_user'");
-    $rows1 = $query->row();
-    $id_teams = $rows1->team;
-    
     $users                  = $this->input->post('users');
-    $narasumber1            = $this->input->post('narasumber1');
-    $bobot_1_nr1            = $this->input->post('bobot_1_nr1');
-    $bobot_5_nr1            = $this->input->post('bobot_5_nr1');
-    $manfaat_bobot_3_nr1    = $this->input->post('manfaat_bobot_3_nr1');
-    $teknisi_bobot_3_nr1    = $this->input->post('teknisi_bobot_3_nr1');
-    $interviewee_nr1_id     = $this->input->post('narasumber1');
-    
-    $narasumber2            = $this->input->post('narasumber2');
-    $bobot_1_nr2            = $this->input->post('bobot_1_nr2');
-    $bobot_5_nr2            = $this->input->post('bobot_5_nr2');
-    $manfaat_bobot_3_nr2    = $this->input->post('manfaat_bobot_3_nr2');
-    $teknisi_bobot_3_nr2    = $this->input->post('teknisi_bobot_3_nr2');
-    $interviewee_nr2_id     = $this->input->post('narasumber2');
-    $keterangan             = $this->input->post('keterangan');
-
-    //Narasumber 1
-    $insert_bobot_5_nr1   = $bobot_5_nr1 * 5;
-    $insert_manfaat_3_nr1 = $manfaat_bobot_3_nr1 * 3;
-    $insert_teknisi_3_nr1 = $teknisi_bobot_3_nr1 * 3;
-    $total1               = $bobot_1_nr1 + $insert_bobot_5_nr1 + $insert_manfaat_3_nr1 + $insert_teknisi_3_nr1;
-    $nilai_murni1         = $total1 / 12;
-    
-    //Narasumber 2
-    $insert_bobot_5_nr2   = $bobot_5_nr2 * 5;
-    $insert_manfaat_3_nr2 = $manfaat_bobot_3_nr2 * 3;
-    $insert_teknisi_3_nr2 = $teknisi_bobot_3_nr2 * 3;
-    $total2               = $bobot_1_nr2 + $insert_bobot_5_nr2 + $insert_manfaat_3_nr2 + $insert_teknisi_3_nr2;
-    $nilai_murni2         = $total2 / 12;
-
-    $nak = ( $nilai_murni1 + $nilai_murni2 ) / 2;
-    
-		if($interviewee_nr2_id == NULL){
-      $data = array(
-        'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
-        'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
-        'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
-        'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
-        'nilai_murni_narasumber_2_nr1'  => $nilai_murni1,
-        'interviewee_nr1_id'            => $interviewee_nr1_id,
-        'ket'                           => $keterangan,
-        'id'     			                  => $users,
-        'team'     			                => $id_teams,
-        'nak'     			                => $nilai_murni1,
-        'status'                        => '1'
-      );
-    }else{
-      $data = array(
-        'penulisan_bobot_1_nr1'  		    => $bobot_1_nr1,
-        'pembahasan_bobot_5_nr1'  		  => $bobot_5_nr1,
-        'manfaat_bobot_3_nr1'  		      => $manfaat_bobot_3_nr1,
-        'teknisi_bobot_3_nr1'  		      => $teknisi_bobot_3_nr1,
-        'nilai_murni_narasumber_1_nr1'  => $nilai_murni1,
-        'interviewee_nr1_id'            => $interviewee_nr1_id,
-        'penulisan_bobot_1_nr2'  		    => $bobot_1_nr2,
-        'pembahasan_bobot_5_nr2'  		  => $bobot_5_nr2,
-        'manfaat_bobot_3_nr2'  		      => $manfaat_bobot_3_nr2,
-        'teknisi_bobot_3_nr2'  		      => $teknisi_bobot_3_nr2,
-        'nilai_murni_narasumber_2_nr2'  => $nilai_murni2,
-        'interviewee_nr2_id'            => $interviewee_nr2_id,
-        'ket'                           => $keterangan,
-        'id'     			                  => $users,
-        'team'     			                => $id_teams,
-        'nak'     			                => $nak,
-        'status'                        => '0'
-      );
-    }
-		
+    $akademic_score         = $this->input->post('akademik');
+    $personality_score      = $this->input->post('kepribadian');
+    $health_score           = $this->input->post('kesehatan');
+    $data = array(
+      'academic_score'  		=> $akademic_score,
+      'personality_score'   => $personality_score,
+      'health_score'  		  => $health_score,
+      'id'  		            => $users,
+    );
 		$where = array(
 			'score_id' => $id
     );
