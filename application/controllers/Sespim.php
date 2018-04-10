@@ -180,63 +180,68 @@ class Sespim extends CI_Controller {
 	{
 		$this->load->view('admin/addannouncements');
   }
-
   public function insertannouncement(){
-
-    function sendMessage(){
-      $content = array(
-        "en" => 'English Message'
-        );
-      
-      $fields = array(
-        'app_id' => "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
-        'included_segments' => array("All"),
-        'data' => array("foo" => "bar"),
-        'contents' => $content
-      );
-      
-      $fields = json_encode($fields);
-        print("\nJSON sent:\n");
-        print($fields);
-      
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, "AIzaSyChUVwGtEQ3GwxlLli5o5cUbrXRChRNSVM");
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8','Authorization: Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj'));
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-      curl_setopt($ch, CURLOPT_HEADER, FALSE);
-      curl_setopt($ch, CURLOPT_POST, TRUE);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-  
-      $response = curl_exec($ch);
-      curl_close($ch);
-      return $response;
-    }
+    $imageUrl = base_url();
+    $description   = $this->input->post('description');
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+    $notif = substr($description,0,80);
+    $notifend = "..";
+    $x = $notif."".$notifend;
+    $content = array(
+      "en" => $x
+    );
     
+    $fields = array(
+      'app_id' => "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
+      'included_segments' => array('All'),
+      'data' => array("foo" => "bar"),
+      'large_icon' =>"https://res.cloudinary.com/rendisimamora/image/upload/v1522840764/default_ze1slc.jpg",
+      'contents' => $content
+    );
+    
+    $fields = json_encode($fields);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8','Authorization: Basic ZTQ1Nzc2YTItOWZmMy00MGVmLWJmYjQtZWZlMGFlNzU1Y2Jj'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_POST, TRUE);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+    $data = array(
+      'announcement'	  => $description,
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+    
+    $query = $this->db->query("SELECT announcement_id FROM announcements ORDER BY announcement_id DESC LIMIT 1");
+    $row = $query->row();
+    $id_notif_last =  $row->announcement_id;
+    $id_notif_new = $id_notif_last + 1;
+
+    $data_notif = array(
+      'type'	  => "announcement",
+      'announcement_id'	  => $id_notif_new,
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+    $this->ModelSespim->insertQuery('announcements',$data); 
+    $this->ModelSespim->insertQuery('notifications',$data_notif); 
+    
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='announcement';
+    </script>");
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    return $response;
     $response = sendMessage();
     $return["allresponses"] = $response;
     $return = json_encode( $return);
-    
-    print("\n\nJSON received:\n");
-    print($return);
-    print("\n");
-
-    // $imageUrl = base_url();
-    // $description   = $this->input->post('description');
-    // $datenow = date("Y-m-d");
-    // $timenow = date("h:i:s");
-    
-    // $data = array(
-    //   'announcement'	  => $description,
-    //   'createdAt'		    => $datenow." ".$timenow,
-    //   'updatedAt'		    => $datenow." ".$timenow
-    // );
-    // $this->ModelSespim->insertQuery('announcements',$data); 
-    
-    // echo ("<script LANGUAGE='JavaScript'>
-    // window.alert('Success Data');
-    // window.location.href='announcement';
-    // </script>");
   }
 
   public function editannouncement()
