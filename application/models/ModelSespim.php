@@ -27,10 +27,7 @@ Class ModelSespim extends CI_Model{
   public function loadQueryRelation(){
     $this->db->select('*');
     $this->db->from('scores');
-    $this->db->select('kodenaskah.kode_naskah as kn');
     $this->db->join('users', 'scores.id = users.id');
-    $this->db->join('kodenaskah', 'users.id = kodenaskah.id');
-    $this->db->join('interviewees', 'interviewees.interviewee_id = scores.interviewee_nr1_id');
     $this->db->order_by('scores.id','desc');
     $db = $this->db->get();
 		return $db;
@@ -72,7 +69,6 @@ Class ModelSespim extends CI_Model{
     $this->db->select('*');
     $this->db->from('users');
     $this->db->join('scores', 'scores.id = users.id');
-    $this->db->join('interviewees', 'interviewees.interviewee_id = scores.interviewee_nr1_id');
     $this->db->where('users.no_serdik',$id);
 		$db = $this->db->get("");
 		return $db;
@@ -130,6 +126,14 @@ Class ModelSespim extends CI_Model{
     return $db;
   }
 
+  public function loadQueryUserForce58(){
+    $this->db->select('*');
+    $this->db->from('users');
+		$this->db->where('force_of',58);
+    $db =$this->db->get();
+    return $db;
+  }
+  
   public function updateQuery($where,$data,$table){
 		$this->db->where($where);
 		$this->db->update($table,$data);

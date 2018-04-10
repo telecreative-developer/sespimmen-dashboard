@@ -63,7 +63,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th width="15%">Nomor Serdik</th>
+                                                            <th>Nomor Serdik</th>
                                                             <th>NRP</th>
                                                             <th>Name</th>
                                                             <th>Email</th>
@@ -83,7 +83,7 @@
                                                             <td><?php echo $no;?></td>
                                                             <td><?php echo $result->no_serdik;?></td>
                                                             <td><?php echo $result->nrp;?></td>
-                                                            <td><a href="pagesprofile/<?php echo $result->no_serdik?>" span style="color:blue;"><?php echo $result->first_name;?> <?php echo $result->last_name?></a></td>
+                                                            <td><a href="pagesprofile/<?php echo $result->no_serdik?>" span style="color:blue;"><?php echo ucfirst($result->first_name);?> <?php echo ucfirst($result->last_name);?></a></td>
                                                             <td><?php echo $result->email;?></td>
                                                             <td><?php echo $result->phone;?></td>
                                                             <td><?php echo $result->force_of;?></td>

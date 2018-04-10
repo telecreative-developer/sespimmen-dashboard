@@ -64,14 +64,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>KN</th>
                                                             <th>Nama</th>
-                                                            <th>Narasumber 1</th>
-                                                            <th>NM 1</th>
-
-                                                            <th>Narasumber 2</th>
-                                                            <th>NM 2</th>
-                                                            <th>Ket</th>
+                                                            <th>Nilai Akademik </th>
+                                                            <th>Nilai Kepribadian </th>
+                                                            <th>Nilai Kesehatan Jasmani </th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
@@ -80,43 +76,13 @@
                                                         <?php
                                                             $no = 1; 
                                                             foreach ($scores as $result) {
-                                                            $narasumber1 = $result->interviewee_nr1_id;
-                                                            $narasumber2 = $result->interviewee_nr2_id;
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><?php echo $result->kn;?></td>
-                                                            <td><a href="pagesprofile/<?php echo $result->no_serdik?>" span style="color:blue;"><?php echo $result->first_name;?> <?php echo $result->last_name?></a></td>
-                                                            <td>
-                                                                <?php 
-                                                                $query = $this->db->query("SELECT * FROM interviewees WHERE interviewee_id ='$narasumber1'");
-                                                                foreach ($query->result_array() as $row)
-                                                                {
-                                                                    echo $row['full_name'];
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                            <td><?php echo $result->nilai_murni_narasumber_1_nr1;?></td>
-                                                            <td>
-                                                                <?php 
-                                                                $query = $this->db->query("SELECT * FROM interviewees WHERE interviewee_id ='$narasumber2'");
-                                                                foreach ($query->result_array() as $row)
-                                                                {
-                                                                    echo $row['full_name'];
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                            <td><?php echo $result->nilai_murni_narasumber_2_nr2;?></td>
-                                                            <td>
-                                                                
-                                                                <?php 
-                                                                    if($result->status == '0'){
-
-                                                                    }else{
-                                                                        echo "<center> **) </center>";
-                                                                    }
-                                                                ?>
-                                                            </td>
+                                                            <td><a href="pagesprofile/<?php echo $result->no_serdik?>" span style="color:blue;"><?php echo ucfirst($result->first_name);?> <?php echo ucfirst($result->last_name);?></a></td>                                                           
+                                                            <td><?php echo $result->academic_score;?></a></td>                                                           
+                                                            <td><?php echo $result->personality_score;?></a></td>   
+                                                            <td><?php echo $result->health_score;?></a></td>   
                                                             <td>
                                                                 <a href="<?php echo base_url();?>editscores/<?php echo $result->score_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
                                                                 <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteScores/<?php echo $result->score_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
@@ -127,19 +93,6 @@
                                                             }
                                                         ?>
                                                     </tbody>
-                                                    <small> 
-                                                        Ket: 
-                                                        <br/>
-                                                        NM1 = NILAI MURNI 1 
-                                                        <br/>
-                                                        NM2 = NILAI MURNI 2 
-                                                        <br/>
-                                                        KN = KODE NASKAH
-                                                        <br/>
-                                                        **) DIUJI OLEH SATU ORANG PENGUJI/NARASUMBER
-                                                    </small>
-                                                    <br/>
-                                                    <br/>
                                                 </table>
                                             </div>
                                         </div>
