@@ -956,7 +956,7 @@ class Sespim extends CI_Controller {
   }
 
   public function insertTopics(){    
-    $query = $this->db->query("SELECT * FROM users");      
+    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");       
       while ($row = $query->unbuffered_row()) {
       
       $numbers = range(1, 5);
@@ -986,7 +986,7 @@ class Sespim extends CI_Controller {
 
   public function insertTeams(){    
 
-    $query = $this->db->query("SELECT * FROM users");      
+    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");        
       while ($row = $query->unbuffered_row()) {
       
       $numbers = range(1, 5);
@@ -1031,7 +1031,7 @@ class Sespim extends CI_Controller {
   }
 
   public function insertKode(){    
-    $query = $this->db->query("SELECT * FROM users");          
+    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");             
       function angkaangkaunik($start, $end, $banyak) {
         $angka = range($start, $end);
         shuffle($angka);
@@ -1039,7 +1039,7 @@ class Sespim extends CI_Controller {
       }
       $x = angkaangkaunik(1, 160, 160);
       $i = 0;
-      $query = $this->db->query("SELECT * FROM users");  
+      $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");      
         while ($row = $query->unbuffered_row()) {
             $data = array(
               'kode_naskah'   => $x[$i++],
@@ -1060,7 +1060,7 @@ class Sespim extends CI_Controller {
   }
 
   public function insertPok_uji(){    
-    $query = $this->db->query("SELECT * FROM users");      
+    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");         
       while ($row = $query->unbuffered_row()) {
       
       $numbers = range(1, 25);
