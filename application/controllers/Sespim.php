@@ -15,8 +15,7 @@ class Sespim extends CI_Controller {
 
 	public function dashboard()
 	{
-    $data['users']  = $this->ModelSespim->loadQueryTheBestValue()->result();
-    $this->load->view('admin/dashboard',$data);
+    $this->load->view('admin/dashboard');
   }
 
   public function events()
