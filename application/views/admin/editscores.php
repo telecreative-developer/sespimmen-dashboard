@@ -51,56 +51,33 @@
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-                                              <?php foreach($scores as $result){?>
-                                                <form method="POST" action="<?php echo base_url()?>updateScores/<?php echo $result->score_id;?>" class="form-horizontal" enctype="multipart/form-data">
-                                                <div class="col-lg-12">
-                                                        <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">User</label>
-                                                            <div class="col-sm-10">
-                                                                <select name="users" class="form-control" required="ON">
-                                                                    <option value="<?php echo $result->id;?>"><?php echo ucfirst($result->first_name);?> <?php echo ucfirst($result->last_name);?></option>
-                                                                    <?php 
-                                                                        foreach($users as $results){    
-                                                                    ?>
-                                                                    <option value="<?php echo $results->id;?>"><?php echo ucfirst($results->first_name);?> <?php echo ucfirst($results->last_name);?></option>
-                                                                        <?php
-                                                                        }
-                                                                    ?>
-                                                                </select>
+                                                <?php foreach($scores as $result){?>
+                                                    <form method="POST" action="<?php echo base_url()?>updateScores/<?php echo $result->score_id;?>" class="form-horizontal" enctype="multipart/form-data">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="text1" class="col-sm-2 control-label">Title</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" name="title" class="form-control" id="title" value="<?php echo $result->file_title;?>" placeholder="Title" />
+                                                                </div>
                                                             </div>
-                                                        </div>   
-                                                    </div>
+                                                        </div>
 
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">Nilai Akademik</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" name="akademik" class="form-control" id="akademik" placeholder="Nilai Akademik" value="<?php echo $result->academic_score;?>"/>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="text1" class="col-sm-2 control-label">File</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="file" name="file" class="form-control" id="file" placeholder="file" />
+                                                                </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">Nilai Kepribadian</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" name="kepribadian" class="form-control" id="kepribadian" placeholder="Nilai Kepribadian" value="<?php echo $result->personality_score;?>"/>
+                                                            <div class="col-sm-offset-2 col-sm-8">
+                                                                <button type="submit" class="btn btn-primary">Submit</button>
                                                             </div>
                                                         </div>
-
-                                                        <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">Nilai Kesehatan Jasmani</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" name="kesehatan" class="form-control" id="kesehatan" placeholder="Nilai Kesehatan" value="<?php echo $result->health_score;?>"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                	<div class="form-group">
-                                                		<div class="col-sm-offset-2 col-sm-8">
-                                                			<button type="submit" class="btn btn-primary">Submit</button>
-                                                		</div>
-                                                	</div>
-                                                </form>  
-                                            <?php } ?>
+                                                    </form>  
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>  

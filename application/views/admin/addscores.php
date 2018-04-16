@@ -52,47 +52,23 @@
                                             </div>
                                             <div class="panel-body">
 
-                                                <form method="POST" action="<?php echo base_url()?>insertscores" class="form-horizontal">
+                                                <form method="POST" action="<?php echo base_url()?>insertscores" class="form-horizontal" enctype="multipart/form-data">
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">User</label>
+                                                            <label for="text1" class="col-sm-2 control-label">Title</label>
                                                             <div class="col-sm-10">
-                                                                <select name="users" class="form-control" required="ON">
-                                                                    <option value="">Default Select</option>
-                                                                    <?php 
-                                                                        foreach($users as $results){    
-                                                                    ?>
-                                                                    <option value="<?php echo $results->id;?>"><?php echo ucfirst($results->first_name);?> <?php echo ucfirst($results->last_name);?></option>
-                                                                        <?php
-                                                                        }
-                                                                    ?>
-                                                                </select>
+                                                                <input type="text" name="title" class="form-control" id="title" placeholder="Title" />
                                                             </div>
-                                                        </div>   
+                                                        </div>
                                                     </div>
 
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">Nilai Akademik</label>
+                                                            <label for="text1" class="col-sm-2 control-label">File</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" name="akademik" class="form-control" id="akademik" placeholder="Nilai Akademik" />
+                                                                <input type="file" name="file" class="form-control" id="file" placeholder="file" />
                                                             </div>
                                                         </div>
-
-                                                        <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">Nilai Kepribadian</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" name="kepribadian" class="form-control" id="kepribadian" placeholder="Nilai Kepribadian" />
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">Nilai Kesehatan Jasmani</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" name="kesehatan" class="form-control" id="kesehatan" placeholder="Nilai Kesehatan" />
-                                                            </div>
-                                                        </div>
-
                                                     </div>
                                                 	<div class="form-group">
                                                 		<div class="col-sm-offset-2 col-sm-8">
