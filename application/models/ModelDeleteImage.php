@@ -23,6 +23,27 @@ Class ModelDeleteImage extends CI_Model{
     }
   }
 
+  public function deleteFileScores($id){
+    error_reporting(0);
+    $this->db->where('score_id',$id);
+    $query = $this->db->get('scores');
+    $row = $query->row();
+    $x = $row->file_loc;
+    
+    //$this->db->delete('articles',array('article_id' => $id));
+    $path ='/var/www/sespim/assets/images/scores/'.$x;
+    if($this->db->affected_rows() >= 1){
+      if(unlink($path)){
+        return TRUE;
+        } else {
+            return FALSE;
+        }
+    }else{
+
+    }
+  }
+
+
   public function deleteFile($id){
     error_reporting(0);
     $this->db->where('document_id',$id);

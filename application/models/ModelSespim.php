@@ -120,8 +120,7 @@ Class ModelSespim extends CI_Model{
   }
 
   public function loadQueryUserById($where,$id,$table){
-    $this->db->join('users', 'users.id = scores.id');
-		$this->db->where($where,$id);
+    $this->db->where($where,$id);
     $db =$this->db->get($table);
     return $db;
   }

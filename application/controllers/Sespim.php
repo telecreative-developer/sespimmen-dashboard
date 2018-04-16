@@ -861,36 +861,43 @@ class Sespim extends CI_Controller {
   }
 
 
+
   public function scores()
 	{
-    $data['scores']  = $this->ModelSespim->loadQueryRelation()->result();
+    $orderid = 'score_id';
+    $data['scores']  = $this->ModelSespim->loadQuery($orderid,'scores')->result();
 		$this->load->view('admin/table-scores',$data);
   }
 
   public function addscores()
 	{
-    $id = 'id';
-    $data['users']  = $this->ModelSespim->loadQueryUserForce58()->result(); 
-		$this->load->view('admin/addscores',$data);
+		$this->load->view('admin/addscores');
   }
 
   public function insertscores(){
-    $id                     = $this->input->post('users');
-    $akademic_score         = $this->input->post('akademik');
-    $personality_score      = $this->input->post('kepribadian');
-    $health_score           = $this->input->post('kesehatan');
-    $data = array(
-      'academic_score'  		=> $akademic_score,
-      'personality_score'   => $personality_score,
-      'health_score'  		  => $health_score,
-      'id'  		            => $id,
-    );
+    $imageUrl = base_url();
+    $title         = $this->input->post('title');
+    $tempFile 		= $_FILES['file']['tmp_name'];
+		$fileName 		= time().$_FILES['file']['name'];	  
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+		$targetFile 	= $targetPath . $fileName;
+    move_uploaded_file($tempFile, $targetFile);
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
     
-    $this->ModelSespim->insertQuery('scores',$data); 
-    echo ("<script LANGUAGE='JavaScript'>
-    window.alert('Success Data');
-    window.location.href='scores';
-    </script>");
+    $data = array(
+      'file_title'  => $title,
+      'file_url'	  => $imageUrl."assets/images/scores/".$fileName,
+      'file_loc'	  => $fileName,
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+
+     $this->ModelSespim->insertQuery('scores',$data); 
+     echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Success Data');
+     window.location.href='scores';
+     </script>");
   }
 
   public function editScores()
@@ -898,33 +905,44 @@ class Sespim extends CI_Controller {
     $id = $this->uri->segment(2);
     $where = 'score_id';
     $data['scores'] = $this->ModelSespim->loadQueryUserById($where,$id,'scores')->result();
-    
-    $query = $this->db->query("SELECT * FROM scores WHERE score_id = '$id'");
-    $row = $query->row();
-    $id_user = $row->id;
-    $data['users']  = $this->ModelSespim->LoadUsersNotById($id_user)->result();
-    $orderid = 'interviewee_id';
-    $data['interviewees']  = $this->ModelSespim->loadQuery($orderid,'interviewees')->result(); 
     $this->load->view('admin/editscores',$data);
   }
 
   public function updateScores() {
+    $imageUrl = base_url();
     $id = $this->uri->segment(2);
-    $users                  = $this->input->post('users');
-    $akademic_score         = $this->input->post('akademik');
-    $personality_score      = $this->input->post('kepribadian');
-    $health_score           = $this->input->post('kesehatan');
-    $data = array(
-      'academic_score'  		=> $akademic_score,
-      'personality_score'   => $personality_score,
-      'health_score'  		  => $health_score,
-      'id'  		            => $users,
-    );
-		$where = array(
-			'score_id' => $id
-    );
-    
-    $this->ModelSespim->updateQuery($where,$data,'scores');
+    $title         = $this->input->post('title');
+    $tempFile 		= $_FILES['file']['tmp_name'];
+		$fileName 		= time().$_FILES['file']['name'];	  
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+		$targetFile 	= $targetPath . $fileName;
+    move_uploaded_file($tempFile, $targetFile);
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+
+    $file = substr($fileName,10);
+    if($file== ""){
+      $data = array(
+        'file_title'  => $title,
+        'updatedAt'		    => $datenow." ".$timenow
+      );
+      $where = array(
+        'document_id' => $id
+      );
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }else{
+      $data = array(
+        'file_title'  => $title,
+        'file_url'	  => $imageUrl."assets/images/scores/".$fileName,
+        'file_loc'	  => $fileName,
+        'updatedAt'		    => $datenow." ".$timenow
+      );
+      $where = array(
+        'score_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileScores($id);
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }
 		echo ("<script LANGUAGE='JavaScript'>
     window.alert('Update Data');
     window.location.href='../scores';
@@ -934,13 +952,13 @@ class Sespim extends CI_Controller {
   public function deleteScores() {
     $id = $this->uri->segment(2);
     $idwhere = 'score_id';
+    $this->ModelDeleteImage->deleteFileScores($id);
     $this->ModelSespim->deleteQuery($idwhere,$id,'scores');
     echo ("<script LANGUAGE='JavaScript'>
      window.alert('Delete Data');
      window.location.href='../scores';
      </script>");
   }
-
   public function teams()
 	{
     $id = 'team_id';
