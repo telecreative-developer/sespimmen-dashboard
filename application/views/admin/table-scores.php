@@ -87,9 +87,9 @@
                                                         <tr>
                                                             <td><?php echo $no;?></td>
                                                             <td><?php echo $result->title;?></a></td>                                                           
-                                                            <td><a span style="color:blue;" href="<?php echo $result->akademik_url;?>"><?php echo $result->akademik_loc;?></a></td>      
-                                                            <td><a span style="color:blue;" href="<?php echo $result->kepribadian_url;?>"><?php echo $result->kepribadian_loc;?></a></td>   
-                                                            <td><a span style="color:blue;" href="<?php echo $result->kesehatan_url;?>"><?php echo $result->kesehatan_loc;?></a></td>   
+                                                            <td><a span style="color:blue;" href="<?php echo $result->akademik_url;?>"><?php echo substr($result->akademik_loc,10);?></a></td>      
+                                                            <td><a span style="color:blue;" href="<?php echo $result->kepribadian_url;?>"><?php echo substr($result->kepribadian_loc,10);?></a></td>   
+                                                            <td><a span style="color:blue;" href="<?php echo $result->kesehatan_url;?>"><?php echo substr($result->kesehatan_loc,10);?></a></td>     
                                                             <td>
                                                                 <?php
                                                                     if($result->status == "0"){
