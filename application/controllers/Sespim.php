@@ -38,7 +38,7 @@ class Sespim extends CI_Controller {
     
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/events/'; 
+    $targetPath		= '/var/www/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
 
@@ -111,7 +111,7 @@ class Sespim extends CI_Controller {
 
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/events/'; 
+    $targetPath		 = '/var/www/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     
@@ -299,7 +299,7 @@ class Sespim extends CI_Controller {
     $imageUrl = base_url();
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/banners/'; 
+    $targetPath		= '/var/www/sespim/assets/images/banners/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $x = substr($fileName,10);
@@ -329,7 +329,7 @@ class Sespim extends CI_Controller {
     $id = $this->uri->segment(2);
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/banners/'; 
+    $targetPath		= '/var/www/sespim/assets/images/banners/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
    
@@ -381,7 +381,7 @@ class Sespim extends CI_Controller {
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
+    $targetPath		= '/var/www/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -418,7 +418,7 @@ class Sespim extends CI_Controller {
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
+    $targetPath		= '/var/www/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -816,19 +816,19 @@ class Sespim extends CI_Controller {
     $title     = $this->input->post('title');
     $tempFile 		= $_FILES['akademik_file']['tmp_name'];
 		$fileName 		= time().$_FILES['akademik_file']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+    $targetPath		= '/var/www/sespim/assets/images/scores/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
 
     $tempFile2 		= $_FILES['kepribadian_file']['tmp_name'];
 		$fileName2 		= time().$_FILES['kepribadian_file']['name'];	  
-    $targetPath2		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+    $targetPath2		= '/var/www/sespim/assets/images/scores/'; 
 		$targetFile2 	= $targetPath2 . $fileName2;
     move_uploaded_file($tempFile2, $targetFile2);
 
     $tempFile3 		= $_FILES['kesehatan_file']['tmp_name'];
 		$fileName3 		= time().$_FILES['kesehatan_file']['name'];	  
-    $targetPath3  = '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+    $targetPath3  = '/var/www/sespim/assets/images/scores/'; 
 		$targetFile3 	= $targetPath3 . $fileName3;
     move_uploaded_file($tempFile3, $targetFile3);
 
@@ -869,19 +869,19 @@ class Sespim extends CI_Controller {
     $title        = $this->input->post('title');
     $tempFile 		= $_FILES['akademik_file']['tmp_name'];
 		$fileName 		= time().$_FILES['akademik_file']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+    $targetPath		= '/var/www/sespim/assets/images/scores/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
 
     $tempFile2 		= $_FILES['kepribadian_file']['tmp_name'];
 		$fileName2 		= time().$_FILES['kepribadian_file']['name'];	  
-    $targetPath2		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+    $targetPath2		= '/var/www/sespim/assets/images/scores/'; 
 		$targetFile2 	= $targetPath2 . $fileName2;
     move_uploaded_file($tempFile2, $targetFile2);
 
     $tempFile3 		= $_FILES['kesehatan_file']['tmp_name'];
 		$fileName3 		= time().$_FILES['kesehatan_file']['name'];	  
-    $targetPath3  = '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+    $targetPath3  = '/var/www/sespim/assets/images/scores/'; 
 		$targetFile3 	= $targetPath3 . $fileName3;
     move_uploaded_file($tempFile3, $targetFile3);
 
@@ -1258,7 +1258,7 @@ class Sespim extends CI_Controller {
     $title         = $this->input->post('title');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/ujian/'; 
+    $targetPath		= '/var/www/sespim/assets/images/ujian/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -1296,7 +1296,7 @@ class Sespim extends CI_Controller {
     $title         = $this->input->post('title');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/ujian/'; 
+    $targetPath		 = '/var/www/sespim/assets/images/ujian/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     
