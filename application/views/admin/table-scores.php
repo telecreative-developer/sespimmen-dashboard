@@ -68,9 +68,13 @@
                                                 <table id="example" class="display table-responsive table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
-                                                            <th>No</th>
+                                                            <th width="5%;">No</th>
                                                             <th>Title</th>
-                                                            <th>File</th>
+                                                            <th>Akademik</th>
+                                                            <th>Kepribadian</th>
+                                                            <th>Kesehatan</th>
+                                                            <th width="3%">Status</th>
+                                                            <th width="15%">Action Publish</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -82,8 +86,32 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><?php echo $result->file_title;?></a></td>                                                           
-                                                            <td><a span style="color:blue;" href="<?php echo $result->file_url;?>"><?php echo $result->file_loc;?></a></td>   
+                                                            <td><?php echo $result->title;?></a></td>                                                           
+                                                            <td><a span style="color:blue;" href="<?php echo $result->akademik_url;?>"><?php echo $result->akademik_loc;?></a></td>      
+                                                            <td><a span style="color:blue;" href="<?php echo $result->kepribadian_url;?>"><?php echo $result->kepribadian_loc;?></a></td>   
+                                                            <td><a span style="color:blue;" href="<?php echo $result->kesehatan_url;?>"><?php echo $result->kesehatan_loc;?></a></td>   
+                                                            <td>
+                                                                <?php
+                                                                    if($result->status == "0"){
+                                                                        echo "<button type='button' class='btn btn-default btn-xs btn-labeled' disabled>Belum dipublish</button>";
+                                                                    }else{
+                                                                        echo "<button type='button' class='btn btn-primary btn-xs btn-labeled'>Sudah dipublish</button>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php
+                                                                    if($result->status == "0"){
+                                                                    ?>
+                                                                        <a href="<?php echo base_url();?>publish_scores/<?php echo $result->score_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-check"></i> Publish</button></a>
+                                                                    <?php 
+                                                                    }else{
+                                                                    ?>
+                                                                        <a href="<?php echo base_url();?>unpublish_scores/<?php echo $result->score_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-close"></i> Batal Publish</button></a>
+                                                                    <?php 
+                                                                    }
+                                                                ?>
+                                                            </td>
                                                             <td>
                                                                 <a href="<?php echo base_url();?>editscores/<?php echo $result->score_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
                                                                 <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteScores/<?php echo $result->score_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>

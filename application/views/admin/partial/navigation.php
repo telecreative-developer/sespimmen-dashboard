@@ -10,10 +10,23 @@
   <span class="">Main Page</span>
 </li>
 <li><a href="<?php echo base_url()?>dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-<li><a href="<?php echo base_url()?>events"><i class="fa fa-calendar-check-o"></i> <span>Kalender</span></a></li>
 <li><a href="<?php echo base_url()?>banner"><i class="fa fa-picture-o"></i> <span>Banners</span></a></li>
+
+<li class="nav-header">
+  <span class="">All Handbook</span>
+</li>
 <li><a href="<?php echo base_url()?>documents"><i class="fa fa-newspaper-o"></i> <span>Documents</span></a></li>
+
+<li class="nav-header">
+  <span class="">All Activities</span>
+</li>
+<li><a href="<?php echo base_url()?>events"><i class="fa fa-calendar-check-o"></i> <span>Kalender</span></a></li>
 <li><a href="<?php echo base_url()?>posts"><i class="fa fa-briefcase"></i> <span>Kegiatan</span></a></li>
+
+
+<li class="nav-header">
+  <span class="">All Announcement</span>
+</li>
 <li><a href="<?php echo base_url()?>announcement"><i class="fa fa-bullhorn"></i> <span>Pengumuman</span></a></li>
 
 <!--
@@ -26,9 +39,9 @@
 <li class="nav-header">
   <span class="">All Random</span>
 </li>
-<li><a href="<?php echo base_url()?>teams"><i class="fa fa-users"></i><span>Pokjar</span></a></li>
+<!-- <li><a href="<?php echo base_url()?>teams"><i class="fa fa-users"></i><span>Pokjar</span></a></li>
 <li><a href="<?php echo base_url()?>kodenaskah"><i class="fa fa-qrcode"></i><span>Kode Naskah</span></a></li>
-<li><a href="<?php echo base_url()?>topics"><i class="fa fa-book"></i><span>Topic</span></a></li>
+<li><a href="<?php echo base_url()?>topics"><i class="fa fa-book"></i><span>Topic</span></a></li> -->
 <li><a href="<?php echo base_url()?>exam"><i class="fa fa-sticky-note-o"></i><span>Ujian</span></a></li>
 
 

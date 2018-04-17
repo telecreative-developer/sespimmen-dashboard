@@ -28,7 +28,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Tabel Kalender</h2>
+                                    <h2 class="title">Tabel Events</h2>
                                 </div>
                                 
                             </div>
@@ -37,7 +37,7 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
             							<li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-            							<li class="active">Kalender</li>
+            							<li class="active">Events</li>
             						</ul>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Kalender </h5>
-                                                    <a href="<?php echo base_url()?>addevents"><button type="button" class="btn btn-primary btn-xs btn-labeled">Tambah Jadwal <i class="fa fa-plus"></i></button></a>
+                                                    <h5>Events </h5>
+                                                    <a href="<?php echo base_url()?>addevents"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Event <i class="fa fa-plus"></i></button></a>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">

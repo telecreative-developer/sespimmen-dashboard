@@ -53,6 +53,7 @@
                                             <div class="panel-body">
 
                                                 <form method="POST" action="<?php echo base_url()?>insertscores" class="form-horizontal" enctype="multipart/form-data">
+                                                   
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label for="text1" class="col-sm-2 control-label">Title</label>
@@ -64,9 +65,27 @@
 
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <label for="text1" class="col-sm-2 control-label">File</label>
+                                                            <label for="text1" class="col-sm-2 control-label">Akademik</label>
                                                             <div class="col-sm-10">
-                                                                <input type="file" name="file" class="form-control" id="file" placeholder="file" />
+                                                                <input type="file" name="akademik_file" class="form-control" id="file" placeholder="file" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="text1" class="col-sm-2 control-label">Kepribadian</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="file" name="kepribadian_file" class="form-control" id="file" placeholder="file" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="text1" class="col-sm-2 control-label">Kesehatan</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="file" name="kesehatan_file" class="form-control" id="file" placeholder="file" />
                                                             </div>
                                                         </div>
                                                     </div>

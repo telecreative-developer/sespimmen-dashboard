@@ -1,5 +1,5 @@
-<?php include"style/styleDashboard.php";?>
-    <body class="top-navbar-fixed">
+<?php include "style/styleDashboard.php";?>
+    <body class="top-navbar-fixed" ng-app="">
         <div class="main-wrapper">
 
             <nav class="navbar top-navbar bg-white box-shadow">
@@ -23,7 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Interviewees</h2>
+                                    <h2 class="title">Exam</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -32,10 +32,10 @@
                             <div class="row breadcrumb-div">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-            							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>interviewees">Interviewees</li></a>
-                                        <li class="active">Edit Interviewees</li>
-            						            </ul>
+            							<li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
+                                        <li><a href="<?php echo base_url();?>exam">Exam</li></a>
+                                        <li class="active">Add Exam</li>
+            						</ul>
                                 </div>
                             </div>
                             <!-- /.row -->
@@ -47,27 +47,35 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Edit Your Interviewees</small></h5>
+                                                    <h5>Input Your Exam</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-                                              <?php foreach($interviewees as $result){?>
-                                                <form method="POST" action="<?php echo base_url()?>updateInterviewees/<?php echo $result->interviewee_id;?>" class="form-horizontal" enctype="multipart/form-data">
-                                                  
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Interviewees</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="text" name="full_name" class="form-control" placeholder="Interviewees" value="<?php echo $result->full_name?>" required="ON">
-                                                		</div>
-                                                  </div>
 
+                                                <form method="POST" action="<?php echo base_url()?>insertexam" class="form-horizontal" enctype="multipart/form-data">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="text1" class="col-sm-2 control-label">Title</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="title" class="form-control" id="title" placeholder="Title" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="text1" class="col-sm-2 control-label">File</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="file" name="file" class="form-control" id="file" placeholder="file" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 	<div class="form-group">
-                                                		<div class="col-sm-offset-2 col-sm-10">
+                                                		<div class="col-sm-offset-2 col-sm-8">
                                                 			<button type="submit" class="btn btn-primary">Submit</button>
                                                 		</div>
                                                 	</div>
                                                 </form>  
-                                            <?php } ?>
                                             </div>
                                         </div>
                                     </div>  

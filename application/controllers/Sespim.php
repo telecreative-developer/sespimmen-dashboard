@@ -38,7 +38,7 @@ class Sespim extends CI_Controller {
     
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/var/www/sespim/assets/images/events/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
 
@@ -111,7 +111,7 @@ class Sespim extends CI_Controller {
 
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		 = '/var/www/sespim/assets/images/events/'; 
+    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/events/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     
@@ -179,6 +179,7 @@ class Sespim extends CI_Controller {
 	{
 		$this->load->view('admin/addannouncements');
   }
+
   public function insertannouncement(){
     $imageUrl = base_url();
     $description   = $this->input->post('description');
@@ -227,7 +228,8 @@ class Sespim extends CI_Controller {
       'updatedAt'		    => $datenow." ".$timenow
     );
     $this->ModelSespim->insertQuery('announcements',$data); 
-    $this->ModelSespim->insertQuery('notifications',$data_notif);  
+    $this->ModelSespim->insertQuery('notifications',$data_notif); 
+    
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Success Data');
     window.location.href='announcement';
@@ -235,7 +237,7 @@ class Sespim extends CI_Controller {
 
     $response = curl_exec($ch);
     curl_close($ch);
-   
+    
     return $response;
     $response = sendMessage();
     $return["allresponses"] = $response;
@@ -297,7 +299,7 @@ class Sespim extends CI_Controller {
     $imageUrl = base_url();
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/var/www/sespim/assets/images/banners/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/banners/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $x = substr($fileName,10);
@@ -327,7 +329,7 @@ class Sespim extends CI_Controller {
     $id = $this->uri->segment(2);
     $tempFile 		= $_FILES['picture']['tmp_name'];
 		$fileName 		= time().$_FILES['picture']['name'];	  
-    $targetPath		= '/var/www/sespim/assets/images/banners/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/banners/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
    
@@ -379,7 +381,7 @@ class Sespim extends CI_Controller {
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/var/www/sespim/assets/images/documents/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -416,7 +418,7 @@ class Sespim extends CI_Controller {
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
 		$fileName 		= time().$_FILES['file']['name'];	  
-    $targetPath		= '/var/www/sespim/assets/images/documents/'; 
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/documents/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
@@ -486,69 +488,6 @@ class Sespim extends CI_Controller {
     echo ("<script LANGUAGE='JavaScript'>
      window.alert('Delete Data');
      window.location.href='../posts';
-     </script>");
-  }
-
-  public function interviewees()
-	{
-    $id = 'interviewee_id';
-    $data['interviewees']  = $this->ModelSespim->loadQuery($id,'interviewees')->result();
-		$this->load->view('admin/table-interviewees',$data);
-  }
-
-  public function addinterviewees()
-	{
-		$this->load->view('admin/addinterviewees');
-  }
-
-  public function insertInterviewees(){
-    $full_name         = $this->input->post('full_name');
-
-    $data = array(
-      'full_name'     			    => $full_name,
-    );
-
-     $this->ModelSespim->insertQuery('interviewees',$data); 
-     echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Success Data');
-     window.location.href='interviewees';
-     </script>");
-  }
-
-  public function editinterviewees()
-	{
-    $id = $this->uri->segment(2);
-    $where = 'interviewee_id';
-    $data['interviewees'] = $this->ModelSespim->loadQueryById($where,$id,'interviewees')->result();
-		$this->load->view('admin/editinterviewees',$data);
-  }
-
-  public function updateinterviewees() {
-    $id = $this->uri->segment(2);
-    $full_name         = $this->input->post('full_name');
-    
-		$data = array(
-      'full_name'     => $full_name,
-		);
-		
-		$where = array(
-			'interviewee_id' => $id
-    );
-    
-    $this->ModelSespim->updateQuery($where,$data,'interviewees');
-		echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Update Data');
-     window.location.href='../interviewees';
-     </script>");
-  }
-  
-  public function deleteInterviewees() {
-    $id = $this->uri->segment(2);
-    $idwhere = 'interviewee_id';
-    $this->ModelSespim->deleteQuery($idwhere,$id,'interviewees');
-    echo ("<script LANGUAGE='JavaScript'>
-     window.alert('Delete Data');
-     window.location.href='../interviewees';
      </script>");
   }
 
@@ -860,7 +799,6 @@ class Sespim extends CI_Controller {
   }
 
 
-
   public function scores()
 	{
     $orderid = 'score_id';
@@ -875,19 +813,37 @@ class Sespim extends CI_Controller {
 
   public function insertscores(){
     $imageUrl = base_url();
-    $title         = $this->input->post('title');
-    $tempFile 		= $_FILES['file']['tmp_name'];
-		$fileName 		= time().$_FILES['file']['name'];	  
+    $title     = $this->input->post('title');
+    $tempFile 		= $_FILES['akademik_file']['tmp_name'];
+		$fileName 		= time().$_FILES['akademik_file']['name'];	  
     $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
+
+    $tempFile2 		= $_FILES['kepribadian_file']['tmp_name'];
+		$fileName2 		= time().$_FILES['kepribadian_file']['name'];	  
+    $targetPath2		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+		$targetFile2 	= $targetPath2 . $fileName2;
+    move_uploaded_file($tempFile2, $targetFile2);
+
+    $tempFile3 		= $_FILES['kesehatan_file']['tmp_name'];
+		$fileName3 		= time().$_FILES['kesehatan_file']['name'];	  
+    $targetPath3  = '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+		$targetFile3 	= $targetPath3 . $fileName3;
+    move_uploaded_file($tempFile3, $targetFile3);
+
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
     
     $data = array(
-      'file_title'  => $title,
-      'file_url'	  => $imageUrl."assets/images/scores/".$fileName,
-      'file_loc'	  => $fileName,
+      'title'  => $title,
+      'akademik_url'	  => $imageUrl."assets/images/scores/".$fileName,
+      'akademik_loc'	  => $fileName,
+      'kepribadian_url'	  => $imageUrl."assets/images/scores/".$fileName2,
+      'kepribadian_loc'	  => $fileName2,
+      'kesehatan_url'	  => $imageUrl."assets/images/scores/".$fileName3,
+      'kesehatan_loc'	  => $fileName3,
+      'status'	  => "0",
       'createdAt'		    => $datenow." ".$timenow,
       'updatedAt'		    => $datenow." ".$timenow
     );
@@ -910,54 +866,254 @@ class Sespim extends CI_Controller {
   public function updateScores() {
     $imageUrl = base_url();
     $id = $this->uri->segment(2);
-    $title         = $this->input->post('title');
-    $tempFile 		= $_FILES['file']['tmp_name'];
-		$fileName 		= time().$_FILES['file']['name'];	  
+    $title        = $this->input->post('title');
+    $tempFile 		= $_FILES['akademik_file']['tmp_name'];
+		$fileName 		= time().$_FILES['akademik_file']['name'];	  
     $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
 		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
+
+    $tempFile2 		= $_FILES['kepribadian_file']['tmp_name'];
+		$fileName2 		= time().$_FILES['kepribadian_file']['name'];	  
+    $targetPath2		= '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+		$targetFile2 	= $targetPath2 . $fileName2;
+    move_uploaded_file($tempFile2, $targetFile2);
+
+    $tempFile3 		= $_FILES['kesehatan_file']['tmp_name'];
+		$fileName3 		= time().$_FILES['kesehatan_file']['name'];	  
+    $targetPath3  = '/opt/lampp/htdocs/sespim/assets/images/scores/'; 
+		$targetFile3 	= $targetPath3 . $fileName3;
+    move_uploaded_file($tempFile3, $targetFile3);
+
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
 
-    $file = substr($fileName,10);
-    if($file== ""){
+    $pdf1 = substr($fileName,10);
+    $pdf2 = substr($fileName2,10);
+    $pdf3 = substr($fileName3,10);
+    
+    if($pdf1 == "" AND $pdf2 == "" AND $pdf3 == ""){
       $data = array(
-        'file_title'  => $title,
-        'updatedAt'		    => $datenow." ".$timenow
-      );
-      $where = array(
-        'document_id' => $id
-      );
-      $this->ModelSespim->updateQuery($where,$data,'scores');
-    }else{
-      $data = array(
-        'file_title'  => $title,
-        'file_url'	  => $imageUrl."assets/images/scores/".$fileName,
-        'file_loc'	  => $fileName,
-        'updatedAt'		    => $datenow." ".$timenow
+        'title'  => $title,
+        'updatedAt'		       => $datenow." ".$timenow
       );
       $where = array(
         'score_id' => $id
       );
-      $this->ModelDeleteImage->deleteFileScores($id);
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }else if($pdf1 == "" AND $pdf2 == ""){
+      $data = array(
+        'title'  => $title,
+        'kesehatan_url'	     => $imageUrl."assets/images/scores/".$fileName3,
+        'kesehatan_loc'	     => $fileName3,
+        'updatedAt'		       => $datenow." ".$timenow
+      );
+      $where = array(
+        'score_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileKesehatan($id);
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }else if($pdf2 == "" AND $pdf3 ==""){
+      $data = array(
+        'title'  => $title,
+        'akademik_url'	  => $imageUrl."assets/images/scores/".$fileName,
+        'akademik_loc'	  => $fileName,
+        'updatedAt'		       => $datenow." ".$timenow
+      );
+      $where = array(
+        'score_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileAkademik($id);
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }else if($pdf3 == "" AND $pdf1 == ""){
+      $data = array(
+        'title'  => $title,
+        'kepribadian_url'	  => $imageUrl."assets/images/scores/".$fileName2,
+        'kepribadian_loc'	  => $fileName2,
+        'updatedAt'		       => $datenow." ".$timenow
+      );
+      $where = array(
+        'score_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileKepribadian($id);
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }else if($pdf1 == ""){
+      $data = array(
+        'title'  => $title,
+        'kepribadian_url'	  => $imageUrl."assets/images/scores/".$fileName2,
+        'kepribadian_loc'	  => $fileName2,
+        'kesehatan_url'	     => $imageUrl."assets/images/scores/".$fileName3,
+        'kesehatan_loc'	     => $fileName3,
+        'updatedAt'		       => $datenow." ".$timenow
+      );
+      $where = array(
+        'score_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileKepribadian($id);
+      $this->ModelDeleteImage->deleteFileKesehatan($id);
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }else if($pdf2 == ""){
+      $data = array(
+        'title'  => $title,
+        'akademik_url'	  => $imageUrl."assets/images/scores/".$fileName,
+        'akademik_loc'	  => $fileName,
+        'kesehatan_url'	     => $imageUrl."assets/images/scores/".$fileName3,
+        'kesehatan_loc'	     => $fileName3,
+        'updatedAt'		       => $datenow." ".$timenow
+      );
+      $where = array(
+        'score_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileAkademik($id);
+      $this->ModelDeleteImage->deleteFileKesehatan($id);
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }else if($pdf3 == ""){
+      $data = array(
+        'title'  => $title,
+        'akademik_url'	  => $imageUrl."assets/images/scores/".$fileName,
+        'akademik_loc'	  => $fileName,
+        'kepribadian_url'	  => $imageUrl."assets/images/scores/".$fileName2,
+        'kepribadian_loc'	  => $fileName2,
+        'updatedAt'		       => $datenow." ".$timenow
+      );
+      $where = array(
+        'score_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileAkademik($id);
+      $this->ModelDeleteImage->deleteFileKepribadian($id);
+      $this->ModelSespim->updateQuery($where,$data,'scores');
+    }else{
+      $data = array(
+        'title'  => $title,
+        'akademik_url'	  => $imageUrl."assets/images/scores/".$fileName,
+        'akademik_loc'	  => $fileName,
+        'kepribadian_url'	  => $imageUrl."assets/images/scores/".$fileName2,
+        'kepribadian_loc'	  => $fileName2,
+        'kesehatan_url'	     => $imageUrl."assets/images/scores/".$fileName3,
+        'kesehatan_loc'	     => $fileName3,
+        'updatedAt'		       => $datenow." ".$timenow
+      );
+      $where = array(
+        'score_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileAkademik($id);
+      $this->ModelDeleteImage->deleteFileKepribadian($id);
+      $this->ModelDeleteImage->deleteFileKesehatan($id);
       $this->ModelSespim->updateQuery($where,$data,'scores');
     }
+    
 		echo ("<script LANGUAGE='JavaScript'>
     window.alert('Update Data');
     window.location.href='../scores';
     </script>");
+
+    
   }
 
   public function deleteScores() {
     $id = $this->uri->segment(2);
     $idwhere = 'score_id';
-    $this->ModelDeleteImage->deleteFileScores($id);
+    $this->ModelDeleteImage->deleteFileAkademik($id);
+    $this->ModelDeleteImage->deleteFileKepribadian($id);
+    $this->ModelDeleteImage->deleteFileKesehatan($id);
     $this->ModelSespim->deleteQuery($idwhere,$id,'scores');
     echo ("<script LANGUAGE='JavaScript'>
      window.alert('Delete Data');
      window.location.href='../scores';
      </script>");
   }
+
+  public function publish_scores(){
+    $id = $this->uri->segment(2);
+    $imageUrl = base_url();
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+    $content = array(
+      "en" => "Data nilai sudah dipublish"
+    );
+    
+    $fields = array(
+      'app_id' => "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
+      'included_segments' => array('All'),
+      'data' => array("foo" => "bar"),
+      'large_icon' =>"https://res.cloudinary.com/rendisimamora/image/upload/v1522840764/default_ze1slc.jpg",
+      'contents' => $content
+    );
+    
+    $fields = json_encode($fields);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8','Authorization: Basic ZTQ1Nzc2YTItOWZmMy00MGVmLWJmYjQtZWZlMGFlNzU1Y2Jj'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_POST, TRUE);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+    $data = array(
+      'announcement'	  => "Data nilai sudah dipublish",
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+    
+    $query = $this->db->query("SELECT announcement_id FROM announcements ORDER BY announcement_id DESC LIMIT 1");
+    $row = $query->row();
+    $id_notif_last =  $row->announcement_id;
+    $id_notif_new = $id_notif_last + 1;
+
+    $data_notif = array(
+      'type'	  => "announcement",
+      'announcement_id'	  => $id_notif_new,
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+    $this->ModelSespim->insertQuery('announcements',$data); 
+    $this->ModelSespim->insertQuery('notifications',$data_notif); 
+
+    $data = array(
+      'status'         => "1",
+      'updatedAt'		   => $datenow." ".$timenow
+    );
+    $where = array(
+      'score_id' => $id
+    );
+    $this->ModelSespim->updateQuery($where,$data,'scores');
+    
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='../scores';
+    </script>");
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    return $response;
+    $response = sendMessage();
+    $return["allresponses"] = $response;
+    $return = json_encode( $return);
+  }
+
+  public function unpublish_scores(){
+    $id = $this->uri->segment(2);
+    $imageUrl = base_url();
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+
+    $data = array(
+      'status'         => "0",
+      'updatedAt'		   => $datenow." ".$timenow
+    );
+    $where = array(
+      'score_id' => $id
+    );
+    $this->ModelSespim->updateQuery($where,$data,'scores');
+    
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='../scores';
+    </script>");
+  }
+
   public function teams()
 	{
     $id = 'team_id';
@@ -973,7 +1129,7 @@ class Sespim extends CI_Controller {
   }
 
   public function insertTopics(){    
-    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");       
+    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");      
       while ($row = $query->unbuffered_row()) {
       
       $numbers = range(1, 5);
@@ -1003,7 +1159,7 @@ class Sespim extends CI_Controller {
 
   public function insertTeams(){    
 
-    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");        
+    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");      
       while ($row = $query->unbuffered_row()) {
       
       $numbers = range(1, 5);
@@ -1048,7 +1204,7 @@ class Sespim extends CI_Controller {
   }
 
   public function insertKode(){    
-    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");             
+    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");      
       function angkaangkaunik($start, $end, $banyak) {
         $angka = range($start, $end);
         shuffle($angka);
@@ -1056,7 +1212,7 @@ class Sespim extends CI_Controller {
       }
       $x = angkaangkaunik(1, 160, 160);
       $i = 0;
-      $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");      
+      $query = $this->db->query("SELECT * FROM users");  
         while ($row = $query->unbuffered_row()) {
             $data = array(
               'kode_naskah'   => $x[$i++],
@@ -1072,28 +1228,207 @@ class Sespim extends CI_Controller {
 
   public function exam()
 	{
-    $data['pok_uji']  = $this->ModelSespim->loadQueryRelationPokUji()->result();
+    $orderid = 'pokuji_document_id';
+    $data['pok_uji']  = $this->ModelSespim->loadQuery($orderid,'pokuji_documents')->result();
 		$this->load->view('admin/table-exam',$data);
   }
 
-  public function insertPok_uji(){    
-    $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");         
-      while ($row = $query->unbuffered_row()) {
+
+  public function add_exam()
+	{
+		$this->load->view('admin/addexam');
+  }
+
+  public function insertexam(){    
+    // $query = $this->db->query("SELECT * FROM users WHERE force_of = '58'");      
+    //   while ($row = $query->unbuffered_row()) {
       
-      $numbers = range(1, 25);
-      shuffle($numbers);
-      foreach($numbers as $number) {
-          $data = array(
-            'id'  			    => $row->id,
-            'pok_uji'  		  => $number
-          );
-      }
-      $this->ModelSespim->insertQueryForeach('pok_uji',$data);
-    }
+    //   $numbers = range(1, 25);
+    //   shuffle($numbers);
+    //   foreach($numbers as $number) {
+    //       $data = array(
+    //         'id'  			    => $row->id,
+    //         'pok_uji'  		  => $number
+    //       );
+    //   }
+    //   $this->ModelSespim->insertQueryForeach('pok_uji',$data);
+    // }
+
+    $imageUrl = base_url();
+    $title         = $this->input->post('title');
+    $tempFile 		= $_FILES['file']['tmp_name'];
+		$fileName 		= time().$_FILES['file']['name'];	  
+    $targetPath		= '/opt/lampp/htdocs/sespim/assets/images/ujian/'; 
+		$targetFile 	= $targetPath . $fileName;
+    move_uploaded_file($tempFile, $targetFile);
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+    
+    $data = array(
+      'document_title'  => $title,
+      'document_url'	  => $imageUrl."assets/images/ujian/".$fileName,
+      'document_loc'	  => $fileName,
+      'status'	        => "0",
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+
+    $this->ModelSespim->insertQuery('pokuji_documents',$data); 
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Success Data');
     window.location.href='exam';
     </script>");  
+  }
+
+  public function edit_exam()
+	{
+    $id = $this->uri->segment(2);
+    $where = 'pokuji_document_id';
+    $data['pok_uji'] = $this->ModelSespim->loadQueryById($where,$id,'pokuji_documents')->result();
+		$this->load->view('admin/edit_exam',$data);
+  }
+
+  public function update_exam() {
+    $imageUrl = base_url();
+    $datenow = date("Y-m-d");
+    $timenow = date("H:i:s");
+    $id = $this->uri->segment(2);
+    $title         = $this->input->post('title');
+    $tempFile 		= $_FILES['file']['tmp_name'];
+		$fileName 		= time().$_FILES['file']['name'];	  
+    $targetPath		 = '/opt/lampp/htdocs/sespim/assets/images/ujian/'; 
+		$targetFile 	= $targetPath . $fileName;
+    move_uploaded_file($tempFile, $targetFile);
+    
+    $pic = substr($fileName,10);
+    if($pic == ""){
+      $data = array(
+        'document_title'     => $title,
+        'updatedAt'		       => $datenow." ".$timenow
+      );
+      $where = array(
+        'pokuji_document_id' => $id
+      );
+      $this->ModelSespim->updateQuery($where,$data,'pokuji_documents');
+    }else{
+      $data = array(
+        'document_title' => $title,
+        'document_url'	 => $imageUrl."assets/images/ujian/".$fileName,
+        'document_loc'	 => $fileName,
+        'updatedAt'		   => $datenow." ".$timenow
+      );
+      $where = array(
+        'pokuji_document_id' => $id
+      );
+      $this->ModelDeleteImage->deleteFileUjian($id);
+      $this->ModelSespim->updateQuery($where,$data,'pokuji_documents');
+    }
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='../exam';
+    </script>");  
+
+  }
+  public function delete_exam() {
+    $id = $this->uri->segment(2);
+    $idwhere = 'pokuji_document_id';
+    $this->ModelDeleteImage->deleteFileUjian($id);
+    $this->ModelSespim->deleteQuery($idwhere,$id,'pokuji_documents');
+    echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Delete Data');
+     window.location.href='../exam';
+     </script>");
+  }
+
+  public function publish_exam(){
+    $id = $this->uri->segment(2);
+    $imageUrl = base_url();
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+    $content = array(
+      "en" => "Jadwal ujian sudah dipublish"
+    );
+    
+    $fields = array(
+      'app_id' => "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
+      'included_segments' => array('All'),
+      'data' => array("foo" => "bar"),
+      'large_icon' =>"https://res.cloudinary.com/rendisimamora/image/upload/v1522840764/default_ze1slc.jpg",
+      'contents' => $content
+    );
+    
+    $fields = json_encode($fields);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8','Authorization: Basic ZTQ1Nzc2YTItOWZmMy00MGVmLWJmYjQtZWZlMGFlNzU1Y2Jj'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_POST, TRUE);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+    $data = array(
+      'announcement'	  => "Jadwal ujian sudah dipublish",
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+    
+    $query = $this->db->query("SELECT announcement_id FROM announcements ORDER BY announcement_id DESC LIMIT 1");
+    $row = $query->row();
+    $id_notif_last =  $row->announcement_id;
+    $id_notif_new = $id_notif_last + 1;
+
+    $data_notif = array(
+      'type'	  => "announcement",
+      'announcement_id'	  => $id_notif_new,
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+    $this->ModelSespim->insertQuery('announcements',$data); 
+    $this->ModelSespim->insertQuery('notifications',$data_notif); 
+
+    $data = array(
+      'status'         => "1",
+      'updatedAt'		   => $datenow." ".$timenow
+    );
+    $where = array(
+      'pokuji_document_id' => $id
+    );
+    $this->ModelSespim->updateQuery($where,$data,'pokuji_documents');
+    
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='../exam';
+    </script>");
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    return $response;
+    $response = sendMessage();
+    $return["allresponses"] = $response;
+    $return = json_encode( $return);
+  }
+
+  public function unpublish_exam(){
+    $id = $this->uri->segment(2);
+    $imageUrl = base_url();
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+
+    $data = array(
+      'status'         => "0",
+      'updatedAt'		   => $datenow." ".$timenow
+    );
+    $where = array(
+      'pokuji_document_id' => $id
+    );
+    $this->ModelSespim->updateQuery($where,$data,'pokuji_documents');
+    
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Success Data');
+    window.location.href='../exam';
+    </script>");
   }
 
   public function deletePok_uji() {
@@ -1104,8 +1439,7 @@ class Sespim extends CI_Controller {
      window.location.href='../exam';
      </script>");
   }
-
-  public Function logout(){
+  public function logout(){
 		$this->session->sess_destroy();
 		redirect('../');
   }

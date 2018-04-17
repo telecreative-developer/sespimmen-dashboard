@@ -55,7 +55,6 @@
                                             <div class="panel-heading">
                                                 <div class="panel-title">
                                                     <h5>Users </h5>
-                                                    <a href="<?php echo base_url()?>addusers"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Users <i class="fa fa-plus"></i></button></a>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">

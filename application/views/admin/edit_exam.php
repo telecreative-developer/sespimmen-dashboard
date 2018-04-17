@@ -23,7 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Scores</h2>
+                                    <h2 class="title">Exam</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -33,8 +33,8 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
                                         <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>scores">Scores</li></a>
-                                        <li class="active">Edit Scores</li>
+                                        <li><a href="<?php echo base_url();?>exam">Exam</li></a>
+                                        <li class="active">Edit Exam</li>
                                     </ul>
                                 </div>
                             </div>
@@ -47,45 +47,26 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Edit Your Scores</small></h5>
+                                                    <h5>Edit Your Exam</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-                                                <?php foreach($scores as $result){?>
-                                                    <form method="POST" action="<?php echo base_url()?>updateScores/<?php echo $result->score_id;?>" class="form-horizontal" enctype="multipart/form-data">
-                                                       
+                                                <?php foreach($pok_uji as $result){?>
+                                                    <form method="POST" action="<?php echo base_url()?>update_exam/<?php echo $result->pokuji_document_id;?>" class="form-horizontal" enctype="multipart/form-data">
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
                                                                 <label for="text1" class="col-sm-2 control-label">Title</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="<?php echo $result->title;?>" />
+                                                                    <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="<?php echo $result->document_title;?>"/>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
-                                                                <label for="text1" class="col-sm-2 control-label">Akademik</label>
+                                                                <label for="text1" class="col-sm-2 control-label">File</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="file" name="akademik_file" class="form-control" id="file" placeholder="file" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <label for="text1" class="col-sm-2 control-label">Kepribadian</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="file" name="kepribadian_file" class="form-control" id="file" placeholder="file" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <label for="text1" class="col-sm-2 control-label">Kesehatan</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="file" name="kesehatan_file" class="form-control" id="file" placeholder="file" />
+                                                                    <input type="file" name="file" class="form-control" id="file" placeholder="file" />
                                                                 </div>
                                                             </div>
                                                         </div>

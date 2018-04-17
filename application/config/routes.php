@@ -121,6 +121,9 @@ $route['editscores/:any']    = 'Sespim/editScores';
 $route['updateScores/:any']  = 'Sespim/updateScores';
 $route['deleteScores/:any']  = 'Sespim/deleteScores';
 
+$route['publish_scores/:any']   = 'Sespim/publish_scores';
+$route['unpublish_scores/:any']   = 'Sespim/unpublish_scores';
+
 // Route All Random
 $route['teams']              = 'Sespim/teams';
 $route['topics']             = 'Sespim/topics';
@@ -132,6 +135,14 @@ $route['kodenaskah']         = 'Sespim/kodenaskah';
 $route['insertKode']         = 'Sespim/insertKode';
 $route['deleteKode/:any']    = 'Sespim/deleteKode';
 $route['exam']               = 'Sespim/exam';
+$route['add_exam']           = 'Sespim/add_exam';
+$route['edit_exam/:any']     = 'Sespim/edit_exam';
+$route['update_exam/:any']   = 'Sespim/update_exam';
+$route['delete_exam/:any']   = 'Sespim/delete_exam';
+$route['publish_exam/:any']   = 'Sespim/publish_exam';
+$route['unpublish_exam/:any']   = 'Sespim/unpublish_exam';
+
+$route['insertexam']         = 'Sespim/insertexam';
 $route['insertPok_uji']      = 'Sespim/insertPok_uji';
 $route['deletePok_uji/:any'] = 'Sespim/deletePok_uji';
 
@@ -139,6 +150,8 @@ $route['deletePok_uji/:any'] = 'Sespim/deletePok_uji';
 //Content
 $route['pagesposts/:any']    = 'Sespim/pagesposts';
 
+
+$route['mypdf'] = "Sespim/mypdf";
 $route['logout'] = 'Sespim/logout';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

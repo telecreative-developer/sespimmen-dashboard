@@ -23,7 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Edit Kalender</h2>
+                                    <h2 class="title">Edit Events</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -32,10 +32,10 @@
                             <div class="row breadcrumb-div">
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
-                                        <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>events">Kalender</li></a>
-                                        <li class="active">Edit Kalender</li>
-                                    </ul>
+            							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
+                                        <li><a href="<?php echo base_url();?>events">Events</li></a>
+                                        <li class="active">Edit Events</li>
+            					            	</ul>
                                 </div>
                             </div>
                             <!-- /.row -->
@@ -48,7 +48,7 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Edit Kalender</small></h5>
+                                                    <h5>Edit Your Event</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">

@@ -53,7 +53,7 @@
                                             <div class="panel-heading">
                                                 <div class="panel-title">
                                                     <h5>Ujian</h5>
-                                                    <?php 
+                                                    <!-- <?php 
                                                     $query = $this->db->query("SELECT * FROM pok_uji");
                                                     $buttonDisable = $query->num_rows();
                                                 
@@ -68,7 +68,8 @@
                                                             <a href="<?php echo base_url()?>deletePok_uji/all" onclick="javascript:return confirm('Are you sure want to delete ?')" ><button type="button" class="btn btn-danger btn-xs btn-labeled">Delete Pok Uji <i class="fa fa-minus"></i></button></a>
                                                         <?php 
                                                         }
-                                                    ?>
+                                                    ?> -->
+                                                    <a href="<?php echo base_url()?>add_exam"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Ujian <i class="fa fa-plus"></i></button></a>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">
@@ -77,9 +78,11 @@
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th>Pok Uji</th>
-                                                            <!-- <th>No Urut</th> -->
-                                                            <th>Kode Naskah</th>
+                                                            <th>Title</th>
+                                                            <th>File</th>
+                                                            <th width="3%">Status</th>
+                                                            <th width="15%">Action Publish</th>
+                                                            <th width="10%">Action</th>
                                                         </tr>
                                                     </thead>
                                                     
@@ -90,9 +93,34 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><?php echo $result->pok_uji;?></td>
-                                                            <!-- <td><?php echo $result->no_urut;?></td> -->
-                                                            <td><?php echo $result->kode_naskah;?></td>
+                                                            <td><?php echo $result->document_title;?></td>
+                                                            <td><a href="<?php echo $result->document_url;?>" style="color:blue;"><?php echo $result->document_loc;?></a></td>
+                                                            <td>
+                                                                <?php
+                                                                    if($result->status == "0"){
+                                                                        echo "<button type='button' class='btn btn-default btn-xs btn-labeled' disabled>Belum dipublish</button>";
+                                                                    }else{
+                                                                        echo "<button type='button' class='btn btn-primary btn-xs btn-labeled'>Sudah dipublish</button>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php
+                                                                    if($result->status == "0"){
+                                                                    ?>
+                                                                        <a href="<?php echo base_url();?>publish_exam/<?php echo $result->pokuji_document_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-check"></i> Publish</button></a>
+                                                                    <?php 
+                                                                    }else{
+                                                                    ?>
+                                                                        <a href="<?php echo base_url();?>unpublish_exam/<?php echo $result->pokuji_document_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-close"></i> Batal Publish</button></a>
+                                                                    <?php 
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td>
+                                                                <a href="<?php echo base_url();?>edit_exam/<?php echo $result->pokuji_document_id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
+                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>delete_exam/<?php echo $result->pokuji_document_id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
+                                                            </td>
                                                         </tr>
                                                         <?php 
                                                             $no++;
