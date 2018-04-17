@@ -94,7 +94,7 @@
                                                         <tr>
                                                             <td><?php echo $no;?></td>
                                                             <td><?php echo $result->document_title;?></td>
-                                                            <td><a href="<?php echo $result->document_url;?>" style="color:blue;"><?php echo $result->document_loc;?></a></td>
+                                                            <td><a href="<?php echo $result->document_url;?>" style="color:blue;"><?php echo substr($result->document_loc,10);?></a></td>
                                                             <td>
                                                                 <?php
                                                                     if($result->status == "0"){
