@@ -83,7 +83,7 @@
 
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
-                                                                <label for="text1" class="col-sm-2 control-label">Kesehatan</label>
+                                                                <label for="text1" class="col-sm-2 control-label">Kesehatan Jasmani</label>
                                                                 <div class="col-sm-10">
                                                                     <input type="file" name="kesehatan_file" class="form-control" id="file" placeholder="file" />
                                                                 </div>

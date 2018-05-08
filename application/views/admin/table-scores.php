@@ -72,7 +72,7 @@
                                                             <th>Title</th>
                                                             <th>Akademik</th>
                                                             <th>Kepribadian</th>
-                                                            <th>Kesehatan</th>
+                                                            <th>Kesehatan Jasmani</th>
                                                             <th width="3%">Status</th>
                                                             <th width="15%">Action Publish</th>
                                                             <th>Action</th>

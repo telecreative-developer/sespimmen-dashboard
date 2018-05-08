@@ -380,9 +380,9 @@ class Sespim extends CI_Controller {
     $title         = $this->input->post('title');
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
-		$fileName 		= time().$_FILES['file']['name'];	  
+    $fileName 		= time().$_FILES['file']['name'];	  
     $targetPath		= '/var/www/sespim/assets/images/documents/'; 
-		$targetFile 	= $targetPath . $fileName;
+    $targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
@@ -417,9 +417,9 @@ class Sespim extends CI_Controller {
     $title         = $this->input->post('title');
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
-		$fileName 		= time().$_FILES['file']['name'];	  
+    $fileName 		= time().$_FILES['file']['name'];	  
     $targetPath		= '/var/www/sespim/assets/images/documents/'; 
-		$targetFile 	= $targetPath . $fileName;
+    $targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
@@ -449,10 +449,10 @@ class Sespim extends CI_Controller {
       $this->ModelDeleteImage->deleteFile($id);
       $this->ModelSespim->updateQuery($where,$data,'documents');
     }
-		echo ("<script LANGUAGE='JavaScript'>
-    window.alert('Update Data');
-    window.location.href='../documents';
-    </script>");
+      echo ("<script LANGUAGE='JavaScript'>
+      window.alert('Update Data');
+      window.location.href='../documents';
+     </script>");
   }
 
   public function delete_documents() {
@@ -610,7 +610,7 @@ class Sespim extends CI_Controller {
                       <td align='left'>
                         <div class='contentEditableContainer contentTextEditable'>
                           <div class='contentEditable' align='center'>
-                            <h2>Hai".$x."</h2>
+                            <h2>Hi, ".$x."</h2>
                           </div>
                         </div>
                       </td>
