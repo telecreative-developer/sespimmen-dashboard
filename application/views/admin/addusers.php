@@ -53,17 +53,17 @@
                                             <div class="panel-body">
 
                                                 <form method="POST" id="Formaddusers" class="form-horizontal">
-                                                	<div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">First Name</label>
+                                                <div class="form-group">
+                                                		<label for="text1" class="col-sm-2 control-label">Nama Depan</label>
                                                 		<div class="col-sm-4">
-                                                			<input type="text" name="first_name" class="form-control" id="firstname" placeholder="Firstname" required="ON">
+                                                			<input type="text" name="first_name" class="form-control" id="Nama Depan" placeholder="Nama Depan" required="ON">
                                                 		</div>
                                                 	</div>
 
                                                   <div class="form-group">
-                                                    <label for="text1" class="col-sm-2 control-label">Last Name</label>
+                                                    <label for="text1" class="col-sm-2 control-label">Nama Belakang</label>
                                                 		<div class="col-sm-4">
-                                                			<input type="text" name="last_name" class="form-control" id="lastname" placeholder="Lastname" required="ON">
+                                                			<input type="text" name="last_name" class="form-control" id="lastname" placeholder="Nama Belakang" required="ON">
                                                 		</div>
                                                   </div>
         
@@ -75,9 +75,30 @@
                                                 	</div>
 
                                                   <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Force Of</label>
+                                                		<label for="text1" class="col-sm-2 control-label">NRP</label>
                                                 		<div class="col-sm-4">
-                                                			<input type="number" name="force_of" class="form-control" id="force_of" placeholder="Force Of" required="ON">
+                                                			<input type="number" name="nrp" class="form-control" id="nrp" placeholder="NRP" required="ON">
+                                                		</div>
+                                                	</div>
+
+                                                  <div class="form-group">
+                                                		<label for="text1" class="col-sm-2 control-label">No Serdik</label>
+                                                		<div class="col-sm-4">
+                                                			<input type="number" name="no_serdik" class="form-control" id="no_serdik" placeholder="No Serdik" required="ON">
+                                                		</div>
+                                                	</div>
+
+                                                  <div class="form-group">
+                                                		<label for="text1" class="col-sm-2 control-label">Angkatan</label>
+                                                		<div class="col-sm-4">
+                                                			<input type="number" name="force_of" class="form-control" id="force_of" placeholder="Angkatan" required="ON">
+                                                		</div>
+                                                	</div>
+
+                                                  <div class="form-group">
+                                                		<label for="text1" class="col-sm-2 control-label">No. Handphone</label>
+                                                		<div class="col-sm-4">
+                                                			<input type="number" name="phone" class="form-control" id="phone" placeholder="No. Handphone" required="ON">
                                                 		</div>
                                                 	</div>
 
@@ -89,9 +110,16 @@
                                                 	</div>
 
                                                   <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Confirm Password</label>
+                                                		<label for="text1" class="col-sm-2 control-label">Konfirmasi Password</label>
                                                 		<div class="col-sm-4">
-                                                			<input type="password" name="cpassword" class="form-control" id="cpassword" placeholder="Confirm Password" required="ON">
+                                                			<input type="password" name="cpassword" class="form-control" id="cpassword" placeholder="Konfirmasi Password" required="ON">
+                                                		</div>
+                                                	</div>
+                                                  
+                                                  <div class="form-group" style="display:none;">
+                                                		<label for="text1" class="col-sm-2 control-label">Verified</label>
+                                                		<div class="col-sm-4">
+                                                			<input type="number" name="verified" class="form-control" id="verified" placeholder="Verified" value="1" required="ON">
                                                 		</div>
                                                 	</div>
                                                   <p id="demo" span style="color:red;"></p>
