@@ -124,6 +124,58 @@ $route['deleteScores/:any']  = 'Sespim/deleteScores';
 $route['publish_scores/:any']   = 'Sespim/publish_scores';
 $route['unpublish_scores/:any']   = 'Sespim/unpublish_scores';
 
+// Academic
+$route['academic']                  = 'SespimScores/academic';
+$route['addacademic']               = 'SespimScores/addacademic';
+$route['insertacademic']            = 'SespimScores/insertacademic';
+$route['editacademic/:any']         = 'SespimScores/editacademic';
+$route['update_academic/:any']      = 'SespimScores/update_academic';
+$route['deleteAkademik/:any']       = 'SespimScores/deleteAkademik';
+$route['publish_academic/:any']     = 'SespimScores/publish_academic';
+$route['unpublish_academic/:any']   = 'SespimScores/unpublish_academic';
+
+// Kepribadian
+$route['kepribadian']                  = 'SespimScores/kepribadian';
+$route['addkepribadian']               = 'SespimScores/addkepribadian';
+$route['insertkepribadian']            = 'SespimScores/insertkepribadian';
+$route['editkepribadian/:any']         = 'SespimScores/editkepribadian';
+$route['update_kepribadian/:any']      = 'SespimScores/update_kepribadian';
+$route['deleteKepribadian/:any']       = 'SespimScores/deleteKepribadian';
+$route['publish_kepribadian/:any']     = 'SespimScores/publish_kepribadian';
+$route['unpublish_kepribadian/:any']   = 'SespimScores/unpublish_kepribadian';
+
+
+// Kegiatan Khusus
+$route['kegiatan_khusus']                 = 'SespimScores/kegiatan_khusus';
+$route['addkegiatan_khusus']              = 'SespimScores/addkegiatan_khusus';
+$route['insertkegiatan_khusus']           = 'SespimScores/insertkegiatan_khusus';
+$route['editkegiatan_khusus/:any']        = 'SespimScores/editkegiatan_khusus';
+$route['update_kegiatan_khusus/:any']     = 'SespimScores/update_kegiatan_khusus';
+$route['deletekegiatan_khusus/:any']      = 'SespimScores/deletekegiatan_khusus';
+$route['publish_kegiatan_khusus/:any']    = 'SespimScores/publish_kegiatan_khusus';
+$route['unpublish_kegiatan_khusus/:any']  = 'SespimScores/unpublish_kegiatan_khusus';
+
+
+// Kesehatan Jasmani
+$route['kesehatan_jasmani']               = 'SespimScores/kesehatan_jasmani';
+$route['addkesehatan']                    = 'SespimScores/addkesehatan_jasmani';
+$route['insertkesehatan']                 = 'SespimScores/insertkesehatan';
+$route['editkesehatan/:any']              = 'SespimScores/editkesehatan';
+$route['update_kesehatan/:any']           = 'SespimScores/update_kesehatan';
+$route['deleteKesehatan/:any']            = 'SespimScores/deleteKesehatan';
+$route['publish_kesehatan/:any']     = 'SespimScores/publish_kesehatan';
+$route['unpublish_kesehatan/:any']   = 'SespimScores/unpublish_kesehatan';
+
+// Gabungan
+$route['gabungan']                  = 'SespimScores/gabungan';
+$route['addgabungan']               = 'SespimScores/addgabungan';
+$route['insertgabungan']            = 'SespimScores/insertgabungan';
+$route['editgabungan/:any']         = 'SespimScores/editgabungan';
+$route['update_gabungan/:any']      = 'SespimScores/update_gabungan';
+$route['deletegabungan/:any']       = 'SespimScores/deleteGabungan';
+$route['publish_gabungan/:any']     = 'SespimScores/publish_gabungan';
+$route['unpublish_gabungan/:any']   = 'SespimScores/unpublish_gabungan';
+
 // Route All Random
 $route['teams']              = 'Sespim/teams';
 $route['topics']             = 'Sespim/topics';
