@@ -46,14 +46,20 @@
 
 
 <li class="nav-header">
-  <span class="">All Users</span>
+  <span class="">All Account</span>
 </li>
 <li><a href="<?php echo base_url()?>users"><i class="fa fa-user-plus"></i> <span>Users</span></a></li>
-<li><a href="<?php echo base_url()?>scores"><i class="fa fa-wpforms" aria-hidden="true"></i> <span>Nilai</span></a></li>
-<li class="nav-header">
-  <span class="">Admin Account</span>
-</li>
 <li><a href="<?php echo base_url()?>admin"><i class="fa fa-user-plus"></i> <span>Admin</span></a></li>
+
+<li class="nav-header">
+  <span class="">All Scores</span>
+</li>
+<li><a href="<?php echo base_url()?>academic"><i class="fa fa-wpforms" aria-hidden="true"></i> <span>Akademik</span></a></li>
+<li><a href="<?php echo base_url()?>kepribadian"><i class="fa fa-wpforms" aria-hidden="true"></i> <span>Kepribadian</span></a></li>
+<li><a href="<?php echo base_url()?>kesehatan_jasmani"><i class="fa fa-wpforms" aria-hidden="true"></i> <span>Kesehatan Jasmani</span></a></li>
+<li><a href="<?php echo base_url()?>kegiatan_khusus"><i class="fa fa-wpforms" aria-hidden="true"></i> <span>Kegiatan Khusus</span></a></li>
+<li><a href="<?php echo base_url()?>gabungan"><i class="fa fa-wpforms" aria-hidden="true"></i> <span>Gabungan</span></a></li>
+
 
 </ul>
 
