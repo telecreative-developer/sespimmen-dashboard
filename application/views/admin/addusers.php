@@ -53,7 +53,7 @@
                                             <div class="panel-body">
 
                                                 <form method="POST" id="Formaddusers" class="form-horizontal">
-                                                <div class="form-group">
+                                                	<div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Nama Depan</label>
                                                 		<div class="col-sm-4">
                                                 			<input type="text" name="first_name" class="form-control" id="Nama Depan" placeholder="Nama Depan" required="ON">
@@ -122,6 +122,7 @@
                                                 			<input type="number" name="verified" class="form-control" id="verified" placeholder="Verified" value="1" required="ON">
                                                 		</div>
                                                 	</div>
+
                                                   <p id="demo" span style="color:red;"></p>
                                                 	<div class="form-group">
                                                 		<div class="col-sm-offset-5 col-sm-10">

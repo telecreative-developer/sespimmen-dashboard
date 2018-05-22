@@ -29,7 +29,7 @@
               $query = $this->db->query("SELECT * FROM admin WHERE admin_id = '$admin_id'");
               $row = $query->row();
               ?>
-              <?php echo $row->username;?><i class="fa fa-caret-down"></i>
+              <?php echo ucfirst($row->username);?><i class="fa fa-caret-down"></i>
             </div>
           </div>
           <div class="user-dropdown">
