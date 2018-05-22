@@ -195,7 +195,7 @@ class Sespim extends CI_Controller {
     $fields = array(
       'app_id' => "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
       'included_segments' => array('All'),
-      'data' => array("foo" => "bar"),
+      'data' => array("screen" => "announcement","data" => array("announcement" => $x, "createdAt" => $datenow)),
       'large_icon' =>"https://res.cloudinary.com/rendisimamora/image/upload/v1522840764/default_ze1slc.jpg",
       'contents' => $content
     );
@@ -380,9 +380,9 @@ class Sespim extends CI_Controller {
     $title         = $this->input->post('title');
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
-    $fileName 		= time().$_FILES['file']['name'];	  
+		$fileName 		= time().$_FILES['file']['name'];	  
     $targetPath		= '/var/www/sespim/assets/images/documents/'; 
-    $targetFile 	= $targetPath . $fileName;
+		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
@@ -417,9 +417,9 @@ class Sespim extends CI_Controller {
     $title         = $this->input->post('title');
     $tipe          = $this->input->post('tipe');
     $tempFile 		= $_FILES['file']['tmp_name'];
-    $fileName 		= time().$_FILES['file']['name'];	  
+		$fileName 		= time().$_FILES['file']['name'];	  
     $targetPath		= '/var/www/sespim/assets/images/documents/'; 
-    $targetFile 	= $targetPath . $fileName;
+		$targetFile 	= $targetPath . $fileName;
     move_uploaded_file($tempFile, $targetFile);
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
@@ -449,10 +449,10 @@ class Sespim extends CI_Controller {
       $this->ModelDeleteImage->deleteFile($id);
       $this->ModelSespim->updateQuery($where,$data,'documents');
     }
-      echo ("<script LANGUAGE='JavaScript'>
-      window.alert('Update Data');
-      window.location.href='../documents';
-     </script>");
+		echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Update Data');
+    window.location.href='../documents';
+    </script>");
   }
 
   public function delete_documents() {
@@ -513,13 +513,13 @@ class Sespim extends CI_Controller {
     
     $this->email->from('donihermawanj11@gmail.com','Aktifasi Akun'); 
     $this->email->to($row->email); 
-    $this->email->subject('Aktifasi Akun'); 
+    $this->email->subject('SIPAMEN - Aktifasi Akun'); 
     echo $this->email->message(
       "
     <html xmlns='http://www.w3.org/1999/xhtml'>
       <head>
       <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-      <title>Aktifasi Akun</title>
+      <title>SIPAMEN - Aktifasi Akun</title>
       <style type='text/css'>
         body {padding-top: 0 !important;padding-bottom: 0 !important;padding-top: 0 !important;padding-bottom: 0 !important;margin:0 !important;width: 100% !important;
         -webkit-text-size-adjust: 100% !important;-ms-text-size-adjust: 100% !important;-webkit-font-smoothing: antialiased !important;}
@@ -610,7 +610,7 @@ class Sespim extends CI_Controller {
                       <td align='left'>
                         <div class='contentEditableContainer contentTextEditable'>
                           <div class='contentEditable' align='center'>
-                            <h2>Hi, ".$x."</h2>
+                            <h2>Hi ".$x."</h2>
                           </div>
                         </div>
                       </td>
@@ -1035,7 +1035,7 @@ class Sespim extends CI_Controller {
     $fields = array(
       'app_id' => "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
       'included_segments' => array('All'),
-      'data' => array("foo" => "bar"),
+      'data' => array("screen" => "score"),
       'large_icon' =>"https://res.cloudinary.com/rendisimamora/image/upload/v1522840764/default_ze1slc.jpg",
       'contents' => $content
     );
@@ -1147,7 +1147,7 @@ class Sespim extends CI_Controller {
     window.location.href='topics';
     </script>");
   }
-  
+
   public function deleteTopics() {
     $id = $this->uri->segment(2);
     $this->ModelSespim->deleteQueryAll('topics');
@@ -1352,7 +1352,7 @@ class Sespim extends CI_Controller {
     $fields = array(
       'app_id' => "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
       'included_segments' => array('All'),
-      'data' => array("foo" => "bar"),
+      'data' => array("screen" => "announcement"),
       'large_icon' =>"https://res.cloudinary.com/rendisimamora/image/upload/v1522840764/default_ze1slc.jpg",
       'contents' => $content
     );
