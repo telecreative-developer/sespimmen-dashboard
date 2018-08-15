@@ -49,7 +49,7 @@ class SespimScores extends CI_Controller {
       'createdAt'		    => $datenow." ".$timenow,
       'updatedAt'		    => $datenow." ".$timenow
     );
-
+//echo getcwd();	
      $this->ModelSespim->insertQuery('academic_scores',$data); 
      echo ("<script LANGUAGE='JavaScript'>
      window.alert('Success Data');
