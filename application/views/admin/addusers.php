@@ -154,7 +154,7 @@ $(function () {
       e.preventDefault();
       $.ajax({
         type: 'POST',
-        url: 'http://45.77.45.112/users',
+        url: 'http://103.236.201.64/users',
         data: $('form').serialize(),
         statusCode: {
           201: function () {
